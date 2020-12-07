@@ -1,0 +1,42 @@
+.hidden{
+	display: none
+}
+
+.errorMessage{
+	font-size: 12px;
+    font-weight: 400;
+    color: rgb(164, 38, 44);
+}
+.loginSection{
+	display: block;
+	margin: auto;
+	margin-top: 10%;
+	width: 30vw;
+	height: 25vh;
+	border: 1px solid black;
+	padding: 5%;
+}
+
+.contentEditorSection{
+  width: 100%;
+  column-gap: 38px;
+  column-fill: initial;
+  margin: 0 auto; 
+  column-count: 4;
+  padding-top: 1%;
+  animation-timing-function: linear;
+  -webkit-animation: in 1500ms linear ;
+  animation: in 1500ms linear ;
+}
+.pivot-wrapper{
+  margin-left : 4%;
+  margin-top: 2%;
+  margin-right: 4%;
+}
+.side-nav{
+  width: 20%;
+  float : left
+}
+.setting-editor{
+  display: flex;
+}

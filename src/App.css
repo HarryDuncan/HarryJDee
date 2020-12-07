@@ -1,0 +1,47 @@
+
+.App-link {
+  color: #61dafb;
+}
+.App{
+	 overflow-x: hidden !important;
+}
+.Container{
+    min-width: 100vw;
+    min-height: 100vh;
+    overflow-x: hidden !important;
+    position: absolute;
+}
+h1{
+  font-weight: 400
+}
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 0px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+@font-face {
+  font-family: 'HarryDuncan';
+  font-style: normal;
+  font-weight: 100;
+  src: local('HarryDuncan');
+  src: url("/fonts/Harryduncan.eot");
+  src: url("/fonts/Harryduncan.woff"), format("woff");
+  src: url("/fonts/Harryduncan.otf") format("opentype");
+  src: url("/fonts/Harryduncan.svg") format("svg");
+  src: url('/fonts/Harryduncan.ttf') format('truetype'); /* Safari, Android, iOS */
+}

@@ -1,0 +1,49 @@
+export interface IDashboardState{
+	isLoggingIn : boolean;
+	loggedIn :boolean;
+	loggedInFailMessage : boolean;
+	dashboardArray: object[];
+	ordersArray : object[];
+}
+
+export enum dashboardActionTypes {
+	LOAD_DASHBOARD_DATA = 'dashboard/LOAD_DASHBOARD_DATA',
+	LOAD_DASHBOARD_DATA_SUCCESS = 'dashboard/LOAD_DASHBOARD_DATA_SUCCESS',
+	LOAD_DASHBOARD_DATA_ERROR = 'dashboard/LOAD_DASHBOARD_DATA_ERROR',
+
+	LOGIN_TRY = 'dashboard/LOGIN_TRY',
+	LOGIN_SUCCESS = 'dashboard/LOGIN_SUCCESS',
+	LOGIN_FAIL = 'dashboard/LOGIN_FAIL',
+
+	SUBMIT_DATA = 'dashboard/SUBMIT_DATA',
+	SUBMIT_DATA_SUCCESS = 'dashboard/SUBMIT_DATA_SUCCESS',
+	SUBMIT_DATA_ERROR = 'dashboard/SUBMIT_DATA_ERROR',
+
+
+	UPDATE_DATA = 'dashboard/UPDATE_DATA',
+	UPDATE_DATA_SUCCESS = 'dashboard/UPDATE_DATA_SUCCESS',
+	UPDATE_DATA_ERROR = 'dashboard/UPDATE_DATA_ERROR',
+
+
+	DELETE_DATA = 'dashboard/DELETE_DATA',
+	DELETE_DATA_SUCCESS = 'dashboard/DELETE_DATA_SUCCESS',
+	DELETE_DATA_ERROR = 'dashboard/DELETE_DATA_ERROR',
+
+	UPLOAD_IMAGE = 'dashboard/UPLOAD_IMAGE',
+	UPLOAD_IMAGE_SUCCESS = 'dashboard/UPLOAD_IMAGE_SUCCESS',
+	UPLOAD_IMAGE_ERROR ='dashboard/UPLOAD_IMAGE_ERROR',
+
+	DELETE_IMAGE = 'dashboard/DELETE_IMAGE',
+	DELETE_IMAGE_SUCCESS = 'dashboard/DELETE_IMAGE_SUCCESS',
+	DELETE_IMAGE_ERROR = 'dashboard/DELETE_IMAGE_ERROR',
+
+	LOAD_ORDERS = 'dashboard/LOAD_ORDERS',
+	LOAD_ORDERS_SUCCESS = 'dashboard/LOAD_ORDERS_SUCCESS',
+	LOAD_ORDERS_ERROR = 'dashboard/LOAD_ORDERS_ERROR',
+
+	UPDATE_ORDER = 'dashboard/UPDATE_ORDER',
+	UPDATE_ORDER_SUCCESS = 'dashboard/UPDATE_ORDER_SUCCESS',
+	UPDATE_ORDER_ERROR = 'dashboard/UPDATE_ORDER_ERROR',
+
+	LOGOUT = 'dashboard/LOGOUT',
+}

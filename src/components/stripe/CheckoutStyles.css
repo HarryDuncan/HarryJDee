@@ -1,0 +1,34 @@
+.img-log{
+	width: 100px;
+	
+}
+
+
+.checkout-footer-item{
+	align-self: center;
+	margin: 0 auto;
+	text-align: center;
+}
+.stripe-div{
+	align-self: center;
+	margin: 0 auto;
+	display: flex;
+	flex-direction: column;
+}
+
+.stripe-div a{
+	align-self: center;
+	margin: 0 auto;
+}
+.card-element-container{
+	margin-top: 50px;
+	margin-bottom: 10px;
+    border-bottom: 1px solid;
+}
+.tcLink{
+	color : rgb(0, 120, 212);
+	text-decoration: underline;
+	text-transform: none;
+	letter-spacing: normal;
+}
+

@@ -1,0 +1,46 @@
+.swipe-signal{
+	position: fixed;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(0deg, rgba(42,42,42,0.5099614845938375) 0%, rgba(0,0,0,0) 100%); 
+    height: 6em;
+ 
+    justify-self: center;
+    margin: 0 auto;
+    width: 100vw;
+    display: flex;
+    }
+    .swipe-left-svg{
+        width: 0.8em;
+        color: white;
+        margin: 0 auto;
+       
+    }
+    
+.swipe-signal-wrapper{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    -webkit-animation: swipe 500ms 1 infinite;
+    animation-name: swipe ;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+  .swipe-signal p{
+    	margin : 0 auto;
+    	margin-top: 2em;
+    	font-weight: 600;
+    	color: white;
+    	font-size: 1.2em;
+    	letter-spacing: 0.15em;
+    }
+
+ @keyframes swipe {
+	 0% {
+		  transform : translateX(0.45em);
+		  }
+		  100%{
+		  transform : translateX(-0.45em);
+		  }
+}

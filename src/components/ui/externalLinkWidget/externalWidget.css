@@ -1,0 +1,12 @@
+.external-icon{
+	margin: 0em;
+	justify-content: flex-end;
+	
+}
+.icon-svg{
+	height: 2em;
+	width: auto;
+}
+.white{
+	fill: white;
+}

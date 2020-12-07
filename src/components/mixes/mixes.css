@@ -1,0 +1,204 @@
+.mixes-section{
+  width: auto;
+  width: calc(100% - 9em);
+  margin: 0 5em 0 3.5em; 
+  
+  padding-top: 1%;
+  overflow-x: hidden;
+  overflow-y: hidden;
+	animation-timing-function: linear;
+  -webkit-animation: in 2500ms linear ;
+  animation: in 2500ms linear ;
+}
+
+.border{
+  border-top: 2px solid black;
+}
+.mixes-title{
+    justify-content: center;
+    font-size: 1.2em;
+    font-weight: 600;
+    color: black !important;
+    text-decoration: none;
+    letter-spacing: 0.15em;
+    padding: 2px 2px;
+    position: relative;
+    display: flex;
+     text-align: center;
+	align-items: center;
+}
+.mix-cover{
+  height: 20em;
+}
+.warning-message{
+	color: gray;
+  font-size: 15px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  letter-spacing: 0.15em;
+	align-items: center;
+  text-align: center;
+
+}
+
+.mixes-subtitle{
+    justify-content: center;
+    font-size: 0.9em;
+    font-weight: 500;
+    color: black !important;
+    text-decoration: none;
+    letter-spacing: 0.15em;
+    padding: 5px 5px;
+    position: relative;
+    display: flex;
+     text-align: center;
+  align-items: center;
+}
+.disclamer-message{
+    color: gray;
+    font-size: 12px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    letter-spacing: 0.15em;
+    align-items: center;
+     text-align: center;
+}
+.mixes-footer{
+ 
+  justify-content: center;
+  align-content: center;
+  vertical-align: center;
+}
+.visualizer-container{
+	width: 100%;
+    clear: both;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    cursor: pointer;
+}
+.mix-details-div{
+	width: 100%;
+	display: inline-block;
+	background-color: white;
+}
+
+.mix-section{
+	width: 60%;
+	margin-left: 20%;
+  clear: both;
+  cursor: pointer;
+  background-color: white;
+	border-bottom: 2px solid black;
+	flex-direction: column;
+     text-align: center;
+}
+.mix-item-title{
+    font-family : 'HarryDuncan';
+    justify-content: center;
+    font-size: 2.5em;
+    font-weight: 300;
+    color: black !important;
+    text-decoration: none;
+    
+   margin: 0;
+    position: relative;
+    display: flex;
+     text-align: center;
+	align-items: center;
+}
+
+.mix-item-description{
+	justify-content: center;
+    font-size: 1.2em;
+    font-weight: 400;
+     text-align: center;
+    color: black !important;
+    text-decoration: none;
+    letter-spacing: 0.15em;
+    padding: 5px 5px;
+    position: relative;
+    display: flex;
+	align-items: center;
+}
+.btn-container{
+	height: 3em;
+	position: relative;
+  display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.btn-container img{
+	height: 3em;
+}
+
+.fill{
+	width: 100%;
+	height: 100%;
+}
+.exit-icon{
+    font-weight: 700;
+    color: black;
+    z-index: 150;
+    font-size: 2em;
+    position: absolute;
+    top: 11vh;
+}
+.icon-vis{
+  clear: both;
+  margin-top: 1.5em;
+  font-weight: 700;
+  color: black;
+  z-index: 150;
+  font-size: 2em;
+  float: left;
+}
+.hide-ico{
+  display: none;
+}
+.visualizer-node{
+	position: fixed;
+	top:10vh;
+	left: 0;
+	width: 100vh;
+	height: 110vh;
+}
+.visualizer-node-full{
+  position: fixed;
+  top:0vh;
+  left: 0;
+  width: 100vh;
+  height: 110vh;
+}
+.scLink{
+    text-decoration: none;
+    margin: 0 auto;
+    align-content: center;
+    display: flex;
+}
+.icon-svg-mix{
+  margin: 0 auto;
+  justify-content: center;
+  align-self: center;
+  height: 1.2em;
+}
+
+@Media only screen and (max-width: 900px){
+
+  .mixes-section{
+      width: 94%;
+      margin: 0 auto;
+    }
+
+  .mix-section{
+    width: 90%;
+    margin-left: 5%;
+  }
+
+  .mix-cover{
+    height: 15em;
+  }
+
+  }

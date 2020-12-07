@@ -1,0 +1,11 @@
+.t-c{
+	position: absolute;
+	width: 50vw;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	justify-self: center;
+	top: 5%;
+	left : 25vw;
+
+}

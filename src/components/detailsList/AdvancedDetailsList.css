@@ -1,0 +1,139 @@
+.workItemDashboard-spinner {
+margin-top:30vh;
+}
+ 
+.workItemDashboard-filterChoice-disabled .ms-ContextualMenu-itemText {
+    color: #a6a6a6;
+}
+ 
+.workItemsDashboard-row.is-selected, .workItemsDashboard-row.is-selected .ms-DetailsRow-fields {
+    background-color:#deecf9!important;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+/*
+.workItemsDashboard-row.is-selected .ms-DetailsRow-fields .ms-DetailsRow-cell:first-child {
+    border-left: 3px solid #0078d4;
+} */
+ 
+.workItemsDashboard-row {
+    cursor: pointer;
+}
+ 
+.workItemDashboard-main {
+    display: flex;
+}
+ 
+.workItemDashboard-main .details-view {
+    flex-grow: 1
+}
+ 
+.dashboard-category-icon {
+margin:auto;
+}
+ 
+.dashboard-category-icon.icon-large {
+    font-size:24px;
+}
+ 
+.dashboard-category-icon.icon-marginRight {
+    margin-right:5px;
+}
+ 
+.dashboard-wrap-text {
+    white-space:pre-wrap;
+}
+ 
+.workItem-dashboard-status-icons {
+    text-align: center;
+    margin:auto;
+    line-height: 16px;
+    cursor:help;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+ 
+.workItem-dashboard-status-icons i {
+    color:#0078d4;
+    font-weight:bold;
+    padding:2px;
+}
+ 
+.workItem-dashboard-status-icons i.colour-urgent {
+    color:#e81123;
+}
+ 
+.workItem-hover-title {
+    padding:8px;
+}
+ 
+.workItem-hover-title i {
+    font-weight: bold;
+    font-size:12px;
+}
+ 
+.workItem-hover-detail {
+    max-height: 90vh;
+}
+ 
+.ms-ExpandingCard-expandedCard {
+    overflow-y:auto!important;
+    max-height:auto!important;
+    min-height:80px!important;
+    height:auto!important;
+    transition: width 1s;
+}
+ 
+.workItem-history-email-hover .ms-ExpandingCard-expandedCard {
+    max-height:520px!important;
+}
+ 
+.workItem-id-label:hover {
+    color:#0078d4;
+    font-weight: bold;
+    cursor:help;
+}
+ 
+@media only screen and (max-width: 1680px) {
+    .dashboard-small-text {
+        font-size:10px;
+    }
+}
+ 
+.dashboard-list-container {
+    position: relative;
+    height: calc(100vh - 260px)
+}
+ 
+.list-commandbar-filtered-container {
+    display: flex;
+}
+ 
+.list-commandbar-filtered-container > div:first {
+    margin-right: 5px;
+}
+ 
+.list-commandbar-filtered-count {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0px 5px;
+    cursor: default;
+}
+ 
+.list-commandbar-filtered-count > i {
+    margin-right: 3px;
+    color: #007dba;
+}
+ 
+.list-commandbar-applied-filters-tooltip .applied-filters-title {
+    font-size:16px;
+    font-weight:lighter;
+    color:#007dba;
+    margin-bottom: 4px;
+}
+ 
+.list-commandbar-applied-filters-tooltip .applied-filters-row {
+    padding-bottom: 6px;
+}

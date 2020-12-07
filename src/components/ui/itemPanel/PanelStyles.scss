@@ -1,0 +1,239 @@
+.imageContainer{
+	max-height: 50%;
+	max-width: 500px;
+	max-height: 500px;
+	flex-wrap: wrap;
+}
+.gutter{
+	width: auto
+}
+.ArtWorkImg{
+	display: block;
+	max-height: 75vh;
+	max-width : 500px;
+	margin-left: auto;
+    margin-right: auto;
+}
+.panelSection{
+  height : 100%;
+  overflow-x: hidden;
+}
+.form-field-section{
+	margin : 3% 10% 0% 10%;
+}
+.piece-content-title{
+	justify-content: left;
+	font-family: 'HarryDuncan';
+    font-size: 2em;
+    font-weight: 600;
+    color: black !important;
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    position: relative;
+    display: flex;
+	align-items: left;
+}
+.product-content-title{
+	justify-content: left;
+    font-size: 2em;
+    font-weight: 600;
+    color: black !important;
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    position: relative;
+    display: flex;
+	align-items: left;
+}
+.panel-footer{
+	
+	background-color: white;
+	padding: 10px 10px 10px 0;
+}
+.view-section-full{
+	width: 70%;
+	margin: 0 auto;
+}
+.sub-text{
+	color: gray;
+	font-size: 1em;
+	letter-spacing: 0.1em;
+}
+.blurb{
+	color: black !important;
+    text-decoration: none;
+    letter-spacing: 0.15em;
+    margin: 0 0 0 2%;
+    font-weight: 500;
+}
+.piece-content{
+	float : left;
+	width: 35%;
+	font-weight: 400;
+	flex-wrap: wrap;
+	flex-grow: 100;
+	display: flex;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	border-top: 2px solid black;
+	border-bottom: 2px solid black;
+}
+.image-container{
+	float : right;
+	flex-wrap: wrap;
+}
+.image-section{
+	margin-bottom : 40px;
+}
+.scroll-left{
+   cursor: pointer;
+	margin-top:10%;
+  	opacity:0.8;
+  	height: 6vh;
+  	position: absolute;
+    left: 4%;
+}
+.scroll-disabled{
+	margin-top:10%;
+  	opacity:0.3;
+  	cursor : default;
+  	height: 6vh;
+  	position: absolute;
+    left: 4%;
+}
+.scroll-right-disabled{
+	margin-top:10%;
+  	opacity:0.3;
+  	cursor : default;
+  	height: 6vh;
+  	position: absolute;
+    right: 4.5em;
+}
+.scroll-right{
+	float : right;
+	margin-top:10%;
+  	opacity:0.8;
+  	animation-timing-function: linear;
+	-webkit-animation: out 200ms linear forwards;
+	animation: out 200ms linear forwards ;
+	height: 6vh;
+	cursor: pointer;
+	position: absolute;
+    right: 4.5em;
+}
+.scroll-right:hover{
+	animation-timing-function: linear;
+	  -webkit-animation: hover 200ms linear forwards;
+	  animation: hover 200ms linear forwards ;
+	   cursor: pointer;
+}
+
+.scroll-left:hover{
+   animation-timing-function: linear;
+  -webkit-animation: hover 200ms linear forwards;
+  animation: hover 200ms linear forwards ;
+   cursor: pointer;
+   }
+
+  @keyframes out{
+	 	100%{
+	 		opacity:0.8;
+	   		transform: scale(1);
+	 	}
+ 	}
+ @keyframes hover{
+ 	100%{
+ 		opacity:0.7;
+   		transform: scale(0.7);
+ 	}
+ } 
+
+
+.slide-left{
+	animation-timing-function:  ease-in-out;
+  	-webkit-animation: slide-left 200ms  ease-in-out forwards;
+  	animation: slide-left 200ms ease-in-out forwards;
+}
+
+.slide-right{
+	animation-timing-function:  ease-in-out;
+  	-webkit-animation: slide-right 200ms  ease-in-out forwards;
+  	animation: slide-right 200ms ease-in-out forwards;
+}
+
+@keyframes slide-left{
+	from { 
+		transform: translateX(-10vw);
+		opacity: 0;
+	}
+  	to { 
+  		transform: translateX(0vw);
+  		opacity: 1;
+  	}
+}
+
+@keyframes slide-right{
+	from { 
+		transform: translateX(20vw);
+		opacity: 0;
+	}
+  	to { 
+  		transform: translateX(0vw);
+  		opacity: 1;
+  	}
+}
+@Media only screen and (max-width: 1200px){
+	.view-section-full{
+		width: 80%;
+		margin: 0 auto;
+	}
+
+	.image-container{
+		width: 80%;
+		margin: 0 auto;
+		clear: both;
+	}
+
+	.ArtWorkImg{
+		max-width: 100%;
+		margin: 0%;
+	}
+	.piece-content{
+		width : 100%;
+	}
+
+}
+@Media only screen and (max-width: 900px){
+
+	.scroll-left{
+		display : none;
+	}
+	.scroll-disabled{
+		display : none;
+	}
+	.scroll-right{
+		display : none;
+	}
+	.scroll-right-disabled{
+		display : none;
+	}
+
+
+	.view-section-full{
+		width: 100%;
+		margin: 0 auto;
+	}
+
+	.image-container{
+		width: 100%;
+		margin: 0 auto;
+		clear: both;
+	}
+
+	.ArtWorkImg{
+		max-width: 100%;
+		margin: 0%;
+	}
+	.piece-content{
+		width : 100%;
+	}
+}

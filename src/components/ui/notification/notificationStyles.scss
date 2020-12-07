@@ -1,0 +1,104 @@
+.remove-item {
+	position: relative;
+	bottom: 0;
+	left : 0;
+	font-weight: 600;
+	cursor : pointer;
+}
+.remove-item:hover{
+	color: red
+}
+.cart-section{
+	border-bottom : 2px solid black;
+	overflow-x: hidden;
+}
+.receipt-wrapper{
+	width: 60vw
+}
+.receipt-item-section{
+	overflow-x: hidden;
+}
+.receipt-summary-container{
+
+	border-top: 2px solid black;
+}
+.thanks-svg{
+	height: 5em;
+    margin: 0 auto;
+    display: flex;
+}
+.receipt-footer{
+	background-color: black;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	height: 90px;
+	color: white;
+	width: 100%;
+}
+.mobile-modal{
+	z-index: 100;
+	width: 100vw;
+	height: 100vh;
+	display: block;
+	padding: 4%;
+	top: 0;
+	
+	background-color: white;
+	margin-left: -4%;
+}
+.receipt-footer p{
+	letter-spacing: 0.15em;
+	font-weight: 700;
+	 text-align: center;
+}
+
+.item-price{
+	font-size: 15px;
+	font-weight: 400;
+	color: grey;
+}
+
+.shipping{
+	font-size: 10px;
+	color: grey;
+}
+.content-inner{
+	display: flex;
+	margin : 0 auto;
+	align-self: center;
+	letter-spacing: 0.2em;
+  padding: 5px 5px;
+  font-size: 1em;
+  font-weight: 700;
+  text-align : center;
+}
+.order-summary{
+	height: 25em;
+	overflow-x: auto;
+	margin-bottom: 90px;
+}
+
+@Media only screen and (max-width: 900px){
+.overlay{
+	position: absolute;
+	top: 0;
+	left : 0;
+	height: 100%;
+	width: 100%;
+
+	z-index: 99;
+	background: linear-gradient(180deg, rgba(255,236,236,0) 0%, rgba(255,255,255,1) 100%);
+}
+.receipt-wrapper{
+	width: 100%
+}
+.thanks-svg{
+	margin: 0 auto;
+}
+.receipt-footer{
+	position: fixed;
+	bottom: 0;
+}
+
+}

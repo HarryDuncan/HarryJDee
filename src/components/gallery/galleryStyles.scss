@@ -1,0 +1,48 @@
+.page{
+  clear : both;
+  padding-top: 4em;
+  width: 100%;
+  margin-right: 1em;
+  padding-left: 0;
+  padding-right: 0;
+  overflow-x: hidden !important;
+}
+.gallerySection{
+  display: block;
+  width: auto;
+  width: calc(100% - 9em);
+  column-gap: 30px;
+  column-fill: initial;
+  -webkit-column-fill: initial;
+  margin: 0 5em 0 3.5em; 
+  column-count: 4;
+  border-top: 2px solid black;
+  padding-top: 1%;
+	animation-timing-function: linear;
+  -webkit-animation: in 2500ms linear ;
+  overflow-x: hidden;
+  animation: in 2500ms linear ;
+}
+  @keyframes in{
+    0% {
+     opacity:0;
+    }
+    100%{
+    opacity :1;
+    }
+  }
+
+
+@Media only screen and (max-width: 900px){
+  .page{
+    padding-top: 10vh;
+
+  }
+
+  .gallerySection{
+     column-count: 1;
+     width: 94%;
+     margin: 0 auto;
+  }
+
+}

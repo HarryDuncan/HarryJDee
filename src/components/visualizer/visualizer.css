@@ -1,0 +1,50 @@
+
+.btn-container{
+	height: 3em;
+	position: relative;
+  display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.btn-container img{
+	height: 3em;
+}
+
+.fill{
+	width: 100%;
+	height: 100%;
+}
+.exit-icon{
+    font-weight: 700;
+    color: black;
+    z-index: 150;
+    font-size: 2em;
+    position: absolute;
+    top: 11vh;
+}
+.icon-vis{
+  clear: both;
+  margin-top: 1.5em;
+  font-weight: 700;
+  color: black;
+  z-index: 150;
+  font-size: 2em;
+  float: left;
+}
+.hide-ico{
+  display: none;
+}
+.visualizer-node{
+	position: fixed;
+	top:10vh;
+	left: 0;
+	width: 100vh;
+	height: 110vh;
+}
+.visualizer-node-full{
+  position: fixed;
+  top:0vh;
+  left: 0;
+  width: 100vh;
+  height: 110vh;
+}
