@@ -7,6 +7,7 @@ export const Home = (props : any) => {
   return (
          <div className="divWrapper">
             <HomePage/>
+            
          </div>
 
   );

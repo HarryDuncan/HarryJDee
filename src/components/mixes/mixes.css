@@ -65,12 +65,7 @@
     align-items: center;
      text-align: center;
 }
-.mixes-footer{
- 
-  justify-content: center;
-  align-content: center;
-  vertical-align: center;
-}
+
 .visualizer-container{
 	width: 100%;
     clear: both;

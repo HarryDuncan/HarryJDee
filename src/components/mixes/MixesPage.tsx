@@ -84,18 +84,6 @@ class MixesPage extends React.Component<IMixesProps, IMixesState>{
 					
 							{this.props.mixes.map(item => (<Stack.Item  align="stretch"><MixItem key={`${Number(item)} Mix Ittem`} hideNav={this.hideNavCB} exitTrackCallback={this.stopVisualizer} itemProps={item} hideMixItems={this.state.isPlaying} selectedCallback={this.playTrack} allTracks={this.props.mixes}/></Stack.Item>))}
 						
-
-						{!this.state.isPlaying?
-							<div className={'mixes-footer'} >
-								<h1 className='mixes-subtitle'>
-									Mixes and tracklists are available on SoundCloud.
-									
-								</h1>
-								<a className={'scLink'} href="https://soundcloud.com/harry-j-dee" target="_blank"><SoundCloud className={'icon-svg-mix'}/></a>
-								<p className={'disclamer-message'}>All tracks used were legally purchased. Please support artists and lables when acquiring music.</p>
-							</div>
-							: null
-						}
 					</Stack>
 						
 					</div>

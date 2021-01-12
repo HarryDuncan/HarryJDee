@@ -1,7 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {getContent} from './../../store/app/app.actions'
-import {ExternalLinkWidget} from './../ui/externalLinkWidget/ExternalLinkWidget'
 import { Stack, IStackTokens, IStackStyles  ,  ITextFieldStyles} from 'office-ui-fabric-react';
 import {DisplayText} from './../ui/customTextField/DisplayText';
 import './BioStyles.scss';
@@ -68,9 +67,7 @@ class BioPage extends React.Component<IBioProps>{
 						 		<Stack.Item align="stretch">
 									<DisplayText customStyleObj={customStyles} text={this.props.content['Bio']['Content']}/>
 								</Stack.Item>
-								<Stack.Item align="end">	
-									<ExternalLinkWidget links={[{url : 'https://www.instagram.com/harry.j.dee/'}]} />	
-					 			</Stack.Item>
+								
 					 		</Stack>
 						</div>
 						

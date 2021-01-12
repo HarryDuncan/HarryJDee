@@ -58,7 +58,7 @@ class ShopPage extends React.Component<IShopProps, IShopState>{
 		return(
 			<div className='page'>
 				<div className="shop-wrapper">
-					<Hero dismissable={true} message={'All prices include taxes and GST and a contribution to the World Aids Day campaign. Free shipping world wide.'} showLinks={false}/>
+					<Hero dismissable={true} message={'All prices include taxes and GST. Free shipping world wide.'} showLinks={false}/>
 
 				{
 					this.props.shopArray.length > 0?
