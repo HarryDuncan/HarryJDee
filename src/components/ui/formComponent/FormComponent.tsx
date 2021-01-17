@@ -1,11 +1,13 @@
 import React from 'react';
-import {TextField, MaskedTextField, Label, DefaultButton} from 'office-ui-fabric-react'
+import {TextField, MaskedTextField, Label, DefaultButton, DatePicker} from 'office-ui-fabric-react'
 import {ImageUpload} from './../imageUpload/ImageUpload';
 import {CustomDropdown} from './../customDropdown/CustomDropdown';
 import {EditExternalLinks} from './../externalLinkWidget/EditExternalLinks';
 import { Stack, IStackProps } from 'office-ui-fabric-react/lib/Stack';
-import './../itemPanel/PanelStyles.scss'
 import { ChoiceGroup, IChoiceGroupOption } from 'office-ui-fabric-react/lib/ChoiceGroup';
+import moment from 'moment';
+import './../itemPanel/PanelStyles.scss'
+
 
 const options: IChoiceGroupOption[] = [
   { key: 'Yes', text: 'Yes' },
@@ -86,6 +88,22 @@ export class FormPageSection extends React.Component<IFormSectionProps, IFormSec
 				return (
 						<div className="form-field-section">
 					 		<TextField required={this.props.fieldItem['required']} multiline={true} autoAdjustHeight={true} label={this.props.fieldItem['label']} value={value} underlined onChange={this.setData}/>
+					 	</div>
+						);
+			case 'dateTime':
+				return (
+						<div className="form-field-section">
+					 		 <DatePicker
+						      	label={this.props.fieldItem['label']}
+						        placeholder="Select a date..."
+						        ariaLabel="Select a date"
+						        onSelectDate={this._changeDate}
+      							/>
+  							{this.props.fieldItem['time']?
+  								<h1>Select Time</h1>
+  								:
+  								null
+  							}
 					 	</div>
 						);
 			case 'int':
@@ -187,6 +205,9 @@ export class FormPageSection extends React.Component<IFormSectionProps, IFormSec
 			}
 	}
 
+	private _changeDate = (date: Date | null | undefined) => {
+		this.props.callback(this.props.fieldName, moment(date).format('DD MM YYYY hh:mm:ss'))
+	}
 	private _removeSection = (event : any) => {
 		if(this.props.callbackNested !== undefined){
 			this.props.callbackNested('Remove item' ,Number(this.props.index), this.props.fieldItem['nestedDepth'])

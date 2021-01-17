@@ -81,9 +81,11 @@ export const checkout = (token : any, product : any, customerData : any, billing
 						dispatch(
 							{type: shopActionTypes.CHECKOUT_SUCCESS, payload: items, customer : customerData, contribution : contributionData}
 						)
+					if(getState().campaigns.activeCampaign['Name'] !== 'No Active Campaign'){
 						dispatch(
 							{type : campaignActionTypes.CONTRIBUTE, payload: contributionData}
 							)
+					}
 						if(items !== undefined){
 							dispatch(
 							{type : appActionTypes.SAVE_EMAIL, payload : items}
@@ -118,14 +120,17 @@ export const checkout = (token : any, product : any, customerData : any, billing
 			let obj : any = {Product : `${cart[i]['Title']}`, Type : itemType, ID : `${cart[i]['ID']}`, Price : `${cart[i]['Price']}`, lossLeader : `${cart[i]['LossLeader']}`, charityPercentage : `${cart[i]['PercentageDonated']}`}
 			orderObj[`product ${Number(i)}`] = obj
 		}
-		let contributionData = formatContributionData(cart)
+		let contributionData : any = null
 		let address = `${customerData['City']} ${customerData['Address']} ${customerData['State']} ${customerData['ZIP']} ${customerData['Country']}`
 		checkoutData['order'] = {'Customer' : {'address' : address.replace(/,/g, ""), 'name' : customerData['Name'], 'email' : customerData['Email'] }, 'Order' : {'value' : JSON.stringify(orderObj)}}
 		checkoutData['order']['Order']['value'] = checkoutData['order']['Order']['value'].replace(/'/g, "''")
 		checkoutData['order']['id'] = token['id']
 		checkoutData['order']['time'] = moment().format('DD MM YYYY hh:mm:ss');
-		checkoutData['order']['contribution'] = contributionData
-		checkoutData['order']['campaignID'] = getState().campaigns.activeCampaign['ID']
+		if(getState().campaigns.activeCampaign['Name'] !== 'No Active Campaign'){
+			contributionData = formatContributionData(cart)
+			checkoutData['order']['contribution'] = contributionData
+			checkoutData['order']['campaignID'] = getState().campaigns.activeCampaign['ID']
+		}
 		postData('checkout', checkoutData, returnDataCallback)
 	}
 }

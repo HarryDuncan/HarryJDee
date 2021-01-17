@@ -85,18 +85,20 @@ class ViewItem extends React.Component<IViewItemProps, IViewItemState>{
 						</Stack.Item>
 						</Stack.Item>
 							<Stack.Item align="stretch">
-							{
-								this.state.currentItem['LossLeader'] === 1?
+							{this.props.activeCampaign['Name'] !== 'No Active Campaign'?
 								<div>
-								<span className={'sub-text'}>100% of the profit will be donated to {this.props.activeCampaign['Name']}</span>
-								<br/>
-								<span className={'sub-text'}>Profit is determined as sale price less the cost of goods, shipping and taxes</span>
+								{this.state.currentItem['LossLeader'] === 1?
+									<div>
+									<span className={'sub-text'}>100% of the profit will be donated to {this.props.activeCampaign['Name']}</span>
+									<br/>
+									<span className={'sub-text'}>Profit is determined as sale price less the cost of goods, shipping and taxes</span>
+									</div>
+									:
+									<span className={'sub-text'}>{this.state.currentItem['PercentageDonated']}% of the sale price will be donated to {this.props.activeCampaign['Name']}</span>
+									}
 								</div>
 								:
-								
-								<span className={'sub-text'}>{this.state.currentItem['PercentageDonated']}% of the sale price will be donated to {this.props.activeCampaign['Name']}</span>
-							
-
+								null
 							}
 						</Stack.Item>
 						<Stack.Item align="stretch">

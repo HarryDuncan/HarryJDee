@@ -45,7 +45,7 @@ class ShopPage extends React.Component<IShopProps, IShopState>{
 	}
 	public render(){
 		const isMobile = window.innerWidth <= 900;
-		let height = '80vh'
+		let height = '74.5vh'
 
 		if(this.props.shopArray.length > 3 && this.props.shopArray.length < 6){
 				 height = String(this.props.shopArray.length / 2 * 65) +'vh'

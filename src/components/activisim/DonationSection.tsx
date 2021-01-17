@@ -33,7 +33,7 @@ const DonationSection: React.SFC<IDonationSectionProps> = props => {
         		<DonationModal key={`Donation Modal Key ${donationModalKey}`} onSuccessCallback={_donationSuccess} />
         	</Elements>
         	: 
-        	<span>This Campaign is now closed</span>
+        	null
 	   		}
 	       
       </div>     

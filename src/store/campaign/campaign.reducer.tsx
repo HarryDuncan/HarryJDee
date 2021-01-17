@@ -16,7 +16,7 @@ const getActiveCampaign = (campaignArray : any) => {
 		// @ts-ignore
 		active = campaignArray.filter(campaign => campaign['Status'] === 'Closed')
 		if(active.length === 0){
-			active.push(campaignArray[0])
+			active.push({Name : 'No Active Campaign'})
 		}
 	}
 	

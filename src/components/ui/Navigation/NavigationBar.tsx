@@ -46,6 +46,7 @@ class NavBar extends React.Component<INavProps, INavState>{
 
 
   public openMenu = (e: any) => {
+    console.log('asdads')
     this.setState({
       isOpen : true
     })
@@ -80,33 +81,30 @@ class NavBar extends React.Component<INavProps, INavState>{
     const isMobile = document.documentElement.clientWidth <= 1100 ;
     if(isMobile){
         return (
-          <div className={ 'mainNav '}>
+          <div key={`Main Nav Mobile ${this.state.isOpen} `} className={ 'mainNav '}>
           <div className={(this.props.navtopType? 'noScroll ' : 'scrolledMainNav ') + (this.state.activeNav === '/' || this.state.activeNav === ''  ? 'homeNav'  : ' ')} />
           <img className={'navLogo start'} src={this.props.navtopType? '/images/icons/harryDLogo.png' : '/images/icons/harryDLogoWhite.png'}/>
               <CartNotification redirectCallback={this.setActiveHome} isMobile={true} customClassName={(this.props.navtopType? 'top-nav ' : 'scrolled-top ')}/>
           
             {this.props.showNav && !this.props.testing? 
-             <nav className={'navbar-toggler'}>
+             <nav key={`Main Nav Mobile ${this.state.isOpen} 22`} className={'navbar-toggler'}>
                <div className="nav-container" onClick={this.openMenu} >
                 <div className={"bar1 " + (this.props.navtopType? '' : 'bar-item ')} ></div>
                 <div className={"bar2 " + (this.props.navtopType? '' : 'bar-item ')} ></div>
                 <div className={"bar3 " + (this.props.navtopType? '' : 'bar-item ')}></div>
-             </div>
-             {this.state.isOpen?
-                <Menu right key={String(this.state.isOpen) + 'nav'} className="MobileMenu" width={200}  >
-                <Link className='link' onClick={this.navClicked.bind(this, '/')} to="/" >Home</Link>
-                <Link className='link' onClick={this.navClicked.bind(this, '/Bio')} to='/Bio'>Bio</Link>
-                <Link className='link' onClick={this.navClicked.bind(this, '/Mixes')}  to='/Mixes'>Mixes</Link>        
-                <Link className='link' onClick={this.navClicked.bind(this, '/Gallery')}  to='/Gallery'>Gallery</Link>
-                <Link className='link' onClick={this.navClicked.bind(this, '/Activism')} to='/Activism'>Activism</Link> 
-                <Link className='link' onClick={this.navClicked.bind(this, '/Shop')} to='/Shop'>Shop</Link>
-              </Menu>
-              :
-              null
-
-             }
-            
-              </nav>
+              </div>
+              
+                  <Menu right key={String(this.state.isOpen) + 'nav'} className="MobileMenu" width={200}  >
+                    <Link className='link' onClick={this.navClicked.bind(this, '/')} to="/" >Home</Link>
+                    <Link className='link' onClick={this.navClicked.bind(this, '/Bio')} to='/Bio'>Bio</Link>
+                    <Link className='link' onClick={this.navClicked.bind(this, '/Mixes')}  to='/Mixes'>Mixes</Link>        
+                    <Link className='link' onClick={this.navClicked.bind(this, '/Gallery')}  to='/Gallery'>Gallery</Link>
+                    <Link className='link' onClick={this.navClicked.bind(this, '/Activism')} to='/Activism'>Activism</Link> 
+                    <Link className='link' onClick={this.navClicked.bind(this, '/Shop')} to='/Shop'>Shop</Link>
+                  </Menu>
+               
+                
+            </nav>
 
               :
               null
@@ -131,7 +129,7 @@ class NavBar extends React.Component<INavProps, INavState>{
     }else{
       return (
           <div className={ 'mainNav '}>
-          <div className={(this.props.navtopType? 'noScroll ' : 'scrolledMainNav ') + (this.state.activeNav === '/'  || this.state.activeNav === '' ? 'homeNav' || this.state.activeNav === '' || 'TestMode' : ' ')} />
+          <div className={(this.props.navtopType? 'noScroll ' : 'scrolledMainNav ') + (this.state.activeNav === '/'  || this.state.activeNav === '' ? 'homeNav' || this.state.activeNav === '' || 'TestMode' : ' ' || this.state.activeNav === '/Activism')} />
           <Link to="/"><img onClick={this.navClicked.bind(this, '/')} className={'navLogo start'} src={this.props.navtopType? '/images/icons/harryDLogo.png' : '/images/icons/harryDLogoWhite.png'}/></Link>
                 {this.props.showNav && !this.props.testing? 
                    <ul>

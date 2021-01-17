@@ -41,6 +41,21 @@ export const CampaignItem = {
 			'value' : '',
 			'edit' : true
 		},
+		'StartDate':{
+			'type' : 'dateTime',
+			'display' : true,
+			'label' : 'Campaign Start Date',
+			'time' : true,
+			'value' : '',
+			'edit' : true
+		},
+		'EndDate':{
+			'type' : 'dateTime',
+			'display' : true,
+			'label' : 'Campaign End Date',
+			'value' : '',
+			'edit' : true
+		},
 		'DataType' : {
 			'type' : 'string',
 			'display' : false,
@@ -50,7 +65,6 @@ export const CampaignItem = {
 
 
 export const formatDataToCampaign = ( data: any[] ) => {
-	console.log(data)
 	data = data.map(item => ({...item , 'Title' : item['Name'], 'DataType' : 'campaigns' }))
 	return data
 

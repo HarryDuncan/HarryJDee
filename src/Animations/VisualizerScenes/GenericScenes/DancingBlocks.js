@@ -165,7 +165,7 @@ export function DancingBlocks (framework) {
         let count = 0
         let bgC = 0
 
-        if(timer - setTime > 15 && overallAvg !== 0){
+        if(timer - setTime > 25 && overallAvg !== 0){
             setTime = Date.now()
 
             scene.traverse((o) => {

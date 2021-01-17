@@ -1,22 +1,77 @@
-
-.activism-section{
+.activism-container{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   width: auto;
   width: calc(100% - 9em);
   margin: 0 5em 0 3.5em; 
-  z-index: 99999;
-  border-top: 2px solid black;
+  z-index: 1;
   padding-top: 1%;
   animation-timing-function: linear;
   -webkit-animation: in 2500ms linear ;
-  overflow-x: hidden;
+  overflow: hidden;
   animation: in 2500ms linear ;
+  height: 80.5vh;
+}
+.activism-menu{
+  display: flex;
+  flex-direction: row;
+  height: 10vh;
+  width: 100%;
+}
+.thanks-to{
+  display: flex;
+  flex-direction: row;
+  float: right;
+}
+.thanks-link{
+  color: black;
+}
+.activism-section{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.inactive-campaign{
+  
+  width: 50%;
+  margin: 0 auto;
+  position: relative;
+}
+.inactive-content{
+  display: flex;
+  flex-direction: column;
+  z-index: 3;
+  position: absolute;
+  top:0;
+  margin: 0 auto;
+}
+.inactive-content h1{
+  font-family: 'HarryDuncan';
+  font-size: 2.5em;
+  text-align: center;
+}
+
+.inactive-content p{
+  font-weight : 300;
+  font-size : 1.4em;
+  margin-top' : 0;
+  padding-top : 0;
+  line-height': 120%;
+  letter-spacing : 0.25em;
+  text-align: center;
+  margin: 10px;
+
+}
+.inactive-background{
+  background-color: white;
+  opacity: 0.8;
+  height: 100%;
+  width: 100%;
 }
 
 .aids-ribbon{
   position: absolute;
-  bottom: 25%;
+  bottom: 40%;
   z-index: -1;
   right:  39%;
 }
@@ -139,10 +194,12 @@
 }
 @Media only screen and (max-width: 900px){
 
-  .activism-section{
+  .activism-container{
       width: 94%;
       margin: 0 auto;
       flex-direction: column;
+      height: 100vh;
+      overflow-y: auto;
     }
 
   .action-section{
@@ -174,6 +231,9 @@
   .info-content{
     text-align: center;
     width: 100%;
+    }
+    .inactive-campaign{
+      width: 80%;
     }
   
   }

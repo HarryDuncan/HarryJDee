@@ -34,7 +34,7 @@ const styles = mergeStyleSets({
     cursor : 'pointer',
     fontSize:'1.5em',
     maxHeight: 32,
-    zIndex: 99999,
+    zIndex: 900,
   },
   callout: {
     width: 300,

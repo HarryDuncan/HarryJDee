@@ -2,12 +2,14 @@ import React from 'react';
 import {connect} from "react-redux";
 import {getCampaignData} from './../../store/campaign/campaign.actions';
 import DonationSection from './DonationSection';
-import { Stack, IStackTokens, IStackStyles  ,  ITextFieldStyles} from 'office-ui-fabric-react';
+import { Stack, IStackTokens, IStackStyles  ,  ITextFieldStyles,Link} from 'office-ui-fabric-react';
 import {DisplayText} from './../ui/customTextField/DisplayText';
 import {DonationReceipt} from './DonationReceipt'
 import { closeDonationModal} from './../../store/campaign/campaign.actions'
 import {AidsRibbon} from './../../Animations/StaticScenes/Aids';
 import {InfoSection} from './InfoSection';
+import { Dropdown , IDropdownStyles, IDropdownOption} from 'office-ui-fabric-react/lib/Dropdown';
+import {NoActiveCampaign} from './../../Animations/StaticScenes/NoActiveCampaign';
 import './activism.css';
 
 
@@ -20,6 +22,17 @@ const stackStyles: IStackStyles = {
 };
 
 
+const dropdownStyles: Partial<IDropdownStyles> = {
+  dropdownItem : {
+    width : '80%  !important',
+    display : 'flex',
+  },
+  
+  dropdown: {
+                 width: '80%' , clear: 'both', margin: '0 auto',
+                },
+ 
+};
 
 const customStyles : Partial<ITextFieldStyles> = {
 	root : {
@@ -49,40 +62,133 @@ interface IActivisimProps {
 	showModal :  boolean;
 	donationReceipt : any;
 	closeDonationModal : any;
-
 }
-class ActivisimContainer extends React.Component<IActivisimProps>{
-	
 
+
+interface IActivisimState{
+	viewingCampaign: any;
+}
+
+ const onRenderOption = (option: IDropdownOption|undefined): JSX.Element => {
+    if(option === undefined){
+      return <div/>
+    }else if(option.data === undefined){
+       return(
+        <div>
+         <span>{option.text}</span>
+        </div>
+      );
+    }else{
+      return(
+        <div style={{width : '400px', display : 'flex', flexDirection : 'row'}}>
+         <span className={'dropdown-main-title'}>{option.text}</span>
+        </div>
+      );
+    }
+    
+  };
+
+
+
+class ActivisimContainer extends React.Component<IActivisimProps, IActivisimState>{
+	constructor(props : IActivisimProps){
+	super(props);
+	   this.state ={
+	    viewingCampaign : this.props.activeCampaign
+	   }
+  	}
 	public componentDidMount = () => {
 		this.props.getCampaignData()
 	}
-	
-	public render(){
-		return(
-			<div className="page">
-				<DonationReceipt isOpen={this.props.showModal} campaignData={this.props.activeCampaign} closeCallback={this._closeModal} donationReceipt={this.props.donationReceipt} />
-				<div className='activism-section'>
-					<Stack styles={stackStyles} tokens={stackTokens}>
-						<Stack.Item align="stretch">
-							<h1 className={'campaign-title'}>{this.props.activeCampaign['Name']} </h1>
-						</Stack.Item>
-						 <Stack.Item align="stretch" >
-							<DisplayText customStyleObj={customStyles} text={this.props.activeCampaign['Supporting']}/>
-						
-							<InfoSection />
-						</Stack.Item>
-					</Stack>
-					<div className={'action-section'}>
-						<DonationSection amount={this.props.activeCampaign['Total']} campaign={this.props.activeCampaign} contributionCount={this.props.activeCampaign['ContributionCount']}  />
-					</div>
-				</div>
-				<AidsRibbon/>
-			</div>
-			
-		);
+
+	public _getOptions = () => {
+		let optionArr : any[] = this.props.campaignData.map((item : any) =>  ( {'key' : item['ID'], 'text' : item['Name'], 'data' : {'EndDate' : item['EndDate']} }))
+		return optionArr
 	}
 
+
+	
+	public render(){
+		let selectionOptions = this._getOptions()
+		if(this.state.viewingCampaign['Name'] === 'No Active Campaign' || this.state.viewingCampaign['Name'] === ''){
+			return(
+				<div className="page">
+					<NoActiveCampaign />
+					<div className='activism-container inactive-campaign no-border'>
+						<div className={'inactive-background'}/>
+						<div className={'inactive-content'}>
+							<h1>Harry J Dee Activisim</h1>
+							<p>
+								Harry J Dee creates work and runs campaigns to generate awareness and support for various causes.
+								By Selling prints, pieces, collecting donations and creating content to inform and empower.
+							</p>
+
+							<p>There are currently no active campaigns at the moment</p>
+							
+
+							 <Dropdown
+					 			
+	                            options={selectionOptions}
+	                            onChange={this._campaignSelected}
+	                            onRenderOption={onRenderOption}
+	                            styles={dropdownStyles}
+	                            placeHolder="View Previous Campaigns"
+	                             />
+	                    </div>
+
+					</div>
+					
+				</div>
+				);
+		}else{
+			return(
+				<div className="page">
+					<DonationReceipt isOpen={this.props.showModal} campaignData={this.state.viewingCampaign} closeCallback={this._closeModal} donationReceipt={this.props.donationReceipt} />
+					<div className='activism-container'>
+						<div className={'activism-menu'}>
+						 <Dropdown
+					 			placeHolder="View Previous Campaigns"
+	                            options={selectionOptions}
+	                            onChange={this._campaignSelected}
+	                            onRenderOption={onRenderOption}
+                             	/>
+                         <div className='thanks-to'>
+                         	<p>Special thanks to...
+                         	<a className={'thanks-link'}>Barba Presents</a> and
+                         	<a className={'thanks-link'}> Thorne Harbour Health</a>
+                         	</p>
+                         </div>
+						</div>
+						<div className='activism-section'>
+							<Stack styles={stackStyles} tokens={stackTokens}>
+								<Stack.Item align="stretch">
+									<h1 className={'campaign-title'}>{this.state.viewingCampaign['Name']} </h1>
+								</Stack.Item>
+								 <Stack.Item align="stretch" >
+									<DisplayText customStyleObj={customStyles} text={this.state.viewingCampaign['Supporting']}/>
+								
+									<InfoSection />
+								</Stack.Item>
+							</Stack>
+							<div className={'action-section'}>
+								<DonationSection amount={this.state.viewingCampaign['Total']} campaign={this.state.viewingCampaign} contributionCount={this.state.viewingCampaign['ContributionCount']}  />
+							</div>
+						</div>
+						<AidsRibbon/>
+					</div>
+				</div>
+				);
+		}
+		
+	}
+
+	private _campaignSelected = (event: any, option: any) => {
+		let selectedCampaign = this.props.campaignData.filter((item : any)=> item['ID'] === option['key'])
+		this.setState({
+			viewingCampaign : selectedCampaign[0]
+		})
+		
+	}
 
 	private _closeModal = () => {
 		this.props.closeDonationModal()
@@ -90,7 +196,7 @@ class ActivisimContainer extends React.Component<IActivisimProps>{
 } 
 
 const mapStateToProps = (state : any) => ({
-	campaignData : state.campaigns.campaignData,
+	campaignData : state.campaigns.campaignArray,
 	activeCampaign : state.campaigns.activeCampaign,
 	showModal : state.campaigns.showDonationReceipt,
 	donationReceipt : state.campaigns.donationReceipt

@@ -34,6 +34,17 @@ h1{
 ::-webkit-scrollbar-thumb:hover {
   background: #555; 
 }
+
+
+
+.dropdown-subtitle{
+  font-size: 10px;
+  color:gray;
+}
+
+.no-border{
+  border: 0px !important;
+}
 @font-face {
   font-family: 'HarryDuncan';
   font-style: normal;

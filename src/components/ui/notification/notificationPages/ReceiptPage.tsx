@@ -60,7 +60,11 @@ class Receipt extends React.Component<IReceiptProps, IReceiptState>{
 						</Stack.Item>
 					<Stack.Item align="stretch">
 						<div className={'content-inner'}>
-							<h2 style={{clear :'both' , margin : '0 auto'}} >Your Purchase just raised ${this.props.receiptObject['contribution']} AUD for the {this.props.activeCampaign['Name']} campaign</h2>
+							{this.props.receiptObject['contribution'] !== undefined && this.props.receiptObject['contribution'] !== null?
+								<h2 style={{clear :'both' , margin : '0 auto'}} >Your Purchase just raised ${this.props.receiptObject['contribution']} AUD for the {this.props.activeCampaign['Name']} campaign</h2>
+								:
+								null
+							}
 						</div>
 					</Stack.Item>
 					<Stack.Item align="stretch">

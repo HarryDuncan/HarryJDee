@@ -11,9 +11,6 @@
   animation: in 2500ms linear ;
 }
 
-.border{
-  border-top: 2px solid black;
-}
 .mixes-title{
     justify-content: center;
     font-size: 1.2em;
