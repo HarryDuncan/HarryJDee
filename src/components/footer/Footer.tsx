@@ -1,20 +1,22 @@
 import React from 'react'
-import './footerStyles.css'
-import {ExternalLinkWidget} from './../ui/externalLinkWidget/ExternalLinkWidget'
-import {Link} from 'office-ui-fabric-react';
 import {connect} from 'react-redux';
+import {ExternalLinkWidget} from './../ui/externalLinkWidget/ExternalLinkWidget'
+import './footerStyles.css'
 
 interface IFooterProps{
 	showNav : boolean;
 }
+
+
+
 const Footer: React.SFC<IFooterProps> = props => {
 	if(!props.showNav){
 		return <div/>
 	}else{
 		return(<div  className='footer-container'>
 				<div className='footer-left'>
-					<Link className={'footer-link'}>Get In Touch</Link>
-					<Link className={'footer-link'}>Terms and Conditions</Link>
+					<a className={'footer-link'} href="mailto: harry@harryjdee.com">Get In Touch</a>
+					<a className={'footer-link'} href="harryjdee.com/TermsAndConditions">Terms and Conditions</a>
 				</div>
 					<div className='footer-center'>
 						<ExternalLinkWidget links={[{url : 'https://www.instagram.com/harry.j.dee/'}, {url : 'https://www.soundcloud.com/harry-j-dee'}]} />	

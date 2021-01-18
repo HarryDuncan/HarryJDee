@@ -83,7 +83,8 @@
   clear: both;
   cursor: pointer;
   background-color: white;
-	border-bottom: 2px solid black;
+	
+  border-bottom: 2px solid black;
 	flex-direction: column;
      text-align: center;
 }

@@ -14,17 +14,35 @@
 }
 .activism-menu{
   display: flex;
-  flex-direction: row;
-  height: 10vh;
+  flex-direction: column;
   width: 100%;
+
 }
 .thanks-to{
   display: flex;
   flex-direction: row;
   float: right;
+  margin: 0 auto;
+}
+.dd-container{
+  width: 30%;
+  margin: 0 auto;
+}
+.thanks-text{
+  font-weight : 500;
+  font-size : 1em;
+  margin-top : 0;
+  padding-top : 0;
+  line-height: 120%;
+  letter-spacing : 0.25em;
+  text-align: center;
+  margin: 10px;
+  color: black;
 }
 .thanks-link{
   color: black;
+  text-transform: none;
+  text-decoration: underline;
 }
 .activism-section{
   display: flex;
@@ -52,11 +70,11 @@
 }
 
 .inactive-content p{
-  font-weight : 300;
-  font-size : 1.4em;
-  margin-top' : 0;
+  font-weight : 500;
+  font-size : 1em;
+  margin-top : 0;
   padding-top : 0;
-  line-height': 120%;
+  line-height: 120%;
   letter-spacing : 0.25em;
   text-align: center;
   margin: 10px;
@@ -195,31 +213,39 @@
 @Media only screen and (max-width: 900px){
 
   .activism-container{
-      width: 94%;
+      width: 96%;
       margin: 0 auto;
       flex-direction: column;
-      height: 100vh;
-      overflow-y: auto;
+      height: fit-content;
+     
     }
 
+  .activism-section{
+      flex-direction: column;
+    }
   .action-section{
     display: flex;
     width: 100%;
-    margin-bottom: 10em;
+    
   }
 
-
+  .dd-container{
+    width: 80%;
+    margin: 0 auto;
+  }
+  .activism-menu{
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    width: 100%;
+  }
   .aids-ribbon{
-    position: absolute;
-    top: 2%;
-    z-index: -1;
-    right: 18%;
-    height: 4em !important;
-    }
+    display: none;
+  }
   .donation-section{
-      position: fixed;
+    
       bottom: 0;
-      background: linear-gradient(3deg, rgba(255,255,255,1) 0%, rgba(255,171,171,1) 100%);
+      
       left: 0;
       width: 100%;
   }
@@ -234,6 +260,7 @@
     }
     .inactive-campaign{
       width: 80%;
+       height: 100vh;
     }
   
   }

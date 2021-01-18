@@ -17,7 +17,8 @@ import './activism.css';
 const stackStyles: IStackStyles = {
   root: {
    height : document.documentElement.clientWidth <= 900 ? 'fit-content' : '90vh',
-   flexGrow: '100',
+   flexGrow: '100'
+  
   },
 };
 
@@ -52,7 +53,7 @@ const customStyles : Partial<ITextFieldStyles> = {
 }
 
 
-const stackTokens: IStackTokens = { childrenGap: document.documentElement.clientWidth <= 900 ? '6em' : 0 };
+const stackTokens: IStackTokens = { childrenGap: document.documentElement.clientWidth <= 900 ? '2em' : 0 };
 
 
 interface IActivisimProps {
@@ -146,17 +147,20 @@ class ActivisimContainer extends React.Component<IActivisimProps, IActivisimStat
 					<DonationReceipt isOpen={this.props.showModal} campaignData={this.state.viewingCampaign} closeCallback={this._closeModal} donationReceipt={this.props.donationReceipt} />
 					<div className='activism-container'>
 						<div className={'activism-menu'}>
-						 <Dropdown
-					 			placeHolder="View Previous Campaigns"
-	                            options={selectionOptions}
-	                            onChange={this._campaignSelected}
-	                            onRenderOption={onRenderOption}
-                             	/>
-                         <div className='thanks-to'>
-                         	<p>Special thanks to...
-                         	<a className={'thanks-link'}>Barba Presents</a> and
-                         	<a className={'thanks-link'}> Thorne Harbour Health</a>
+						 
+                         <div className={'thanks-to'}>
+                         	<p className={'thanks-text'}>This campaign is closed.<br/>Special thanks to
+                         	<a className={'thanks-link'} href={'https://www.barbapresents.com/'} target={'_blank'}>Barba Presents</a> and 
+                         	<a className={'thanks-link'} href={'https://thorneharbour.org'} target={'_blank'}>Thorne Harbour Health</a>
                          	</p>
+                         </div>
+                         <div className={'dd-container'}>
+	                         <Dropdown
+						 			placeHolder="View Previous Campaigns"
+		                            options={selectionOptions}
+		                            onChange={this._campaignSelected}
+		                            onRenderOption={onRenderOption}
+	                             	/>
                          </div>
 						</div>
 						<div className='activism-section'>
@@ -166,7 +170,6 @@ class ActivisimContainer extends React.Component<IActivisimProps, IActivisimStat
 								</Stack.Item>
 								 <Stack.Item align="stretch" >
 									<DisplayText customStyleObj={customStyles} text={this.state.viewingCampaign['Supporting']}/>
-								
 									<InfoSection />
 								</Stack.Item>
 							</Stack>
