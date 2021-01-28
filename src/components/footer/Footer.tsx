@@ -16,7 +16,7 @@ const Footer: React.SFC<IFooterProps> = props => {
 		return(<div  className='footer-container'>
 				<div className='footer-left'>
 					<a className={'footer-link'} href="mailto: harry@harryjdee.com">Get In Touch</a>
-					<a className={'footer-link'} href="harryjdee.com/TermsAndConditions">Terms and Conditions</a>
+					<a className={'footer-link'} href="/TermsAndConditions" >Terms and Conditions</a>
 				</div>
 					<div className='footer-center'>
 						<ExternalLinkWidget links={[{url : 'https://www.instagram.com/harry.j.dee/'}, {url : 'https://www.soundcloud.com/harry-j-dee'}]} />	

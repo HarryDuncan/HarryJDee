@@ -250,6 +250,57 @@ export const dataScaffold : any = {
 			'display' : false,
 			'value' : ''
 		}
+	},
+	'mixes' : {
+			'ID' : {
+			'type' : 'int',
+			'display' : false,
+			},
+		'Title' : {
+			'type' : 'string',
+			'label' : 'Mix Name',
+			'display' : true,
+			'edit' : true,
+			'required' : true,
+		},
+		
+		'MixDescription' : {
+			'type' : 'string',
+			'display' : true,
+			'edit' : true,
+			'multiline' : true,
+			'required' : true,
+			'label' : 'Mix Description'
+		},
+		'PublishDate' : {
+			'type' : 'dateTime',
+			'display' : true,
+			'label' : 'Date Recorded',
+			'time' : true,
+			'value' : '',
+			'edit' : true
+		},
+		'Mix File': {
+			'type' : 'int',
+			'display' : true,
+			'edit' : true,
+			'required' : false,
+			'label' : 'Mix File',
+		},
+		
+		'Image' :{
+			'type' : 'image',
+			'label' : 'Upload Image',
+			'display' : true,
+			'edit' : false,
+			'required' : true,
+		},
+		'DataType' : {
+			'type' : 'string',
+			'display' : false,
+			'value' : 'products'
+		},
+		
 	}
 }
 export const customerDetails : any = {

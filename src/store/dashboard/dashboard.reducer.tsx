@@ -1,7 +1,7 @@
 import {IDashboardState, dashboardActionTypes} from './dashboard.types';
 import update from 'immutability-helper';
 import {updateCurrentData, removeFromCurrent} from './../mainFunctions'
-import {formatDataToContent} from './../../DataModels/dataFunctions';
+import {formatDataToContent, formatDataToMixes} from './../../DataModels/dataFunctions';
 import {getFromStorage} from './../../utilities/utilityFunctions'
 import {formatDataToCampaign} from './../../DataModels/campaignData';
 
@@ -44,12 +44,19 @@ function dashboard(state: IDashboardState = initialDashboardState, action: any){
 			return state;
 		case dashboardActionTypes.LOAD_DASHBOARD_DATA_SUCCESS:
 			let data = action.payload.data
-			if(action.table === 'content'){
-				data = formatDataToContent(data)
-			}else if(action.table === 'campaigns'){
-				console.log('asdasd')
-				data = formatDataToCampaign(data)
+			switch(action.table){
+				case 'content':
+					data = formatDataToContent(data)
+					break;
+				case 'campaigns':
+					data = formatDataToCampaign(data)
+					break;
+				case 'mixes':
+					data = formatDataToMixes(data)
+					break
+
 			}
+			console.log(action.table)
 			return update(state, {
 				dashboardArray : {$set : data}
 			})

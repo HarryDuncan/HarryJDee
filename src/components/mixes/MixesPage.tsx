@@ -61,12 +61,6 @@ class MixesPage extends React.Component<IMixesProps, IMixesState>{
 		if(this.props.mixes.length === 0){
 			return <div/>
 		}else{
-			// console.log(this.props.mixes)
-			// let mixObj = [
-			// {'title' : 'Red Room', 'src' : './mixes/EasyListening.wav', 'description' : 'Dreamy soundscapes and relaxing tunes.'},
-			// {'title' : 'Groove Anthology', 'src' : './mixes/GrooveAnthology.wav', 'description' : 'A fun, eclectic and genre jumping mix.'},
-			// // {'title' : 'Test', 'src' : './01.mp3', 'description' : 'A fun, eclectic and genre jumping mix.'}
-			// ]
 			return(
 				<div className='page'>
 					<div className={"mixes-section " + (this.state.isFullScreen ?  "" : "border")}>

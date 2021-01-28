@@ -64,6 +64,8 @@ export class ItemTile extends React.Component<IItemTileProps, IItemTileState>{
 		let cardImage : any;
 		if(this.props.itemProps['DataType'] === undefined || this.props.itemProps['Url'] === undefined){
 			cardImage = null
+		}else if(this.props.itemProps['DataType'] === 'hjdmix'){
+			cardImage = `/${this.props.itemProps['DataType']}/${this.props.itemProps['Url']}.jpg`
 		}else{
 			cardImage = `/images/${this.props.itemProps['DataType']}/${this.props.itemProps['Url']}.jpg`
 		}

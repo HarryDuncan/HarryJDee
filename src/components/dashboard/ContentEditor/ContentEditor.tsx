@@ -52,9 +52,9 @@ class ContentEditor extends React.Component<IContentEditorProps, IContentEditorS
 		editItems = addItemObj.concat(editItems)
 		let height = '100vh'
 		if(editItems.length > 3 && editItems.length < 6){
-			 height = String(editItems.length / 2 * 50) +'vh'
+			height = String(editItems.length / 2 * 45) +'vh'
 		}else if(editItems.length > 6){
-			 height = String(editItems.length / 3 * 50) +'vh'
+			 height = String(editItems.length / 3 * 45) +'vh'
 		}
 		return(
 		<div className='content-page'>

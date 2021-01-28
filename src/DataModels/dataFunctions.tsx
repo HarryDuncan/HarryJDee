@@ -80,6 +80,18 @@ export const formatRawData = (rawData : any, scaffold : any) => {
 
 
 
+export const formatDataToMixes = (data : any[]) => {
+	
+	
+	for(let i in data){
+		
+		data[i]['DataType'] = 'hjdmix'
+		
+	}
+	
+	return data
+}
+
 export const formatDataToContent = (data : any[]) => {
 	let returnArr = []
 	for(let i in data){

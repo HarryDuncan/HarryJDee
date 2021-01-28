@@ -75,6 +75,7 @@ const [audioCont, setAudioContext] = useState(null)
 					         	 </div>
 					        </div>
 				          	<p className={'mix-item-description'} >{props.itemProps.MixDescription}</p>
+                    <p>Recorded: {props.itemProps.MixDescription}</p>
 				          </div>
 				          
 				      </div>  

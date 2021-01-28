@@ -31,7 +31,7 @@ export const DashboardPage = () => {
 		            <ContentEditor type={'campaigns'}/>
 		          </PivotItem>
 		          <PivotItem headerText="Edit Mixes">
-		            <ContentEditor type={'Mixes'}/>
+		            <ContentEditor type={'mixes'}/>
 		          </PivotItem>
 		           <PivotItem headerText="Site Settings">
 		            <SettingsPage/>
