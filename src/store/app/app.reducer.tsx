@@ -48,8 +48,9 @@ function app(state: IAppState = initialAppState, action: any){
 				showNav : {$set : !action.payload}
 			})
 		case appActionTypes.LOAD_MIXES_SUCCESS:
+		let mixArr =  action.payload.data.map((obj : any ) => ({...obj, title: obj['Title']}))
 			return update(state, {
-				mixes : {$set : action.payload.data.map((obj : any ) => ({...obj, title: obj['Title']}))}
+				mixes : {$set : mixArr.sort((a: any, b: any) => b['ID']- a['ID'])}
 			})
 		case appActionTypes.LOAD_CONTENT_SUCCESS:
 			let returnObj : any = {}

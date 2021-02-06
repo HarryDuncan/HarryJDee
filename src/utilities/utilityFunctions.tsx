@@ -13,7 +13,7 @@ export const validateData = (dataObject : any) => {
 }
 
 export const getFromStorage = ( key: string, nullReturnValue : any , parse? : boolean): any =>{
-	let localItem = sessionStorage.getItem(key)
+	let localItem = localStorage.getItem(key)
 	if(localItem === null){
 		return nullReturnValue
 	}else{

@@ -10,7 +10,7 @@
   -webkit-animation: in 2500ms linear ;
   overflow: hidden;
   animation: in 2500ms linear ;
-  height: 80.5vh;
+  height: 100vh;
 }
 .activism-menu{
   display: flex;

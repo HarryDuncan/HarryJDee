@@ -8,7 +8,7 @@ import {formatDataToCampaign} from './../../DataModels/campaignData';
 
 const initialDashboardState : IDashboardState = {
 	isLoggingIn : false,
-	loggedIn : process.env.NODE_ENV !== 'production' ? true : getFromStorage("Logged_In", false, true),
+	loggedIn : process.env.NODE_ENV === 'production' ? true : getFromStorage("Logged_In", false, true),
 	loggedInFailMessage : false,
 	dashboardArray : [],
 	ordersArray: [],
@@ -25,7 +25,7 @@ function dashboard(state: IDashboardState = initialDashboardState, action: any){
 				isLoggingIn : {$set : true},
 			})
 		case dashboardActionTypes.LOGIN_SUCCESS:
-			sessionStorage.setItem('Logged_In', JSON.stringify(true)) 
+			localStorage.setItem('Logged_In', JSON.stringify(true)) 
 			return update(state, {
 				loggedIn : {$set : true},
 				loggedInFailMessage : {$set :false},

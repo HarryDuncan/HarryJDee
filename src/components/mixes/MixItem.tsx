@@ -3,7 +3,7 @@ import './../visualizer/Audio/assets/play-dark.png';
 import {useState} from 'react'
 import {VisualizerWrapper} from './../visualizer/VisualizerWrapper';
 import './mixes.css'
-
+import moment from 'moment';
  
 interface IMixItemProps {
       itemProps : any;
@@ -75,7 +75,7 @@ const [audioCont, setAudioContext] = useState(null)
 					         	 </div>
 					        </div>
 				          	<p className={'mix-item-description'} >{props.itemProps.MixDescription}</p>
-                    <p>Recorded: {props.itemProps.MixDescription}</p>
+                    <p>Recorded: {moment(new Date(props.itemProps.PublishDate)).format('DD/MM/YYYY')}</p>
 				          </div>
 				          
 				      </div>  

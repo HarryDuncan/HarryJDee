@@ -98,6 +98,9 @@ export const deleteData = (data : any, type? : string, callback?: () => void ) =
 			case 'content':
 				table = '_content_table'
 				break;
+			case 'mixes':
+				table = '_mixes_table'
+				break;
 			default:
 				table = ''
 				break;
@@ -145,6 +148,9 @@ export const submitData = (data : any, type? : string, callback? : () => void) =
 			break;
 		case 'campaigns':
 			table = '_campaigns'
+			break;
+		case 'mixes':
+			table = '_mixes_table'
 			break;
 		default:
 			table = ''
@@ -199,6 +205,10 @@ export const updateData = (data : any, type? : string , callback?: () => void) =
 		case 'campaigns':
 		case 'campaign':
 			table = '_campaigns'
+			break;
+		case 'mixes':
+		case 'hjdmix':
+			table = '_mixes_table'
 			break;
 		default:
 			table = ''
@@ -315,30 +325,3 @@ export const updateOrder = (orderData : any, status : string, callback : (succes
 
 
 
-	/*
-  let body = JSON.stringify({
-      key: filename
-  })
-  var url = process.env.REACT_APP_API_URL + 'S3Resolve/signs3Bucket'
-  let axiosConfig = {
-  headers: {
-          'Content-Type': 'application/json',
-          "Access-Control-Allow-Origin": "*",
-      }
-  }
-  axios.post(url, body, axiosConfig )
-  .then(response => {
-   let options = {
-    headers: {
-      "Content-Type": 'jpg'
-    }
-   };
-   axios.put(response.data, file, options)
-   .then(response => {
-    
-   })
-    })
-
-}
-
-*/

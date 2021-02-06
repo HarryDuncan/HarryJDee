@@ -1,5 +1,8 @@
 .footer-container{
-	width: 100vw;
+	width: 92vw;
+	padding-left: 4vw;
+	padding-right: 4vw;
+	margin: 0 auto;
 	display: flex;
 	flex-direction: row;
 	position: relative;

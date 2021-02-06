@@ -23,7 +23,6 @@ export const VisualizerWrapper: React.FunctionComponent<IVisualizerWrapperProps>
 
 
  const  _getTrackID = () => {
-  console.log(props.trackProps)
   	for(let i in props.trackProps){
   		if(props.trackProps[i]['Title'] === props.selectedTrack){
   			return Number(i)
