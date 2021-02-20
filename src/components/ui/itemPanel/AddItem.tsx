@@ -3,7 +3,7 @@ import './PanelStyles.scss'
 import {connect} from 'react-redux';
 import {submitData} from './../../../store/dashboard/dashboard.actions'
 import { DefaultButton, TextField, PrimaryButton} from 'office-ui-fabric-react'
-import {dataScaffold, performMappingOnForm, addNewVariation, removeVariation} from './../../../DataModels/dataModels'
+import {dataScaffold, performMappingOnForm, addNewVariation, removeVariation} from './../../../data'
 import {validateData} from './../../../utilities/utilityFunctions'
 import {FormPageSection} from './../formComponent/FormComponent';
 import {cloneDeep} from 'lodash';

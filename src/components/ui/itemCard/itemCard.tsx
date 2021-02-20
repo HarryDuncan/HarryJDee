@@ -13,7 +13,7 @@ interface IItemTileState {
 interface IItemTileProps {
 	itemProps : any
 	isHoverable?: boolean;
-	onClickCallback : any;
+	onClickCallback? : any;
 }
 
 export class ItemTile extends React.Component<IItemTileProps, IItemTileState>{

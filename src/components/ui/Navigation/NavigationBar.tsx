@@ -14,7 +14,7 @@ import {Countdown} from './../../launch/Countdown';
 
 const history = createBrowserHistory()
 interface INavProps  {
-  navtopType : boolean;
+ 
   showReceipt : boolean;
   receiptType : string;
   showNav : boolean;
@@ -28,6 +28,7 @@ interface INavState {
   activeNav : string;
   isOpen : boolean;
   showCountdown : boolean;
+  navTop : boolean;
 
 }
 
@@ -38,7 +39,9 @@ class NavBar extends React.Component<INavProps, INavState>{
     this.state = {
       activeNav : history.location.pathname,
       isOpen : false,
-      showCountdown : false
+      showCountdown : false,
+      navTop : true,
+     
     }
   }
   
@@ -46,7 +49,6 @@ class NavBar extends React.Component<INavProps, INavState>{
 
 
   public openMenu = (e: any) => {
-    console.log('asdads')
     this.setState({
       isOpen : true
     })
@@ -59,21 +61,40 @@ class NavBar extends React.Component<INavProps, INavState>{
   }
 
   public componentDidMount = () => {
-    setTimeout(() => {
-       if(this.props.testing){
-          this.setState({
-            showCountdown : true
-          })
-        }
-    }, 2500)
+    window.addEventListener('scroll', this.handleScroll)
+
+    // Not Needed currently
+
+    //TODO - Campaign/Product Launch Countdown
+    // setTimeout(() => {
+    //    if(this.props.testing){
+    //       this.setState({
+    //         showCountdown : true
+    //       })
+    //     }
+    // }, 2500)
    
   }
+
+  public handleScroll = (ev : any) => {
+    if(window.pageYOffset > 20 && this.state.navTop){
+     this.setState({
+      navTop : false
+      })
+    }else if(window.pageYOffset < 20 && !this.state.navTop){
+      this.setState({
+        navTop : true,
+      })
+    }
+  }
+
+
   public render (){
     if(this.props.siteStatus === 'Maintenance' || this.props.siteStatus === 'Down'){
       return (
           <div className={ 'mainNav '}>
             <div className={this.state.activeNav === '/' ? 'homeNav'  : ' '} />
-              <img onClick={this.navClicked.bind(this, '/')} className={'navLogo start'} src={this.props.navtopType? '/images/icons/harryDLogo.png' : '/images/icons/harryDLogoWhite.png'}/>
+              <img onClick={this.navClicked.bind(this, '/')} className={'navLogo start'} src={this.state.navTop? '/images/icons/harryDLogo.png' : '/images/icons/harryDLogoWhite.png'} alt={'Harry J Dee'}/>
               <div style={{ 'margin' : '4%', 'padding': '0.5%', 'clear' : 'both', 'backgroundColor' : 'black'}} ><span style={{'color' : 'white', 'fontSize': '1em', 'letterSpacing': '0.15em','fontWeight':600}}>Sorry... We are down for maintenance. Please Come back a bit later </span></div>
           </div>
         )
@@ -82,16 +103,16 @@ class NavBar extends React.Component<INavProps, INavState>{
     if(isMobile){
         return (
           <div key={`Main Nav Mobile ${this.state.isOpen} `} className={ 'mainNav '}>
-          <div className={(this.props.navtopType? 'noScroll ' : 'scrolledMainNav ') + (this.state.activeNav === '/' || this.state.activeNav === ''  ? 'homeNav'  : ' ')} />
-          <img className={'navLogo start'} src={this.props.navtopType? '/images/icons/harryDLogo.png' : '/images/icons/harryDLogoWhite.png'}/>
-              <CartNotification redirectCallback={this.setActiveHome} isMobile={true} customClassName={(this.props.navtopType? 'top-nav ' : 'scrolled-top ')}/>
+          <div className={(this.state.navTop? 'noScroll ' : 'scrolledMainNav ') + (this.state.activeNav === '/' || this.state.activeNav === ''  ? 'homeNav'  : ' ')} />
+          <img className={'navLogo start'} src={this.state.navTop? '/images/icons/harryDLogo.png' : '/images/icons/harryDLogoWhite.png'}/>
+              <CartNotification redirectCallback={this.setActiveHome} isMobile={true} customClassName={(this.state.navTop? 'top-nav ' : 'scrolled-top ')}/>
           
             {this.props.showNav && !this.props.testing? 
              <nav key={`Main Nav Mobile ${this.state.isOpen} 22`} className={'navbar-toggler'}>
                <div className="nav-container" onClick={this.openMenu} >
-                <div className={"bar1 " + (this.props.navtopType? '' : 'bar-item ')} ></div>
-                <div className={"bar2 " + (this.props.navtopType? '' : 'bar-item ')} ></div>
-                <div className={"bar3 " + (this.props.navtopType? '' : 'bar-item ')}></div>
+                <div className={"bar1 " + (this.state.navTop? '' : 'bar-item ')} ></div>
+                <div className={"bar2 " + (this.state.navTop? '' : 'bar-item ')} ></div>
+                <div className={"bar3 " + (this.state.navTop? '' : 'bar-item ')}></div>
               </div>
               
                   <Menu right key={String(this.state.isOpen) + 'nav'} className="MobileMenu" width={200}  >
@@ -129,30 +150,30 @@ class NavBar extends React.Component<INavProps, INavState>{
     }else{
       return (
           <div className={ 'mainNav '}>
-          <div className={(this.props.navtopType? 'noScroll ' : 'scrolledMainNav ') + (this.state.activeNav === '/'  || this.state.activeNav === '' ? 'homeNav' || this.state.activeNav === '' || 'TestMode' : ' ' || this.state.activeNav === '/Activism')} />
-          <Link to="/"><img onClick={this.navClicked.bind(this, '/')} className={'navLogo start'} src={this.props.navtopType? '/images/icons/harryDLogo.png' : '/images/icons/harryDLogoWhite.png'}/></Link>
+          <div className={(this.state.navTop? 'noScroll ' : 'scrolledMainNav ') + (this.state.activeNav === '/'  || this.state.activeNav === '' ? 'homeNav' || this.state.activeNav === '' || 'TestMode' : ' ' || this.state.activeNav === '/Activism')} />
+          <Link to="/"><img onClick={this.navClicked.bind(this, '/')} className={'navLogo start'} src={this.state.navTop? '/images/icons/harryDLogo.png' : '/images/icons/harryDLogoWhite.png'}/></Link>
                 {this.props.showNav && !this.props.testing? 
                    <ul>
                     <li>
-                      <CartNotification redirectCallback={this.setActiveHome} customClassName={(this.props.navtopType? 'top-nav ' : 'scrolled-top ')}/>
+                      <CartNotification redirectCallback={this.setActiveHome} customClassName={(this.state.navTop? 'top-nav ' : 'scrolled-top ')}/>
                     </li>
                    <li className={'nav-item'}>
-                      <Link className={'nav-item-link ' + (this.props.navtopType? 'no-scroll-item-link ' : 'scrolled-nav-item ') + (this.state.activeNav === '/Shop' && !this.props.showReceipt ? 'active-nav ' : '')} onClick={this.navClicked.bind(this, '/Shop')} to="/Shop">Shop</Link>
+                      <Link className={'nav-item-link ' + (this.state.navTop? 'no-scroll-item-link ' : 'scrolled-nav-item ') + (this.state.activeNav === '/Shop' && !this.props.showReceipt ? 'active-nav ' : '')} onClick={this.navClicked.bind(this, '/Shop')} to="/Shop">Shop</Link>
                     </li>
                     <li className={'nav-item'}>
-                      <Link className={'nav-item-link ' + (this.props.navtopType? 'no-scroll-item-link ' : 'scrolled-nav-item ') + (this.state.activeNav === '/Activism' || this.state.activeNav === '/Activism/'? 'active-nav ' : '')} onClick={this.navClicked.bind(this, '/Activism')} to="/Activism">Activism</Link>
+                      <Link className={'nav-item-link ' + (this.state.navTop? 'no-scroll-item-link ' : 'scrolled-nav-item ') + (this.state.activeNav === '/Activism' || this.state.activeNav === '/Activism/'? 'active-nav ' : '')} onClick={this.navClicked.bind(this, '/Activism')} to="/Activism">Activism</Link>
                     </li>
                      <li className={'nav-item'}>
-                      <Link className={'nav-item-link ' + (this.props.navtopType? 'no-scroll-item-link ' : 'scrolled-nav-item ') + (this.state.activeNav === '/Gallery'  || this.state.activeNav === '/Gallery/' ? 'active-nav ' : '')} onClick={this.navClicked.bind(this, '/Gallery')} to="/Gallery">Gallery</Link>
+                      <Link className={'nav-item-link ' + (this.state.navTop? 'no-scroll-item-link ' : 'scrolled-nav-item ') + (this.state.activeNav === '/Gallery'  || this.state.activeNav === '/Gallery/' ? 'active-nav ' : '')} onClick={this.navClicked.bind(this, '/Gallery')} to="/Gallery">Gallery</Link>
                     </li>
                      <li className={'nav-item'}>
-                      <Link className={'nav-item-link ' + (this.props.navtopType? 'no-scroll-item-link ' : 'scrolled-nav-item ') + (this.state.activeNav === '/Mixes' || this.state.activeNav === '/Mixes/' ? 'active-nav ' : '')} onClick={this.navClicked.bind(this, '/Mixes')}  to="/Mixes">Mixes</Link>
+                      <Link className={'nav-item-link ' + (this.state.navTop? 'no-scroll-item-link ' : 'scrolled-nav-item ') + (this.state.activeNav === '/Mixes' || this.state.activeNav === '/Mixes/' ? 'active-nav ' : '')} onClick={this.navClicked.bind(this, '/Mixes')}  to="/Mixes">Mixes</Link>
                     </li>
                      <li className={'nav-item'}>
-                      <Link className={'nav-item-link '  + (this.props.navtopType? 'no-scroll-item-link ' : 'scrolled-nav-item ') + (this.state.activeNav === '/Bio' || this.state.activeNav === '/Bio/' ? 'active-nav ' : '')} onClick={this.navClicked.bind(this, '/Bio')}  to="/Bio">Bio</Link>
+                      <Link className={'nav-item-link '  + (this.state.navTop? 'no-scroll-item-link ' : 'scrolled-nav-item ') + (this.state.activeNav === '/Bio' || this.state.activeNav === '/Bio/' ? 'active-nav ' : '')} onClick={this.navClicked.bind(this, '/Bio')}  to="/Bio">Bio</Link>
                     </li>
                     <li className={'nav-item'}>
-                      <Link className={'nav-item-link ' + (this.props.navtopType? 'no-scroll-item-link ' : 'scrolled-nav-item ') + (this.state.activeNav === '/' && this.props.showReceipt ? 'active-nav ' : '')} onClick={this.navClicked.bind(this, '/')} to="/">Home</Link>
+                      <Link className={'nav-item-link ' + (this.state.navTop? 'no-scroll-item-link ' : 'scrolled-nav-item ') + (this.state.activeNav === '/' && this.props.showReceipt ? 'active-nav ' : '')} onClick={this.navClicked.bind(this, '/')} to="/">Home</Link>
                     </li>
                   </ul>
                   : 

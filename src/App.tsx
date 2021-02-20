@@ -19,6 +19,7 @@ import {initializeSite} from './store/app/app.actions'
 import TermsAndConditions from './containers/TermsAndConditions';
 import Test from './containers/Test';
 
+
 interface IAppProps {
   checkoutModalShow : boolean;
   initializeSite : any;
@@ -29,7 +30,7 @@ interface IAppProps {
 }
 
 interface IAppState {
-  navTop : boolean;
+ 
   loadingSite : boolean;
 
 
@@ -38,16 +39,14 @@ export class App extends React.Component<IAppProps, IAppState> {
   constructor(props : IAppProps){
     super(props);
     this.state ={
-    navTop : true,
+    
     loadingSite : true,
    }
   }
   public componentDidMount = () => {
-    window.addEventListener('scroll', this.handleScroll)
+   
     if(!this.props.isInitialized){
       this.props.initializeSite()
-    }else{
-      console.log('asds')
     }
     
     setTimeout(() => {
@@ -59,23 +58,13 @@ export class App extends React.Component<IAppProps, IAppState> {
   }
     
 
-  public handleScroll = (ev : any) => {
-    if(window.pageYOffset > 20 && this.state.navTop){
-     this.setState({
-      navTop : false
-      })
-    }else if(window.pageYOffset < 20 && !this.state.navTop){
-      this.setState({
-        navTop : true,
-      })
-    }
-  }
+
  
     public render(){
         return (
           <div className="App">
           <LoadingSplash show={this.state.loadingSite}/>
-            <NavBar navtopType={this.state.navTop} />
+            <NavBar/>
                 {this.props.siteStatus !== 'Maintenance' && this.props.siteStatus !== 'Down' && this.props.testing !== true ?
                   <Switch>
                       <Route exact path="/"  component={Home} />

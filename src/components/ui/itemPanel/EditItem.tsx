@@ -6,9 +6,7 @@ import { DefaultButton, TextField} from 'office-ui-fabric-react';
 import {validateData} from './../../../utilities/utilityFunctions';
 import {FormPageSection} from './../formComponent/FormComponent';
 import { PrimaryButton} from 'office-ui-fabric-react';
-import {formatRawData} from './../../../DataModels/dataFunctions';
-import {dataScaffold,  addNewVariation, removeVariation, bioData, performMappingOnForm} from './../../../DataModels/dataModels';
-import {CampaignItem } from './../../../DataModels/campaignData'
+import {formatRawData, dataScaffold,  addNewVariation, removeVariation, bioData, performMappingOnForm,CampaignItem} from './../../../data';
 import {updateData, deleteData} from './../../../store/dashboard/dashboard.actions';
 import {CustomDialog} from './../customDialog/CustomDialog';
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import {HomeScene} from './../../Animations/StaticScenes/HomeScene';
+import {HomeScene} from './../../animations/staticScenes/HomeScene';
 import {connect} from 'react-redux';
 
 

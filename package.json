@@ -33,6 +33,7 @@
     "lodash": "^4.17.15",
     "moment": "^2.27.0",
     "moment-timezone": "^0.5.32",
+    "music-beat-detector": "^0.1.1",
     "node-sass": "^4.13.1",
     "office-ui-fabric-react": "^7.88.0",
     "open-simplex-noise": "^2.4.0-pre4",

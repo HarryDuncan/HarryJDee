@@ -1,10 +1,18 @@
 import React from 'react';
 import BioPage from './../components/bio/BioPage';
-import Footer from './../components/footer/Footer';
+import Footer from './../components/ui/footer/Footer';
+import MetaTags from 'react-meta-tags';
 import './../App.css'
+
+
 export const Bio = () => {
+	window.scrollTo(0,0);
   return (
     <div className="Container">
+     	<MetaTags>
+            <title>Bio</title>
+            <meta id="meta-description" name="description" content="Lean more about Harry J Dee." />
+          </MetaTags>
     	<BioPage />
     	<Footer />
     </div>

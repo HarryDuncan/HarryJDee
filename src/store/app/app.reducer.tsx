@@ -18,6 +18,19 @@ const initialAppState : IAppState = {
 }
 
 
+const combineContent = (data : any, contentType : string) => {
+	let returnData :any = {};
+	
+	for(let i in data){
+		if(data[i]['Title'] === contentType){
+			returnData['Asset_URL'] === undefined? returnData['Asset_URL'] = [data[i]['Asset_URL']] : returnData['Asset_URL'].push(data[i]['Asset_URL'])
+			// returnData['Content'].push(data[i]['Content'])
+		}
+	}
+	return returnData
+}
+
+
 
 function app(state: IAppState = initialAppState, action: any){
 	switch(action.type) {
@@ -54,10 +67,14 @@ function app(state: IAppState = initialAppState, action: any){
 			})
 		case appActionTypes.LOAD_CONTENT_SUCCESS:
 			let returnObj : any = {}
+			// Todo - when building more interesting bio page with dynamic content module
+			// let rawData : any[] = [combineContent(action.payload.data, 'Bio')]
 			let rawData : any[] = action.payload.data
+			
 			for(let i in rawData){
 				returnObj[rawData[i]['Title']] = rawData[Number(i)]
 			}
+			
 			return update(state, {
 				content : {$set : returnObj}
 			})

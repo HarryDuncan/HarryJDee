@@ -3,7 +3,7 @@ import {connect} from "react-redux";
 import {initializeGallery} from './../../store/art/art.actions'
 import {ItemTile} from './../ui/itemCard/itemCard';
 import { ItemPanel} from './../ui/itemPanel/itemPanel';
-
+// import {Gallery3D} from './Gallery3D' 	 <Gallery3D items={this.props.galleryArray} key={`3d ${this.props.galleryArray.length}`}/>
 import './galleryStyles.scss';
 
 
@@ -60,9 +60,12 @@ class GalleryPage extends React.Component<IGalleryProps, IGalleryState>{
 				<div className="gallerySection" style={{'height' : height}}>
 					{this.props.galleryArray.map(item => (<ItemTile onClickCallback={this.isViewing} itemProps={item} key={`Gallery Item ${item['ID']}`}/> ))}
 				</div>
+			
 				<ItemPanel isOpen={this.state.viewingPiece} item={this.state.pieceData} closeCallback={this.closePanel} />
 			</div>
 			);
+		
+
 		
 		
 	}

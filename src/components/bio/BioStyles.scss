@@ -21,7 +21,7 @@
 }
 
 .bio-page{
-	width: 92%;
+	width: calc(100% - 9em);
   overflow-x: hidden;
 	display:flex;
   flex-wrap:wrap;

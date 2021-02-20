@@ -1,14 +1,14 @@
 import {IDashboardState, dashboardActionTypes} from './dashboard.types';
 import update from 'immutability-helper';
 import {updateCurrentData, removeFromCurrent} from './../mainFunctions'
-import {formatDataToContent, formatDataToMixes} from './../../DataModels/dataFunctions';
+import {formatDataToContent, formatDataToMixes, formatDataToCampaign} from './../../data';
 import {getFromStorage} from './../../utilities/utilityFunctions'
-import {formatDataToCampaign} from './../../DataModels/campaignData';
+
 
 
 const initialDashboardState : IDashboardState = {
 	isLoggingIn : false,
-	loggedIn : process.env.NODE_ENV === 'production' ? true : getFromStorage("Logged_In", false, true),
+	loggedIn : process.env.NODE_ENV === 'development' ? true : getFromStorage("Logged_In", false, true),
 	loggedInFailMessage : false,
 	dashboardArray : [],
 	ordersArray: [],

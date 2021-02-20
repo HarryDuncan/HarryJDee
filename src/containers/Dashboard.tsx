@@ -16,6 +16,10 @@ class Dashboard extends React.Component<IDashboardProps, IDashboardState>{
 
   	}
   }
+
+  public componentDidMount = () => {
+  	 window.scrollTo(0,0);
+  }
   	public render() {
 	  	if(!this.props.loggedIn){
 	  		return(

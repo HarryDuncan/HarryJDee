@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { DefaultButton, PrimaryButton, Stack, IStackTokens } from 'office-ui-fabric-react';
-import {orderDetails} from './../../../DataModels/dataModels'
-import {formatRawData}from './../../../DataModels/dataFunctions'
+import {formatRawData, orderDetails} from './../../../data'
 import {FormPageSection} from './../../ui/formComponent/FormComponent';
 import {validateData} from './../../../utilities/utilityFunctions';
 import {useState} from 'react';

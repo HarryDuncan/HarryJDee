@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Panel ,  PanelType, IPanelStyles} from 'office-ui-fabric-react/lib/Panel';
 import { useConstCallback } from '@uifabric/react-hooks';
-import {dataScaffold} from './../../../DataModels/dataModels'
+import {dataScaffold} from './../../../data';
 import ViewItem from './ViewItem'
 
 interface IPanelProps{

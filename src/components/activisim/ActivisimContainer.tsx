@@ -6,10 +6,10 @@ import { Stack, IStackTokens, IStackStyles  ,  ITextFieldStyles,Link} from 'offi
 import {DisplayText} from './../ui/customTextField/DisplayText';
 import {DonationReceipt} from './DonationReceipt'
 import { closeDonationModal} from './../../store/campaign/campaign.actions'
-import {AidsRibbon} from './../../Animations/StaticScenes/Aids';
+import {AidsRibbon} from './../../animations/staticScenes/activisimItems/AidsRibbon';
 import {InfoSection} from './InfoSection';
 import { Dropdown , IDropdownStyles, IDropdownOption} from 'office-ui-fabric-react/lib/Dropdown';
-import {NoActiveCampaign} from './../../Animations/StaticScenes/NoActiveCampaign';
+import {NoActiveCampaign} from './../../animations/staticScenes/NoActiveCampaign';
 import './activism.css';
 
 

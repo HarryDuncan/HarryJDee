@@ -2,8 +2,7 @@ import React from 'react';
 import {connect} from "react-redux";
 import {NavLinks} from './../../ui/customNavLinks/NavLinks'
 import SettingsPageInner from './SettingsPageInner'
-import { siteSettings} from './../../../DataModels/siteSettingData'
-import {formatRawData} from './../../../DataModels/dataFunctions'
+import {formatRawData, siteSettings} from './../../../data'
 
 interface ISettingsPageState {
 	settingData :any;
