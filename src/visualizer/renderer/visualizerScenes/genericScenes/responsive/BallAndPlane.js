@@ -2,18 +2,19 @@ import * as THREE from "three";
 import {fragmentShading, vertexShading, fractionate, avg, max, modulate} from './../../../functions';
 import { makeNoise3D , makeNoise2D} from "open-simplex-noise";
 
+
 const noise2D = makeNoise2D(2342342)
 const noise3D = makeNoise3D(424342)
-
 
 // Ball and plane scene
 export function BallAndPlane (framework) {
 
+  
   // Initializes 3 JS Stuff
     let scene = new THREE.Scene();
     let group = new THREE.Group();
     let camera = new THREE.PerspectiveCamera(85, window.innerWidth / window.innerHeight, 0.1, 1000);
-    camera.position.set(0, document.documentElement.clientWidth <= 900 ? -20 : 0, document.documentElement.clientWidth <= 900 ? 120 : 100);
+    camera.position.set(0, document.documentElement.clientWidth <= 900 ? -20 : 0, document.documentElement.clientWidth <= 900 ? 120 : 50);
     camera.lookAt(scene.position);
     scene.add(camera);
 
@@ -83,26 +84,26 @@ export function BallAndPlane (framework) {
       camera: camera,
       tag : 'generic',
       responsive : true,
-      sceneLength: 45000,
+      sceneLength: 10000,
       onUpdate: function(framework){
-        framework.analyserNode.getByteFrequencyData(framework.data);
-        let lowerHalfArray = framework.data.slice(0, (framework.data.length/2) - 1);
-        let upperHalfArray = framework.data.slice((framework.data.length/2) - 1, framework.data.length - 1);
+       //  framework.analyserNode.getByteFrequencyData(framework.data);
+        // let lowerHalfArray = framework.data.slice(0, (framework.data.length/2) - 1);
+        // let upperHalfArray = framework.data.slice((framework.data.length/2) - 1, framework.data.length - 1);
 
-        let overallAvg = avg(framework.data);
-        let lowerMax = max(lowerHalfArray);
-        let lowerAvg = avg(lowerHalfArray);
-        let upperMax = max(upperHalfArray);
-        let upperAvg = avg(upperHalfArray);
+        // let overallAvg = avg(framework.data);
+        // let lowerMax = max(lowerHalfArray);
+        // let lowerAvg = avg(lowerHalfArray);
+        // let upperMax = max(upperHalfArray);
+        // let upperAvg = avg(upperHalfArray);
 
-        let lowerMaxFr = lowerMax / lowerHalfArray.length;
-        let lowerAvgFr = lowerAvg / lowerHalfArray.length;
-        let upperMaxFr = upperMax / upperHalfArray.length;
-        let upperAvgFr = upperAvg / upperHalfArray.length;
+        // let lowerMaxFr = lowerMax / lowerHalfArray.length;
+        // let lowerAvgFr = lowerAvg / lowerHalfArray.length;
+        // let upperMaxFr = upperMax / upperHalfArray.length;
+        // let upperAvgFr = upperAvg / upperHalfArray.length;
 
-        makeRoughGround(plane, modulate(upperAvgFr, 0, 1, 0.5, 10));
-        makeRoughGround(plane2, modulate(lowerMaxFr, 0, 1, 0.5, 17));
-        makeRoughBall(ball, modulate(Math.pow(lowerMaxFr, 2), 0, 1, 0, 20), modulate(upperAvgFr, 0, 1, 0, 10));
+        makeRoughGround(plane, modulate(framework.streamData.bufferData.upperMaxFr , 0, 1, 0.5, 10));
+        makeRoughGround(plane2, modulate(framework.streamData.bufferData.lowerMaxFr, 0, 1, 0.5, 17));
+        makeRoughBall(ball, modulate(Math.pow(framework.streamData.bufferData.lowerMaxFr, 2), 0, 1, 0, 20), modulate(framework.streamData.bufferData.upperAvgFr, 0, 1, 0, 10));
         group.rotation.y += 0.0005;
          function onWindowResize() {
             framework.camera.aspect = window.innerWidth / window.innerHeight;
@@ -113,8 +114,8 @@ export function BallAndPlane (framework) {
         function makeRoughBall(mesh, bassFr, treFr) {
           mesh.geometry.vertices.forEach(function (vertex, i) {
               var offset = mesh.geometry.parameters.radius;
-              var amp = 2;
-              var time = window.performance.now();
+              var amp = 3;
+              var time = Date.now();
               vertex.normalize();
               var rf = 0.0003;
               var distance = (offset + bassFr ) + noise3D(vertex.x + time *rf*8, vertex.y +  time*rf*7, vertex.z + time*rf*9) * amp * treFr;
@@ -129,7 +130,7 @@ export function BallAndPlane (framework) {
 
         function makeRoughGround(mesh, distortionFr) {
           mesh.geometry.vertices.forEach(function (vertex, i) {
-              var amp = 2;
+              var amp = 3;
               var time = Date.now();
               var distance = (noise2D(vertex.x + time * 0.0003, vertex.y + time * 0.0001) + 0) * distortionFr * amp;
               vertex.z = distance;

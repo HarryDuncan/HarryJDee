@@ -1,195 +1,171 @@
-// <!DOCTYPE html>
-// <html lang="en">
-// 	<head>
-// 		<title>three.js webgl - geometry hierarchy 2</title>
-// 		<meta charset="utf-8">
-// 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-// 		<link type="text/css" rel="stylesheet" href="main.css">
-// 	</head>
-// 	<body>
+import * as THREE from "three";
 
-// 		<script type="module">
+let camera, scene, renderer, stats, root;
+let mouseX = 0, mouseY = 0;
 
-// 			import * as THREE from '../build/three.module.js';
 
-// 			import Stats from './jsm/libs/stats.module.js';
 
-// 			let camera, scene, renderer, stats, root;
+export function CrazySpiral(framework) {
 
-// 			let mouseX = 0, mouseY = 0;
+			let windowHalfX = window.innerWidth / 2;
+			let windowHalfY = window.innerHeight / 2;
+			camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 15000 );
+			camera.position.z = 500;
 
-// 			let windowHalfX = window.innerWidth / 2;
-// 			let windowHalfY = window.innerHeight / 2;
+			scene = new THREE.Scene();
+			scene.background = new THREE.Color( 0xffffff );
 
-// 			init();
-// 			animate();
+			const geometry = new THREE.BoxGeometry( 100, 100, 100 );
+			const material = new THREE.MeshNormalMaterial();
 
-// 			function init() {
+			root = new THREE.Mesh( geometry, material );
+			root.position.x = 1000;
+			scene.add( root );
 
-// 				camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 15000 );
-// 				camera.position.z = 500;
+				const amount = 200;
+				let object, parent = root;
 
-// 				scene = new THREE.Scene();
-// 				scene.background = new THREE.Color( 0xffffff );
+				for ( let i = 0; i < amount; i ++ ) {
 
-// 				const geometry = new THREE.BoxGeometry( 100, 100, 100 );
-// 				const material = new THREE.MeshNormalMaterial();
+					object = new THREE.Mesh( geometry, material );
+					object.position.x = 100;
 
-// 				root = new THREE.Mesh( geometry, material );
-// 				root.position.x = 1000;
-// 				scene.add( root );
+					parent.add( object );
+					parent = object;
 
-// 				const amount = 200;
-// 				let object, parent = root;
+				}
 
-// 				for ( let i = 0; i < amount; i ++ ) {
+				parent = root;
 
-// 					object = new THREE.Mesh( geometry, material );
-// 					object.position.x = 100;
+				for ( let i = 0; i < amount; i ++ ) {
 
-// 					parent.add( object );
-// 					parent = object;
+					object = new THREE.Mesh( geometry, material );
+					object.position.x = - 100;
 
-// 				}
+					parent.add( object );
+					parent = object;
 
-// 				parent = root;
+				}
 
-// 				for ( let i = 0; i < amount; i ++ ) {
+				parent = root;
 
-// 					object = new THREE.Mesh( geometry, material );
-// 					object.position.x = - 100;
+				for ( let i = 0; i < amount; i ++ ) {
 
-// 					parent.add( object );
-// 					parent = object;
+					object = new THREE.Mesh( geometry, material );
+					object.position.y = - 100;
 
-// 				}
+					parent.add( object );
+					parent = object;
 
-// 				parent = root;
+				}
 
-// 				for ( let i = 0; i < amount; i ++ ) {
+				parent = root;
 
-// 					object = new THREE.Mesh( geometry, material );
-// 					object.position.y = - 100;
+				for ( let i = 0; i < amount; i ++ ) {
 
-// 					parent.add( object );
-// 					parent = object;
+					object = new THREE.Mesh( geometry, material );
+					object.position.y = 100;
 
-// 				}
+					parent.add( object );
+					parent = object;
 
-// 				parent = root;
+				}
 
-// 				for ( let i = 0; i < amount; i ++ ) {
+				parent = root;
 
-// 					object = new THREE.Mesh( geometry, material );
-// 					object.position.y = 100;
+				for ( let i = 0; i < amount; i ++ ) {
 
-// 					parent.add( object );
-// 					parent = object;
+					object = new THREE.Mesh( geometry, material );
+					object.position.z = - 100;
 
-// 				}
+					parent.add( object );
+					parent = object;
 
-// 				parent = root;
+				}
 
-// 				for ( let i = 0; i < amount; i ++ ) {
+				parent = root;
 
-// 					object = new THREE.Mesh( geometry, material );
-// 					object.position.z = - 100;
+				for ( let i = 0; i < amount; i ++ ) {
 
-// 					parent.add( object );
-// 					parent = object;
+					object = new THREE.Mesh( geometry, material );
+					object.position.z = 100;
 
-// 				}
+					parent.add( object );
+					parent = object;
 
-// 				parent = root;
+				}
 
-// 				for ( let i = 0; i < amount; i ++ ) {
 
-// 					object = new THREE.Mesh( geometry, material );
-// 					object.position.z = 100;
+				//
 
-// 					parent.add( object );
-// 					parent = object;
+				renderer = new THREE.WebGLRenderer( { antialias: true } );
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				
 
-// 				}
+				
 
-// 				//
+				//
 
-// 				renderer = new THREE.WebGLRenderer( { antialias: true } );
-// 				renderer.setPixelRatio( window.devicePixelRatio );
-// 				renderer.setSize( window.innerWidth, window.innerHeight );
-// 				document.body.appendChild( renderer.domElement );
+				// document.addEventListener( 'mousemove', onDocumentMouseMove );
 
-// 				//
+				// //
 
-// 				stats = new Stats();
-// 				document.body.appendChild( stats.dom );
+				// window.addEventListener( 'resize', onWindowResize );
 
-// 				//
 
-// 				document.addEventListener( 'mousemove', onDocumentMouseMove );
 
-// 				//
+			    let crazySpiral = {
+			        name: 'crazySpiral',
+			        responsive : false,
+			        scene: scene,
+			        camera: camera,
+			        sceneLength: 8000,
+			        onUpdate: function(framework) {
+			        	const time = Date.now() * 0.001 + 10000;
+						const rx = Math.sin( time * 0.7 ) * 0.2;
+						const ry = Math.sin( time * 0.3 ) * 0.1;
+						const rz = Math.sin( time * 0.2 ) * 0.1;
 
-// 				window.addEventListener( 'resize', onWindowResize );
+						framework.camera.position.x += ( mouseX - framework.camera.position.x ) * 0.05;
+						framework.camera.position.y += ( - mouseY - framework.camera.position.y ) * 0.05;
 
-// 			}
+						framework.camera.lookAt( scene.position );
 
-// 			function onWindowResize() {
+						root.traverse( function ( object ) {
 
-// 				windowHalfX = window.innerWidth / 2;
-// 				windowHalfY = window.innerHeight / 2;
+							object.rotation.x = rx;
+							object.rotation.y = ry;
+							object.rotation.z = rz;
 
-// 				camera.aspect = window.innerWidth / window.innerHeight;
-// 				camera.updateProjectionMatrix();
+						} );
 
-// 				renderer.setSize( window.innerWidth, window.innerHeight );
+					
 
-// 			}
+			   
+			        function onWindowResize() {
+						windowHalfX = window.innerWidth / 2;
+						windowHalfY = window.innerHeight / 2;
 
-// 			function onDocumentMouseMove( event ) {
+						camera.aspect = window.innerWidth / window.innerHeight;
+						camera.updateProjectionMatrix();
 
-// 				mouseX = ( event.clientX - windowHalfX ) * 10;
-// 				mouseY = ( event.clientY - windowHalfY ) * 10;
+						renderer.setSize( window.innerWidth, window.innerHeight );
 
-// 			}
+					}
 
-// 			//
+					function onDocumentMouseMove( event ) {
 
-// 			function animate() {
+						mouseX = ( event.clientX - windowHalfX ) * 10;
+						mouseY = ( event.clientY - windowHalfY ) * 10;
 
-// 				requestAnimationFrame( animate );
+					}
 
-// 				render();
-// 				stats.update();
+				
+				}
+			}
 
-// 			}
+		return crazySpiral
+}
+			
 
-// 			function render() {
-
-// 				const time = Date.now() * 0.001 + 10000;
-
-// 				const rx = Math.sin( time * 0.7 ) * 0.2;
-// 				const ry = Math.sin( time * 0.3 ) * 0.1;
-// 				const rz = Math.sin( time * 0.2 ) * 0.1;
-
-// 				camera.position.x += ( mouseX - camera.position.x ) * 0.05;
-// 				camera.position.y += ( - mouseY - camera.position.y ) * 0.05;
-
-// 				camera.lookAt( scene.position );
-
-// 				root.traverse( function ( object ) {
-
-// 					object.rotation.x = rx;
-// 					object.rotation.y = ry;
-// 					object.rotation.z = rz;
-
-// 				} );
-
-// 				renderer.render( scene, camera );
-
-// 			}
-
-// 		</script>
-
-// 	</body>
-// </html>

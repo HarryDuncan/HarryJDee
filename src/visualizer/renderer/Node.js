@@ -3,40 +3,14 @@ import * as THREE from "three";
 import {initializeAllScenes,getScene, deleteAllScenes, updateSceneManager} from './SceneManager'
 import {dataPoints} from './data/dataPoints'
 import './../visualizer.css';
+import {changeToLight} from '../../store/app/app.actions';
+import framework from './data/Framework'
+import {connect} from 'react-redux'
 
-
-let framework = {
-        initialized : false,
-        isPlaying : false,
-        paused: false,
-        audioStartOffset: 0,
-        audioStartTime: 0,
-       
-        responsiveVisualizerIndex : 0,
-        nonResponsiveVisualizerIndex : 0,
-        cameraPaused: false,
-        automaticSwitchingOn: true,
-        breakAnimation  : false,
-
-        //Audio context 
-        source : null,
-        audioBuffer: null,
-        data : null,
-        analyserNode : null,
-
-        // Three JS part of the framework
-        renderer : null,
-        camera: null,
-        scene : null,
-
-        //Data Points
-        streamData : dataPoints,
-
-    }
 let currentVisualizer; 
 
 // This node is where the controler meets the visualizer
-export class Node extends Component {
+class Node extends Component {
   constructor(props){
     super(props);
     this.state = {
@@ -44,6 +18,7 @@ export class Node extends Component {
     }
     this.audio = this.props.audio
     this.createScene = this.createScene.bind(this)
+    this.dispatchFunctions = this.dispatchFunctions.bind(this)
   }
 
   createScene(){
@@ -57,7 +32,7 @@ export class Node extends Component {
       framework.analyserNode.fftSize =  1024
       framework.analyserNode.maxDecibels = 50
       framework.analyserNode.minDecibels = -80
-      framework.analyserNode.smoothingTimeConstant = 0.001
+      framework.analyserNode.smoothingTimeConstant = 0.01
 
 
     framework.source = this.props.audioCtx.createMediaElementSource(this.props.audio) 
@@ -71,6 +46,8 @@ export class Node extends Component {
     // Initializes 3 JS Stuff
     framework.renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
     framework.renderer.setSize(window.innerWidth, window.innerHeight);
+
+    // framework.renderer.outputEncoding = THREE.sRGBEncoding;
     framework.renderer.shadowMap.enabled = true;
     framework.renderer.shadowMap.type = THREE.PCFSoftShadowMap; // default THREE.PCFShadowMap
 
@@ -81,7 +58,7 @@ export class Node extends Component {
       framework.scene = currentVisualizer.scene
       framework.camera = currentVisualizer.camera
       framework.renderer.render(framework.scene, framework.camera );
-      switchVisualizers(framework)
+      switchVisualizers(framework, this.dispatchFunctions)
 
       tick()
       function tick() {
@@ -94,23 +71,28 @@ export class Node extends Component {
     }
 
 
-  function switchVisualizers(framework) {
+  function switchVisualizers(framework, dispatchFunctions) {
     if(!framework.breakAnimation && framework.isPlaying){
       if(framework.streamData.change){
-          currentVisualizer = getScene(framework)  
-          framework.scene = currentVisualizer.scene  
+          currentVisualizer = getScene(framework)
+          framework.scene = currentVisualizer.scene
           framework.camera = currentVisualizer.camera
           framework.streamData.change = false
+          dispatchFunctions(currentVisualizer)
+         
           setTimeout(() => {
-            switchVisualizers(framework)
+            switchVisualizers(framework, dispatchFunctions)
           }, currentVisualizer.sceneLength)
       }else{
          setTimeout(() => {
-            switchVisualizers(framework)
+            switchVisualizers(framework, dispatchFunctions)
           }, 10)
       }
     }
   }
+
+
+
   function onWindowResize() {
         framework.camera.aspect = window.innerWidth / window.innerHeight;
         framework.camera.updateProjectionMatrix();
@@ -119,7 +101,20 @@ export class Node extends Component {
   
   }
 
- 
+
+// Functions if we need to update app state while visualizer is playing
+dispatchFunctions(data){
+  // TODO - Change Seeker and logo from light to dark depending on bg 
+  if(data['backgroundDark'] === true){
+    this.props.changeToLight(true)
+  }else{
+
+    this.props.changeToLight(false)
+  }
+// TODO - Warning message if CPU usage is too high
+// TODO - Get track playing
+
+}
 
 componentWillUnmount(){
     framework.breakAnimation = true
@@ -135,6 +130,11 @@ componentWillUnmount(){
   togglePlaying = () => {
     framework.isPlaying = !framework.isPlaying
   }
+ 
+
+
+
+
  render() {
    if(this.props.playerState.playStarted && !framework.isPlaying && this.props.audio !== undefined){
       framework.isPlaying = true
@@ -151,3 +151,10 @@ componentWillUnmount(){
   }
 
 }
+
+const mapDispatchToProps = {
+  changeToLight,
+}
+
+export default connect(null, mapDispatchToProps)(Node)
+

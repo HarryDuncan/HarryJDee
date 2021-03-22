@@ -1,7 +1,9 @@
 import React from 'react';
-import {HomeScene} from './../../animations/staticScenes/HomeScene';
+import {AnimationWidget} from './../animationWidget'
 import {connect} from 'react-redux';
+// import {HomeScene} from './../../animations/staticScenes/HomeScene';
 
+// import {VidScene} from './../../animations/staticScenes/VideoPlayer';
 
 interface IHomePageProps{
 
@@ -21,9 +23,7 @@ export class HomePage extends React.Component<IHomePageProps, IHomePageState>{
 		return(
 			<div>
 				<div style={{'height': '100vh', 'width': '100vw', 'overflow':'hidden'}}>
-
-					<HomeScene />
-					
+					<AnimationWidget scenes={['ArtLavaLamp', 'HomeScene']} />
 				</div>
 			</div>
 		);

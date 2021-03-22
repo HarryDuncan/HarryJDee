@@ -4,17 +4,29 @@ import {getFromStorage} from './../../utilities/utilityFunctions'
 
 
 const initialAppState : IAppState = {
-	content : null,
-	isInitialized : getFromStorage("isInitialized", false, true),
+
+	// Site settings
 	siteStatus : 'Open',
 	sitePages : [],
-	showNav : true,
 	settings : {},
-	testingOn :getFromStorage('testMode', false, true),
 	heroMessage : null,
-	testCode  : 0,
+
+
+	content : null,
+	isInitialized : getFromStorage("isInitialized", false, true),
+	
+	
 	mixes : [],
-	emailData : {}
+	emailData : {},
+
+	// Controls the nav bar when playing the visualizer
+	showNav : true,
+	isLight : false,
+
+
+	// Testing Stuff - Likely not going to need anymore
+	testingOn :getFromStorage('testMode', false, true),
+	testCode  : 0
 }
 
 
@@ -58,7 +70,8 @@ function app(state: IAppState = initialAppState, action: any){
 			})
 		case appActionTypes.TOGGLE_NAV:
 			return update(state, {
-				showNav : {$set : !action.payload}
+				showNav : {$set : !action.payload},
+				isLight : {$set : action.payload === false? false : state.isLight}
 			})
 		case appActionTypes.LOAD_MIXES_SUCCESS:
 		let mixArr =  action.payload.data.map((obj : any ) => ({...obj, title: obj['Title']}))
@@ -82,6 +95,11 @@ function app(state: IAppState = initialAppState, action: any){
 		case appActionTypes.SAVE_EMAIL:
 			return update(state,{
 				emailData : {$set: action.payload['emailData']}
+			})
+		case appActionTypes.CHANGE_TO_LIGHT:
+		
+			return update(state,{
+				isLight : {$set: action.payload},
 			})
 		default:
 			return state;

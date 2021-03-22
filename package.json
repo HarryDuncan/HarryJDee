@@ -64,6 +64,7 @@
     "stripe": "^8.119.0",
     "three": "^0.116.1",
     "thunk": "0.0.1",
+    "tinycolor2": "^1.4.2",
     "typescript": "^3.7.5",
     "web-audio-beat-detector": "^8.0.24"
   },

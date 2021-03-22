@@ -1,5 +1,5 @@
 import React from 'react';
-import {Node} from './../../renderer/Node';
+import Node from './../../renderer/Node';
 
 
 export function mountComponent() {

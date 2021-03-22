@@ -8,7 +8,7 @@ export const Gallery = () => {
   return (
     <div className="Container">
     	<MetaTags>
-            <title>Bio</title>
+            <title>Gallery</title>
             <meta id="meta-description" name="description" content="Art of Harry J Dee." />
           </MetaTags>
     	<GalleryPage />

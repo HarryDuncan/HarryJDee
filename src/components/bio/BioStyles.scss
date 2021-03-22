@@ -44,6 +44,10 @@
 
 @media screen and (max-width: 1200px) {
 
+  .bio-page{
+    width: 100%;
+     margin: 0 auto; 
+  }
   .bio-pic{
    width: 100%;
    max-width: 90vw;
@@ -70,7 +74,12 @@
 
 
 @media screen and (max-width: 900px) {
+  
+.bio-page{
+  width: 100%;
+  margin: 0 auto; 
 
+  }
    .bio-pic{
    width: auto;
    margin: 0 auto;

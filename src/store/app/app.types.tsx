@@ -3,7 +3,7 @@ export interface IAppState{
 	content : any;
 	siteStatus : string;
 	sitePages : any[];
-	showNav : boolean;
+	
 	settings : object;
 
 	testingOn : boolean;
@@ -13,6 +13,9 @@ export interface IAppState{
 	heroMessage : string|null;
 
 	emailData : any;
+
+	showNav : boolean;
+	isLight : boolean;
 }
 
 export enum appActionTypes {
@@ -38,5 +41,7 @@ export enum appActionTypes {
 
 	UNLOCK_SITE = 'app/UNLOCK_SITE',
 	SAVE_EMAIL = 'app/SAVE_EMAIL',
-	RESEND_EMAIL = 'app/RESEND_EMAIL'
+	RESEND_EMAIL = 'app/RESEND_EMAIL',
+
+	CHANGE_TO_LIGHT = 'app/CHANGE_TO_LIGHT',
 }

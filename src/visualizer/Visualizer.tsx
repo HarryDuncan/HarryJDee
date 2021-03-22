@@ -1,9 +1,9 @@
 import * as React from 'react';
 import {useState} from 'react';
 import { Stack} from 'office-ui-fabric-react';
-import {AudioPlayer} from './controler/audioPlayer';
+import AudioPlayer from './controler/audioPlayer';
 import { IconButton, IIconProps, initializeIcons } from 'office-ui-fabric-react';
-
+import {connect} from 'react-redux';
 
 export interface IVisualizerWrapperProps {
   audioContext : any;
@@ -11,12 +11,13 @@ export interface IVisualizerWrapperProps {
   selectedTrack: any;
   hideNav : (fullScrn : boolean ) => void;
   exitCallback : () => void;
+  isLight : boolean;
 }
 
 const quitIcon: IIconProps = { iconName: 'Cancel'  ,styles: {root: { fontSize: '26px' }}};
 const fullScreen : IIconProps = {iconName: 'ChromeFullScreen', styles : {root: { fontSize: '26px' }}}
 
-export const Visualizer: React.FunctionComponent<IVisualizerWrapperProps> = props => {
+const Visualizer: React.FunctionComponent<IVisualizerWrapperProps> = props => {
   
  const [isFullScreen, toggleFullScreen] = useState(false)
  const [isActive, toggleActive] = useState(true)
@@ -52,9 +53,19 @@ export const Visualizer: React.FunctionComponent<IVisualizerWrapperProps> = prop
       <Stack horizontal >
         <IconButton iconProps={quitIcon} title="Quit" ariaLabel="Quit" onClick={exitTrack} className={'exit-icon' + (isActive ? ' ' : " hide-ico")}/>
       </Stack>
-      <AudioPlayer audioContext={props.audioContext} audioFiles={props.trackProps} visualizerFullScreen={isFullScreen} activeCB={toggleActiveScreen} currentTrackId={_getTrackID()}/>
+      <AudioPlayer isLight={props.isLight} audioContext={props.audioContext} audioFiles={props.trackProps} visualizerFullScreen={isFullScreen} activeCB={toggleActiveScreen} currentTrackId={_getTrackID()}/>
     </div>
   );
 };
 
+
+const mapStateToProps = (state : any) => ({
+ isLight : state.app.isLight
+});
+
+const mapDispatchToProps = {
+ 
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Visualizer)
 

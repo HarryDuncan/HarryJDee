@@ -71,6 +71,14 @@ export const toggleNav = (isFullScreen : boolean) => {
 		dispatch({type : appActionTypes.TOGGLE_NAV, payload : isFullScreen})
 	}
 }
+
+export const changeToLight = (yesNo : boolean) => {
+	
+	return (dispatch : any ) => {
+		
+		dispatch({type : appActionTypes.CHANGE_TO_LIGHT, payload : yesNo})
+	}
+}
 export const getContent = (title : string ) => {
 	return function (dispatch : any) {
 		dispatch({type : appActionTypes.LOAD_CONTENT_DATA})

@@ -1,279 +1,267 @@
-// <!-- <!DOCTYPE html>
-// <html lang="en">
-// 	<head>
-// 		<title>three.js webgl - materials - video</title>
-// 		<meta charset="utf-8">
-// 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-// 		<link type="text/css" rel="stylesheet" href="main.css">
-// 	</head>
-// 	<body>
+import React, { Component } from "react";
+import * as THREE from "three";
+import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer.js';
+import { RenderPass } from 'three/examples//jsm/postprocessing/RenderPass.js';
+import { ShaderPass } from 'three/examples//jsm/postprocessing/ShaderPass.js';
+import { BloomPass } from 'three/examples//jsm/postprocessing/BloomPass.js';
+import { CopyShader } from 'three/examples/jsm/shaders/CopyShader.js';
 
-// 		<div id="overlay">
-// 			<button id="startButton">Play</button>
-// 		</div>
-// 		<div id="container"></div>
 
-// 		<div id="info">
-// 			<a href="https://threejs.org" target="_blank" rel="noopener">three.js</a> - webgl video demo<br/>
-// 			playing <a href="http://durian.blender.org/" target="_blank" rel="noopener">sintel</a> trailer
-// 		</div>
 
-// 		<video id="video" loop crossOrigin="anonymous" playsinline style="display:none">
-// 			<source src="textures/sintel.ogv" type='video/ogg; codecs="theora, vorbis"'>
-// 			<source src="textures/sintel.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
-// 		</video>
+export class VidScene extends Component {
 
-// 		<script type="module">
 
-// 			import * as THREE from '../build/three.module.js';
+  componentDidMount() {
+			let container;
 
-// 			import { EffectComposer } from './jsm/postprocessing/EffectComposer.js';
-// 			import { RenderPass } from './jsm/postprocessing/RenderPass.js';
-// 			import { ShaderPass } from './jsm/postprocessing/ShaderPass.js';
-// 			import { BloomPass } from './jsm/postprocessing/BloomPass.js';
-// 			import { CopyShader } from './jsm/shaders/CopyShader.js';
+			let camera, scene, renderer;
 
-// 			let container;
+			let video, texture, material, mesh;
 
-// 			let camera, scene, renderer;
+			let composer;
 
-// 			let video, texture, material, mesh;
+			let mouseX = 0;
+			let mouseY = 0;
 
-// 			let composer;
+			let windowHalfX = window.innerWidth / 2;
+			let windowHalfY = window.innerHeight / 2;
 
-// 			let mouseX = 0;
-// 			let mouseY = 0;
+			let cube_count;
 
-// 			let windowHalfX = window.innerWidth / 2;
-// 			let windowHalfY = window.innerHeight / 2;
+			const meshes = [],
+				materials = [],
 
-// 			let cube_count;
+				xgrid = 20,
+				ygrid = 10;
 
-// 			const meshes = [],
-// 				materials = [],
+	
+		
 
-// 				xgrid = 20,
-// 				ygrid = 10;
+				container = document.createElement( 'div' );
+				document.body.appendChild( container );
 
-// 			const startButton = document.getElementById( 'startButton' );
-// 			startButton.addEventListener( 'click', function () {
+				camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 10000 );
+				camera.position.z = 500;
 
-// 				init();
-// 				animate();
+				scene = new THREE.Scene();
 
-// 			} );
+				const light = new THREE.DirectionalLight( 0xffffff );
+				light.position.set( 0.5, 1, 1 ).normalize();
+				scene.add( light );
 
-// 			function init() {
+				renderer = new THREE.WebGLRenderer();
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				this.container.appendChild( renderer.domElement );
 
-// 				const overlay = document.getElementById( 'overlay' );
-// 				overlay.remove();
+				video = document.getElementById( 'video' );
+				video.play();
+				video.addEventListener( 'play', function () {
 
-// 				container = document.createElement( 'div' );
-// 				document.body.appendChild( container );
+					this.currentTime = 3;
 
-// 				camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 10000 );
-// 				camera.position.z = 500;
+				} );
 
-// 				scene = new THREE.Scene();
+				texture = new THREE.VideoTexture( video );
 
-// 				const light = new THREE.DirectionalLight( 0xffffff );
-// 				light.position.set( 0.5, 1, 1 ).normalize();
-// 				scene.add( light );
+				//
 
-// 				renderer = new THREE.WebGLRenderer();
-// 				renderer.setPixelRatio( window.devicePixelRatio );
-// 				renderer.setSize( window.innerWidth, window.innerHeight );
-// 				container.appendChild( renderer.domElement );
+				let i, j, ox, oy, geometry;
 
-// 				video = document.getElementById( 'video' );
-// 				video.play();
-// 				video.addEventListener( 'play', function () {
+				const ux = 1 / xgrid;
+				const uy = 1 / ygrid;
 
-// 					this.currentTime = 3;
+				const xsize = 500 / xgrid;
+				const ysize = 204 / ygrid;
 
-// 				} );
+				const parameters = { color: 0xffffff, map: texture };
 
-// 				texture = new THREE.VideoTexture( video );
+				cube_count = 0;
 
-// 				//
+				for ( i = 0; i < xgrid; i ++ ) {
 
-// 				let i, j, ox, oy, geometry;
+					for ( j = 0; j < ygrid; j ++ ) {
 
-// 				const ux = 1 / xgrid;
-// 				const uy = 1 / ygrid;
+						ox = i;
+						oy = j;
 
-// 				const xsize = 480 / xgrid;
-// 				const ysize = 204 / ygrid;
+						geometry = new THREE.BoxGeometry( xsize, ysize, xsize );
 
-// 				const parameters = { color: 0xffffff, map: texture };
+						change_uvs( geometry, ux, uy, ox, oy );
 
-// 				cube_count = 0;
+						materials[ cube_count ] = new THREE.MeshLambertMaterial( parameters );
 
-// 				for ( i = 0; i < xgrid; i ++ ) {
+						material = materials[ cube_count ];
 
-// 					for ( j = 0; j < ygrid; j ++ ) {
+						material.hue = i / xgrid;
+						material.saturation = 1 - j / ygrid;
 
-// 						ox = i;
-// 						oy = j;
+						material.color.setHSL( material.hue, material.saturation, 0.5 );
 
-// 						geometry = new THREE.BoxGeometry( xsize, ysize, xsize );
+						mesh = new THREE.Mesh( geometry, material );
 
-// 						change_uvs( geometry, ux, uy, ox, oy );
+						mesh.position.x = ( i - xgrid / 2 ) * xsize;
+						mesh.position.y = ( j - ygrid / 2 ) * ysize;
+						mesh.position.z = 0;
 
-// 						materials[ cube_count ] = new THREE.MeshLambertMaterial( parameters );
+						mesh.scale.x = mesh.scale.y = mesh.scale.z = 1;
 
-// 						material = materials[ cube_count ];
+						scene.add( mesh );
 
-// 						material.hue = i / xgrid;
-// 						material.saturation = 1 - j / ygrid;
+						mesh.dx = 0.001 * ( 0.5 - Math.random() );
+						mesh.dy = 0.001 * ( 0.5 - Math.random() );
 
-// 						material.color.setHSL( material.hue, material.saturation, 0.5 );
+						meshes[ cube_count ] = mesh;
 
-// 						mesh = new THREE.Mesh( geometry, material );
+						cube_count += 1;
 
-// 						mesh.position.x = ( i - xgrid / 2 ) * xsize;
-// 						mesh.position.y = ( j - ygrid / 2 ) * ysize;
-// 						mesh.position.z = 0;
+					}
 
-// 						mesh.scale.x = mesh.scale.y = mesh.scale.z = 1;
+				}
 
-// 						scene.add( mesh );
+				renderer.autoClear = false;
 
-// 						mesh.dx = 0.001 * ( 0.5 - Math.random() );
-// 						mesh.dy = 0.001 * ( 0.5 - Math.random() );
+				document.addEventListener( 'mousemove', onDocumentMouseMove );
 
-// 						meshes[ cube_count ] = mesh;
+				// postprocessing
 
-// 						cube_count += 1;
+				const renderModel = new RenderPass( scene, camera );
+				const effectBloom = new BloomPass( 1.3 );
+				const effectCopy = new ShaderPass( CopyShader );
 
-// 					}
+				composer = new EffectComposer( renderer );
 
-// 				}
+				composer.addPass( renderModel );
+				composer.addPass( effectBloom );
+				composer.addPass( effectCopy );
 
-// 				renderer.autoClear = false;
+				//
 
-// 				document.addEventListener( 'mousemove', onDocumentMouseMove );
+				window.addEventListener( 'resize', onWindowResize );
 
-// 				// postprocessing
+				
+			animate();
 
-// 				const renderModel = new RenderPass( scene, camera );
-// 				const effectBloom = new BloomPass( 1.3 );
-// 				const effectCopy = new ShaderPass( CopyShader );
 
-// 				composer = new EffectComposer( renderer );
+			function onWindowResize() {
 
-// 				composer.addPass( renderModel );
-// 				composer.addPass( effectBloom );
-// 				composer.addPass( effectCopy );
+				windowHalfX = window.innerWidth / 2;
+				windowHalfY = window.innerHeight / 2;
 
-// 				//
+				camera.aspect = window.innerWidth / window.innerHeight;
+				camera.updateProjectionMatrix();
 
-// 				window.addEventListener( 'resize', onWindowResize );
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				composer.setSize( window.innerWidth, window.innerHeight );
 
-// 			}
+			}
 
-// 			function onWindowResize() {
+			function change_uvs( geometry, unitx, unity, offsetx, offsety ) {
+				if(geometry !== undefined && geometry.attributes !== undefined){
+						const uvs = geometry.attributes.uv.array;
 
-// 				windowHalfX = window.innerWidth / 2;
-// 				windowHalfY = window.innerHeight / 2;
+						for ( let i = 0; i < uvs.length; i += 2 ) {
 
-// 				camera.aspect = window.innerWidth / window.innerHeight;
-// 				camera.updateProjectionMatrix();
+							uvs[ i ] = ( uvs[ i ] + offsetx ) * unitx;
+							uvs[ i + 1 ] = ( uvs[ i + 1 ] + offsety ) * unity;
 
-// 				renderer.setSize( window.innerWidth, window.innerHeight );
-// 				composer.setSize( window.innerWidth, window.innerHeight );
+						}
+				}
+			
 
-// 			}
+			}
 
-// 			function change_uvs( geometry, unitx, unity, offsetx, offsety ) {
 
-// 				const uvs = geometry.attributes.uv.array;
+			function onDocumentMouseMove( event ) {
 
-// 				for ( let i = 0; i < uvs.length; i += 2 ) {
+				mouseX = ( event.clientX - windowHalfX );
+				mouseY = ( event.clientY - windowHalfY ) * 0.3;
 
-// 					uvs[ i ] = ( uvs[ i ] + offsetx ) * unitx;
-// 					uvs[ i + 1 ] = ( uvs[ i + 1 ] + offsety ) * unity;
+			}
 
-// 				}
+			//
 
-// 			}
+			function animate() {
 
+				requestAnimationFrame( animate );
 
-// 			function onDocumentMouseMove( event ) {
+				render();
 
-// 				mouseX = ( event.clientX - windowHalfX );
-// 				mouseY = ( event.clientY - windowHalfY ) * 0.3;
+			}
 
-// 			}
+			
 
-// 			//
+			function render() {
+				let h, counter = 1;
+				const time = Date.now() * 0.00005;
 
-// 			function animate() {
+				camera.position.x += ( mouseX - camera.position.x ) * 0.05;
+				camera.position.y += ( - mouseY - camera.position.y ) * 0.05;
 
-// 				requestAnimationFrame( animate );
+				camera.lookAt( scene.position );
 
-// 				render();
+				for ( let i = 0; i < cube_count; i ++ ) {
 
-// 			}
+					material = materials[ i ];
 
-// 			let h, counter = 1;
 
-// 			function render() {
+				}
 
-// 				const time = Date.now() * 0.00005;
+				
+				if ( counter % 1000 > 200 ) {
 
-// 				camera.position.x += ( mouseX - camera.position.x ) * 0.05;
-// 				camera.position.y += ( - mouseY - camera.position.y ) * 0.05;
+					for ( let i = 0; i < cube_count; i ++ ) {
 
-// 				camera.lookAt( scene.position );
+						mesh = meshes[ i ];
 
-// 				for ( let i = 0; i < cube_count; i ++ ) {
+						mesh.rotation.x += 10 * mesh.dx;
+						mesh.rotation.y += 10 * mesh.dy;
 
-// 					material = materials[ i ];
+						mesh.position.x -= 150 * mesh.dx;
+						mesh.position.y += 150 * mesh.dy;
+						mesh.position.z += 300 * mesh.dx;
 
-// 					h = ( 360 * ( material.hue + time ) % 360 ) / 360;
-// 					material.color.setHSL( h, material.saturation, 0.5 );
+					}
 
-// 				}
+				}
 
-// 				if ( counter % 1000 > 200 ) {
+				if ( counter % 1000 === 0 ) {
 
-// 					for ( let i = 0; i < cube_count; i ++ ) {
+					for ( let i = 0; i < cube_count; i ++ ) {
 
-// 						mesh = meshes[ i ];
+						mesh = meshes[ i ];
 
-// 						mesh.rotation.x += 10 * mesh.dx;
-// 						mesh.rotation.y += 10 * mesh.dy;
+						mesh.dx *= - 1;
+						mesh.dy *= - 1;
 
-// 						mesh.position.x -= 150 * mesh.dx;
-// 						mesh.position.y += 150 * mesh.dy;
-// 						mesh.position.z += 300 * mesh.dx;
+					}
 
-// 					}
+				}
 
-// 				}
+				counter ++;
 
-// 				if ( counter % 1000 === 0 ) {
+				renderer.clear();
+				composer.render();
 
-// 					for ( let i = 0; i < cube_count; i ++ ) {
+			}
 
-// 						mesh = meshes[ i ];
+		}
 
-// 						mesh.dx *= - 1;
-// 						mesh.dy *= - 1;
 
-// 					}
+  render() {
 
-// 				}
+    return (
+    		<div>
+    		
+    	 	 <video id="video" loop crossOrigin="anonymous" playsinline style={{"display" : "none"}}>
+					<source src="/Keith.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'/>
+			</video>
+				
+	        <div style={{width:"inherit", height:"inherit", position:"absolute"}} 
+	          ref={thisNode => this.container=thisNode}>
+				</div>  
+      		</div>
+    )
+  }
 
-// 				counter ++;
-
-// 				renderer.clear();
-// 				composer.render();
-
-// 			}
-
-
-// 		</script>
-
-// 	</body>
+}

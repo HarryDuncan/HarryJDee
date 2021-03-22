@@ -31,8 +31,8 @@ var renderer = new THREE.WebGLRenderer( { antialias: true } );
 var camera = new THREE.PerspectiveCamera( 705, window.innerWidth / window.innerHeight, 1, 1000 );
 
 
-export class HomeScene extends Component {
-  componentDidMount() {
+export function HomeScene(framework){
+  
     window.addEventListener('resize', this.handleResize, false)
     breakAnimation = false;
    
@@ -63,7 +63,7 @@ export class HomeScene extends Component {
            },
         );
    
-    var ambientLight = new THREE.AmbientLight( 0xffffff, 0.5 );
+    var ambientLight = new THREE.AmbientLight( 0xffffff, 0.4 );
     ambientLight.position.x = 900
     scene.add( ambientLight );
     var pointLight = new THREE.PointLight(0xffffff, 1 );
@@ -79,104 +79,71 @@ export class HomeScene extends Component {
    
     renderer.setPixelRatio( window.devicePixelRatio );
     renderer.setSize( window.innerWidth, window.innerHeight );
-    this.container.appendChild( renderer.domElement );
+   
     let toggle = -1
     let bgToggleLimit = 40
     let bgTranslateCount = 0;
     window.addEventListener('resize', onWindowResize, false);
-    animate()
-      function animate() {
-        if(breakAnimation){
-          cancelAnimationFrame(animate)
-        }else{
-          requestAnimationFrame( animate );
-          render();
-        }  
-      }
-
+    
        function onWindowResize() {
         camera.aspect = window.innerWidth / window.innerHeight;
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
     }
-
+   // let changeVis = false
     
-      function render() {
-        var timer = Date.now() * 0.0003;
-        camera.position.z = Math.cos( timer ) * 45 ;
-        camera.position.x = Math.sin(timer) * 0.9;
-        pointLight.position.set(Math.sin( timer ) * 800 , pointLight.position.y, pointLight.position.z )
-        camera.lookAt( scene.position );
-        if(camera.position.z > -0.5 && camera.position.z < 0.5 && !changeScene){
-          changeScene = true
-          
-          let c1 = colourPairs[colourCount]['colour_1']
-          let c2 = colourPairs[colourCount]['colour_2']
-          let newMaterial =  new THREE.MeshPhongMaterial({color : c1, reflectivity : 0.7}) ;
-          let newMaterial2 =  new THREE.MeshPhongMaterial({color : c2,  reflectivity : 0.7}) ;
-          
-          colourCount += 1
-          cameraCount += 1
-          if(colourCount > 7){
-            colourCount = 1
-          }if(cameraCount > 5){
-            cameraCount = 0;
-          }
-          let count = 0
-          scene.traverse((o) => {
-            if(o.isMesh){
-              if(count % 2 === 0){
-                o.material = newMaterial
-              }else{
-                o.material = newMaterial2
-              }
-              count ++
+    let HomeScene = {
+        name: 'MagicBlobs',
+       scene: scene,
+       camera: camera,
+       tag : 'generic',
+       responsive : true,
+       changeVisuals : false,
+       onUpdate :  function(framework){
+         var timer = Date.now() * 0.0003;
+         framework.camera.position.z = Math.cos( timer ) * 45 ;
+         framework.camera.position.x = Math.sin(timer) * 0.9;
+          pointLight.position.set(Math.sin( timer ) * 800 , pointLight.position.y, pointLight.position.z )
+          framework.camera.lookAt( scene.position );
+          if(framework.camera.position.z > -0.5 && framework.camera.position.z < 0.5 && !changeScene){
+            changeScene = true
+            setTimeout(() => {
+               framework.changeVisuals = true
+             },100)
+           
+            
+            let c1 = colourPairs[colourCount]['colour_1']
+            let c2 = colourPairs[colourCount]['colour_2']
+            let newMaterial =  new THREE.MeshPhongMaterial({color : c1, reflectivity : 0.7}) ;
+            let newMaterial2 =  new THREE.MeshPhongMaterial({color : c2,  reflectivity : 0.7}) ;
+            
+            colourCount += 1
+            cameraCount += 1
+            if(colourCount > 7){
+              colourCount = 1
+            }if(cameraCount > 5){
+              cameraCount = 0;
             }
-          });
-        // }else if(camera.position.z > -0.5 && camera.position.z < 0.5 ){
-        //   console.log('asds')
-
-        }else if((camera.position.z < -0.5 || camera.position.z > 0.5) && changeScene){
-          ambientLight.intensity = 0.65
-          pointLight.intensity = 1
-          scene.background = new THREE.Color( 0xffffff );
-          changeScene = false
+            let count = 0
+            scene.traverse((o) => {
+              if(o.isMesh){
+                if(count % 2 === 0){
+                  o.material = newMaterial
+                }else{
+                  o.material = newMaterial2
+                }
+                count ++
+              }
+            });
+        
+          }else if((camera.position.z < -0.5 || camera.position.z > 0.5) && changeScene){
+            framework.changeVisuals = false
+            changeScene = false
+          }
         }
-      
-        renderer.render( scene, camera );
-
-      }
-
-    
-      function gradualReduction(){
-        while(ambientLight.intensity > 0){
-             ambientLight.intensity -= 0.01
-         
-         
-        }
-      }
-  }
-
-
-
-  handleResize = () => {
-    camera = new THREE.PerspectiveCamera( 705, window.innerWidth / window.innerHeight, 1, 1000 );
-    camera.position.y = 180;
-  }
-  componentWillUnmount(){
-    breakAnimation = true
-    renderer.dispose()
-     window.removeEventListener('resize', this.handleResize, false)
-  }
-
+      }  
  
-  
-  render() {
 
-    return (
-        <div style={{width:"inherit", height:"inherit", position:"absolute"}} 
-          ref={thisNode => this.container=thisNode}>
-      </div>  
-    )
-  }
+  return HomeScene
+ 
 }

@@ -7,7 +7,8 @@ export const dataPoints = {
 
 	// Non Data 
 	shouldPlay : 'nonResponsive',
-	change : true
+	change : true,
+	toggleKey : false,
 }
 
 // The scene manager object

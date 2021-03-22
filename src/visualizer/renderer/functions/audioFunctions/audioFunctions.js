@@ -4,7 +4,7 @@ import {fractionate, avg, max, modulate} from './../'
 // Gets the data points need based on the scene to perform the animations
 export const getDataPoints = (framework) => {
 
-	console.log(framework.scene.name)
+//	console.log(framework.scene.name)
 	 framework.analyserNode.getByteFrequencyData(framework.data);
 
 	  let av =  avg(framework.data);
@@ -65,7 +65,7 @@ export const getDataPoints = (framework) => {
 	}
 
 	if(framework.streamData.bufferData.average  + 3 > framework.streamData.bufferData.peak){
-		
+		framework.streamData.toggleKey = !framework.streamData.toggleKey
 		framework.streamData.change = true
 	}else{
 		framework.streamData.change = false

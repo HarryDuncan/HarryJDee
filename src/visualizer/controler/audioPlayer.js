@@ -15,17 +15,15 @@ import {
 import IdleTimer from 'react-idle-timer'
 //methods
 import functions from "./functions/index";
-
-//initial state
-// import { default as initialState } from "./initialState";
-
 //style sheet
 import "./audioPlayerStyle.scss";
-
+import {connect} from 'react-redux';
 //prop types
 import { audioPlayerPropTypes } from "./spec/propTypes";
 
-export class AudioPlayer extends Component {
+
+
+class AudioPlayer extends Component {
   constructor(props) {
     super(props);
    
@@ -158,9 +156,16 @@ export class AudioPlayer extends Component {
     })
   }
   render() {
-
     let title = this.props.audioFiles[this.state.currentTrackIdx].Title;
-    
+    if(this.props.isLight && this.state.fontColor === 'black'){
+      this.setState({
+        fontColor : 'white'
+      })
+    }else if(!this.props.isLight && this.state.fontColor === 'white'){
+      this.setState({
+        fontColor : 'black'
+      })
+    }
     if (!this.props.rearrange) {
       //DEFAULT PLAYER VIEW
 
@@ -183,7 +188,7 @@ export class AudioPlayer extends Component {
 
           {/* Rewind */}
           <div className={this.state.showClassName}>
-            <div className="wrapper">
+            <div className={"wrapper " + (this.props.isLight? 'light-screen' : '')}>
               {this.props.hideRewind ? null : this.componentObj.rewind()}
                {this.componentObj.play("first")}
               {/* Forward */}
@@ -211,3 +216,12 @@ export class AudioPlayer extends Component {
 }
 
 AudioPlayer.propTypes = audioPlayerPropTypes;
+
+const mapDispatchToProps = {
+
+}
+const mapStateToProps  = (state) => ({
+  isLight : state.app.isLight
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(AudioPlayer)

@@ -23,6 +23,7 @@ interface INavProps  {
   testing : boolean;
   hero : string|null;
   openSite : any;
+  isLight : boolean;
 }
 interface INavState {
   activeNav : string;
@@ -101,10 +102,11 @@ class NavBar extends React.Component<INavProps, INavState>{
     }
     const isMobile = document.documentElement.clientWidth <= 1100 ;
     if(isMobile){
+      console.log(this.props.isLight)
         return (
           <div key={`Main Nav Mobile ${this.state.isOpen} `} className={ 'mainNav '}>
           <div className={(this.state.navTop? 'noScroll ' : 'scrolledMainNav ') + (this.state.activeNav === '/' || this.state.activeNav === ''  ? 'homeNav'  : ' ')} />
-          <img className={'navLogo start'} src={this.state.navTop? '/images/icons/harryDLogo.png' : '/images/icons/harryDLogoWhite.png'}/>
+          <img key={`${this.props.isLight} Logo`} className={'navLogo start'} alt={"Harry J Dee"} src={!this.state.navTop || this.props.isLight ? '/images/icons/harryDLogoWhite.png' : '/images/icons/harryDLogo.png' }/>
               <CartNotification redirectCallback={this.setActiveHome} isMobile={true} customClassName={(this.state.navTop? 'top-nav ' : 'scrolled-top ')}/>
           
             {this.props.showNav && !this.props.testing? 
@@ -151,7 +153,7 @@ class NavBar extends React.Component<INavProps, INavState>{
       return (
           <div className={ 'mainNav '}>
           <div className={(this.state.navTop? 'noScroll ' : 'scrolledMainNav ') + (this.state.activeNav === '/'  || this.state.activeNav === '' ? 'homeNav' || this.state.activeNav === '' || 'TestMode' : ' ' || this.state.activeNav === '/Activism')} />
-          <Link to="/"><img onClick={this.navClicked.bind(this, '/')} className={'navLogo start'} src={this.state.navTop? '/images/icons/harryDLogo.png' : '/images/icons/harryDLogoWhite.png'}/></Link>
+          <Link to="/"><img key={`${this.props.isLight} Logo`} onClick={this.navClicked.bind(this, '/')} className={'navLogo start'} src={!this.state.navTop || this.props.isLight ? '/images/icons/harryDLogoWhite.png' : '/images/icons/harryDLogo.png' }/></Link>
                 {this.props.showNav && !this.props.testing? 
                    <ul>
                     <li>
@@ -233,6 +235,7 @@ const mapStateToProps = (state : any) => ({
   siteStatus : state.app.siteStatus,
   testing : state.app.testingOn,
   hero : state.app.heroMessage,
+  isLight : state.app.isLight
 
 })
 
