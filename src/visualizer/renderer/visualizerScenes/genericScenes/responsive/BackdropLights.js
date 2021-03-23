@@ -73,16 +73,17 @@ export function BackdropLights(framework) {
 		const mshStdWall = new THREE.Mesh( geoFloor, matStdFloor );
 		mshStdFloor.position.set(0, 0,-5 )
 		scene.add( mshStdFloor );
-
+	
 		
 		
 
 
 		const controls = new OrbitControls( camera, framework.renderer.domElement );
 		controls.target.copy( meshKnot.position );
-		controls.update();
+	
 
-
+		let t = window.performance.now();
+		
 		let BackdropLights = {
 		 	name: 'BackdropLight',
 		    scene: scene,
@@ -91,7 +92,7 @@ export function BackdropLights(framework) {
 		    backgroundDark : true,
 		    responsive : true,
 		    sceneTimer : window.performance.now(),
-		    sceneLength: 9000,
+		    sceneLength: 19000,
 	      	onUpdate : function(framework){
 
 	      		const toggleOnBeat = (lightPattern) => {
@@ -122,11 +123,11 @@ export function BackdropLights(framework) {
 
 	      		
 				const mesh = scene.getObjectByName( 'meshKnot' );
-			
-				if(framework.streamData.bufferData.peak - 1 < framework.streamData.bufferData.average){
+				if(framework.streamData.frequencies.bassFr > 1.17 && window.performance.now() - t > 0.15 ){
 					toggleOnBeat([ 'rect2', 'helper2'])
 					mesh.rotation.y += 0.02;
 					framework.sceneTimer = window.performance.now();
+					t = window.performance.now()
 
 				}
 				mesh.rotation.y += 0.02;

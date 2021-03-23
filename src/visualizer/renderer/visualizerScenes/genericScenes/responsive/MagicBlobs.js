@@ -44,7 +44,7 @@ export function MagicBlobs(framework) {
 		pointLight.position.set( 0, 0, 100 );
 		scene.add( pointLight );
 
-		ambientLight = new THREE.AmbientLight(0xffffff, 0.2 );
+		ambientLight = new THREE.AmbientLight(0xffffff, 0.6 );
 		ambientLight.position.set( 0, 0, 100 );
 		scene.add( ambientLight );
 

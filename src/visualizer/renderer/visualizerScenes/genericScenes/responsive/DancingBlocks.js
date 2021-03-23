@@ -17,7 +17,7 @@ export function DancingBlocks (framework) {
     camera.lookAt(scene.position);
     scene.add(camera);
     let planeGeometry = new THREE.PlaneGeometry(800, 800, 20, 20);
-    let planeMaterial =  new THREE.MeshStandardMaterial( { color :0xffffff})
+    let planeMaterial =  new THREE.MeshStandardMaterial( { color :0xffffff, roughness: 0, metalness: 0.1 })
     let plane2 = new THREE.Mesh(planeGeometry, planeMaterial);
     plane2.rotation.x = -0.5 * Math.PI;
     plane2.position.set(0, -90, 0);
@@ -67,7 +67,7 @@ export function DancingBlocks (framework) {
   
     camera.position.y = 0;
     
-    var light = new THREE.DirectionalLight( 0xffffff, 1, 200 );
+    var light = new THREE.DirectionalLight( 0xdfebff, 1.75 );
     light.position.set( 0, 1, 0.5 ); 
     light.shadow.mapSize.width = 512; // default
     light.shadow.mapSize.height = 512; // default

@@ -5,6 +5,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
 let colourCount = 1
 let cameraCount = 0
+let rotateCount = 1
 let cameraDepth = [ 750,  500, 650, 500,  550, 500]
 let colourPairs = {
                  
@@ -93,23 +94,29 @@ export function HomeScene(framework){
    // let changeVis = false
     
     let HomeScene = {
-        name: 'MagicBlobs',
+      name: 'MagicBlobs',
        scene: scene,
        camera: camera,
        tag : 'generic',
        responsive : true,
        changeVisuals : false,
        onUpdate :  function(framework){
-         var timer = Date.now() * 0.0003;
-         framework.camera.position.z = Math.cos( timer ) * 45 ;
-         framework.camera.position.x = Math.sin(timer) * 0.9;
+          var timer = Date.now() * 0.0003;
+          framework.camera.position.z = Math.cos( timer ) * 45 ;
+          framework.camera.position.x = Math.sin(timer) * 0.9;
           pointLight.position.set(Math.sin( timer ) * 800 , pointLight.position.y, pointLight.position.z )
           framework.camera.lookAt( scene.position );
           if(framework.camera.position.z > -0.5 && framework.camera.position.z < 0.5 && !changeScene){
             changeScene = true
-            setTimeout(() => {
-               framework.changeVisuals = true
-             },100)
+            if(rotateCount === 2){
+               
+                framework.changeVisuals = true
+                rotateCount = 1
+               
+            }else{
+              rotateCount ++ 
+            }
+        
            
             
             let c1 = colourPairs[colourCount]['colour_1']

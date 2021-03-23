@@ -132,6 +132,19 @@ export class AnimationWidget extends React.Component<IAnimationWidgetProps, IAni
 	      
 	}
 
+
+	public componentWillUnmount = () => {
+		framework.breakAnimation = true
+	    if(this.state.manager.renderer !== undefined && this.state.manager.renderer !== null){
+	      this.state.manager.renderer.dispose()
+	    }
+	  //  deleteAllScenes() 
+	  
+	   // window.removeEventListener('resize', this.handleResize, false)
+		this.setState({
+			manager : {...this.state.manager, 'breakAnimation' : true}
+		})
+	}
 	
 
 

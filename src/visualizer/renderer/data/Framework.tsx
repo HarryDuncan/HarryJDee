@@ -1,5 +1,5 @@
 import {dataPoints} from './dataPoints'
-
+import Metronome from '../functions/audioFunctions/Metronome'
 let framework = {
         initialized : false,
         isPlaying : false,
@@ -27,11 +27,13 @@ let framework = {
         // If background is dark change logo to light version
         bgDark : false,
 
-        //Data Points
+        // Data Points For Audio 
         streamData : dataPoints,
+        metro : Metronome,
 
         sceneTimer : null,
-        sceneData : {}
+        sceneData : {},
+
 
     }
 

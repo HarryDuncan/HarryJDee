@@ -187,7 +187,7 @@ export function ArtLavaLamp(framework) {
 	     camera: camera,
 	     tag : 'generic',
 	     responsive : true,
-	     sceneLength: 4000,
+	     sceneLength: 7000,
 	     onUpdate : function(framework){
 	      		const delta = clock.getDelta();
 				time += delta * effectController.speed * 0.3;
