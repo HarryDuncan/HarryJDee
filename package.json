@@ -43,6 +43,7 @@
     "react-date-picker": "^8.0.7",
     "react-datepicker": "^3.4.1",
     "react-dom": "^16.12.0",
+    "react-full-screen": "^1.0.2",
     "react-idle-timer": "^4.3.6",
     "react-image-magnifier-lens": "^1.1.9",
     "react-image-magnify": "^2.7.4",

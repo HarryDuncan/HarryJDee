@@ -13,6 +13,7 @@ export const initializeAllScenes = (framework) =>{
     allScenes.responsive.push(Scenes.DancingBlocks(framework))
     allScenes.responsive.push(Scenes.MagicBlobs(framework))
     allScenes.responsive.push(Scenes.BackdropLights(framework))
+    allScenes.responsive.push(Scenes.RotatingCubes(framework))
 
     allScenes.nonResponsive.push(Scenes.CrazySpiral(framework))
     allScenes.nonResponsive.push(Scenes.StarField(framework))
@@ -37,7 +38,7 @@ export const getScene = (framework) => {
       case 'responsive':
         framework.responsiveVisualizerIndex = updateIncrement(framework.responsiveVisualizerIndex, allScenes.responsive)
         return allScenes.responsive[framework.responsiveVisualizerIndex]
-        // allScenes.responsive[3]
+      //  return allScenes.responsive[4]
 
     }
 }

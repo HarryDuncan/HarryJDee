@@ -9,15 +9,23 @@ body {
   }
 }
 .light-screen{
-  color: white !important;
+
 }
 .active-audio{
   display: flex;
   width: 100vw;
+  padding-left: 4%;
+  padding-right: 4%;
+  background: linear-gradient(0deg, rgba(255,255,255,0.6) 0%, rgba(255,252,252,0.4) 100%);
+  z-index: 100;
+  align-items: center;
+  
 }
 .idle-audio{
   display: none;
+  
 }
+
 //audio player
 .audio-player {
   ::-webkit-scrollbar {
@@ -26,19 +34,19 @@ body {
   display: flex;
   flex-direction: row;
   cursor: default;
-  align-items: left;
   
-  height: auto;
-    font-family: sans-serif;
-    font-weight: 500 !important;
-    letter-spacing: 0.15em;
-    font-size: large !important;
-   
-    width: 80vw !important;
-    position:fixed;
-    bottom: 2vh;
-    left: 10vw;
-    justify-self: center;
+  height: 4em;
+  font-family: sans-serif;
+  font-weight: 500 !important;
+  letter-spacing: 0.15em;
+  font-size: large !important;
+ 
+  width: 100vw !important;
+  position:fixed;
+  bottom: 0;
+  left: 0;
+  justify-self: center;
+
 
   &-track-name {
     overflow-x: scroll;
@@ -47,7 +55,16 @@ body {
     overflow: -moz-scrollbars-none;
     white-space: nowrap;
     width: 26%;
-    margin: 0em 0.15em;
+  
+    justify-content: right;
+    text-decoration: none;
+    align-content: right;
+    float: right;
+    font-size: 1.1em;
+    font-weight: 800;
+    color: black !important;
+    margin-top: 1.6%;
+   
   }
 
   &-seeker {
@@ -59,9 +76,15 @@ body {
   &-time {
     display: flex;
     width: fit-content;
+     float: right;
+    font-size: 1.1em;
+    font-weight: 800;
+    margin-top: 1.6%;
+    margin-left : 1.5%;
+    color: black !important;
   }
 
-  &-time,
+  
   &-seeker,
   &-volume {
     z-index: 100;
@@ -101,6 +124,7 @@ body {
 .current-time {
   margin-right: 0.25em;
   margin-left: 0.25em;
+
 }
  .above-visualizer{
   z-index: 102;
@@ -121,8 +145,10 @@ body {
 
 .player-img {
   width: auto;
-  height: 1.5rem !important;
+  height: 2rem !important;
   margin: 0em 0.15em;
+  z-index: 200;
+  cursor:pointer;
 }
 
 //style for volume slider
@@ -263,6 +289,8 @@ input[type="range"].slider:focus::-ms-fill-upper {
   display: flex;
   flex-direction: column;
    width: 100% !important;
+   background: linear-gradient(0deg, rgba(255,255,255,0.8) 0%, rgba(255,252,252,0.6) 100%);
+   z-index: 100;
    margin: 0;
    left: 0;
    justify-self: center;

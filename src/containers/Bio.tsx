@@ -11,7 +11,7 @@ export const Bio = () => {
     <div className="Container">
      	<MetaTags>
             <title>Bio</title>
-            <meta id="meta-description" name="description" content="Lean more about Harry J Dee." />
+            <meta id="meta-description" name="description" content="Lean more about Harry J Dee. Harry. J .Dee is a kiwi artist based in Melbourne. From a young age Harry dabbled in painting, drawing and sculpture." />
           </MetaTags>
     	<BioPage />
     	<Footer />

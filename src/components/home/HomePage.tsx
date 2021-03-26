@@ -19,6 +19,9 @@ export class HomePage extends React.Component<IHomePageProps, IHomePageState>{
 		}
 	}
 	
+
+
+
 	render(){
 		return(
 			<div>

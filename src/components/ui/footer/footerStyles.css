@@ -31,7 +31,7 @@
 }
 .footer-link{
 	  color: black;
-	  font-size: 13px;
+	  font-size: 0.9em;
 	  text-decoration: none;
 	  letter-spacing: 0.2em;
 	  padding: 5px 5px;
@@ -52,7 +52,7 @@
 }
 .footer-container p{
   color: black;
-  font-size: 10px;
+  font-size: 0.9em;
   text-decoration: none;
   letter-spacing: 0.2em;
   padding: 5px 5px;
@@ -62,6 +62,78 @@
 }
 
 
+
+.footer-container-home{
+	width: 100%;
+	background: linear-gradient(0deg, rgba(255,255,255,0.8) 0%, rgba(255,252,252,0.6) 100%);
+	flex-direction: column;
+	margin: 0 auto;
+	display: flex;
+	z-index: 100;
+	position: absolute;
+	bottom: 0;
+	height: auto;
+}
+.footer-container-home-inverse{
+	min-width: 100%;
+	background: linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,252,252,0) 100%);
+	flex-direction: column;
+	margin: 0 auto;
+	display: block;
+	z-index: 100;
+	position: absolute;
+	bottom: 0;
+	height: auto;
+	color:white !important;
+}
+
+.footer-left-home{
+	width: 100%;
+	float: left;
+	flex-direction: column;
+	margin-top: 15px;
+	display: flex;
+	background-color: transparent;
+	flex-direction: column;
+}
+.footer-center-home{
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	background-color: transparent;
+	margin-top: 15px;
+}
+.footer-link-home{
+	  font-size: 13px;
+	  text-decoration: none;
+	  letter-spacing: 0.2em;
+	  padding: 5px 5px;
+	  position: relative;
+	  text-transform: none;
+	  text-decoration: underline;
+	  background-color: transparent;
+	  margin: 0  auto;
+}
+.footer-right-home{
+	width: 80%;
+	background-color: transparent;
+	float: right;
+	
+	flex-direction: column;
+	margin: 0 auto;
+
+
+}
+.footer-container-home p{
+  font-size: 0.9em;
+  text-decoration: none;
+  letter-spacing: 0.2em;
+  background-color: transparent;
+  padding: 5px 5px;
+  position: relative;
+  margin: 0 auto;
+  text-align: center;
+}
 @Media only screen and (max-width: 900px){
 	.footer-container{
 		width: 100vw;
@@ -69,6 +141,7 @@
 		flex-direction: column;
 		position: relative;
 		height: auto;
+		font-size: 0.6em;
 		padding: 0;
 		}
 		.footer-link{
@@ -86,5 +159,7 @@
 		.footer-center{
 			width: 100%;
 		}
-
+.footer-container-home p{
+  		font-size: 0.6em;
+	}
 }

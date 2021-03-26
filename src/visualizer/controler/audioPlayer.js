@@ -9,9 +9,13 @@ import {
   renderName,
   renderSeekBar,
   renderTime,
-  renderVolume,
+ 
   renderCustomArrange
 } from "./innerComponents/index";
+
+import {Volume} from './innerComponents/Volume'
+
+
 import IdleTimer from 'react-idle-timer'
 //methods
 import functions from "./functions/index";
@@ -67,7 +71,7 @@ class AudioPlayer extends Component {
                   loopEngagedIcon : icons.loopEngagedIcon,
                   seekWidth : "35%",
                   volumeWidth : "33%",
-                  nameWidth : "32%",
+                  nameWidth : "12%",
                   sliderClass : "slider",
                   fontFamily : "sans-serif",
                   fontWeight : "100",
@@ -92,7 +96,7 @@ class AudioPlayer extends Component {
       name: renderName.bind(this),
       seek: renderSeekBar.bind(this),
       time: renderTime.bind(this),
-      volume: renderVolume.bind(this)
+      
     };
 
     //binding methods
@@ -137,6 +141,7 @@ class AudioPlayer extends Component {
 
   handleOnActive(){
     this.props.activeCB(true)
+    document.exitPointerLock();
     this.setState({
       showClassName : 'active-audio'
     })
@@ -144,6 +149,7 @@ class AudioPlayer extends Component {
 
   handleOnAction(){
     this.props.activeCB(true)
+    document.exitPointerLock();
     this.setState({
       showClassName : 'active-audio'
     })
@@ -151,29 +157,25 @@ class AudioPlayer extends Component {
 
   handleOnIdle(){
     this.props.activeCB(false)
+    let el = document.getElementById('vizualizer-full')
+    el.webkitRequestFullScreen()
+    console.log('asdsd')
     this.setState({
       showClassName : 'idle-audio'
     })
   }
   render() {
     let title = this.props.audioFiles[this.state.currentTrackIdx].Title;
-    if(this.props.isLight && this.state.fontColor === 'black'){
-      this.setState({
-        fontColor : 'white'
-      })
-    }else if(!this.props.isLight && this.state.fontColor === 'white'){
-      this.setState({
-        fontColor : 'black'
-      })
-    }
+   
     if (!this.props.rearrange) {
       //DEFAULT PLAYER VIEW
 
       return (
         <div
-          className="audio-player"
+          className={"audio-player "}
           style={this.setStyle()}
         >
+        <div className={this.state.showClassName === 'idle-audio' ? 'hide-cursor' : 'show-cursor'} />
         <IdleTimer
           ref={ref => { this.idleTimer = ref }}
           timeout={1000 * 60 * 0.081}
@@ -194,17 +196,16 @@ class AudioPlayer extends Component {
               {/* Forward */}
               {this.props.hideForward ? null : this.componentObj.forward()}
             </div>
-            {/* Track Name and Artist */}
-            {this.props.hideName ? null : this.componentObj.name()}
-
+             {/* Current Time / Duration */}
+            {this.componentObj.time()}
             {/* Seeking Bar*/}
             {this.props.hideSeeking ? null : this.componentObj.seek()}
 
-            {/* Current Time / Duration */}
-            {this.componentObj.time()}
+            
+            <Volume renderMuteIcon={this.renderMuteIcon} handleVolume={this.handleVolume}  volume={this.state.volume}/>
+            {/* Track Name and Artist */}
+            {this.props.hideName ? null : this.componentObj.name()}
 
-            {/* Volume Controls */}
-            {this.componentObj.volume()}
           </div>
         </div>
       );

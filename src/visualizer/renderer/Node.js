@@ -144,7 +144,7 @@ componentWillUnmount(){
        framework.isPlaying = false
     }
     return (
-        <div className={'visualizer-node-full'} 
+        <div id={'vizualizer-full'} className={'visualizer-node-full'} 
           ref={thisNode => this.elVisualizer=thisNode}>
       </div>  
     )

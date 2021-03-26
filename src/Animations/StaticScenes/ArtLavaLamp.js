@@ -126,7 +126,7 @@ export function ArtLavaLamp(framework) {
 		
 		current_material = "chrome";
 
-		resolution = 28;
+		resolution = 55;
 
 		effect = new MarchingCubes( resolution, materials[ current_material ].m, true, true );
 		effect.position.set( 0, 0, 0 );

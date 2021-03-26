@@ -15,7 +15,8 @@ export interface IVisualizerWrapperProps {
 }
 
 const quitIcon: IIconProps = { iconName: 'Cancel'  ,styles: {root: { fontSize: '26px' }}};
-const fullScreen : IIconProps = {iconName: 'ChromeFullScreen', styles : {root: { fontSize: '26px' }}}
+const lightQuit : IIconProps = {iconName :'Cancel', styles : {root : {color : 'white'}}}
+
 
 const Visualizer: React.FunctionComponent<IVisualizerWrapperProps> = props => {
   
@@ -51,7 +52,7 @@ const Visualizer: React.FunctionComponent<IVisualizerWrapperProps> = props => {
   return (
     <div className={'fill'} >
       <Stack horizontal >
-        <IconButton iconProps={quitIcon} title="Quit" ariaLabel="Quit" onClick={exitTrack} className={'exit-icon' + (isActive ? ' ' : " hide-ico")}/>
+        <IconButton iconProps={props.isLight ? lightQuit : quitIcon } title="Quit" ariaLabel="Quit" onClick={exitTrack} className={'exit-icon' + (isActive ? ' ' : " hide-ico")}/>
       </Stack>
       <AudioPlayer isLight={props.isLight} audioContext={props.audioContext} audioFiles={props.trackProps} visualizerFullScreen={isFullScreen} activeCB={toggleActiveScreen} currentTrackId={_getTrackID()}/>
     </div>

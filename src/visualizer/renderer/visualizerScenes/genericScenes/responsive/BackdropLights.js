@@ -123,7 +123,7 @@ export function BackdropLights(framework) {
 
 	      		
 				const mesh = scene.getObjectByName( 'meshKnot' );
-				if(framework.streamData.frequencies.bassFr > 1.17 && window.performance.now() - t > 0.15 ){
+				if(framework.streamData.frequencies.bassFr > 1.18 && window.performance.now() - t > 60){
 					toggleOnBeat([ 'rect2', 'helper2'])
 					mesh.rotation.y += 0.02;
 					framework.sceneTimer = window.performance.now();

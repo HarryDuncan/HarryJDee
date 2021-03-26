@@ -120,9 +120,10 @@ export function DancingBlocks (framework) {
               if(o.isMesh && o.name === 'block'){
                 if(count % 2 === 0){
                   
-                  if(o.position.y > 2  && (MoveDowner ||  framework.streamData.bufferData.lowerMaxFr > 0.9 )){
+                  if(o.position.y > 2  && (MoveDowner ||  framework.streamData.bufferData.lowerMaxFr > 0.9 )&& window.performance.now() - t > 60){
                     // o.translateY(-1 * modulate(framework.streamData.bufferData.peak, 1,2,0,2))
                      o.translateY(-1 * lerp(o.position.y, distance * 2, ease(t)))
+                     t = window.performance.now()
                   }else if(o.position.y < 2  && MoveUpper){
                     //  o.translateY(modulate(framework.streamData.bufferData.trough,1,2,0,2.5))
                      o.translateY(lerp(o.position.y, distance * 2, ease(t)))
@@ -135,9 +136,10 @@ export function DancingBlocks (framework) {
                   
                   }
                 }else{
-                  if(o.position.y < 2 && (MoveDowner ||  framework.streamData.bufferData.lowerMaxFr > 0.9 )){
+                  if(o.position.y < 2 && (MoveDowner ||  framework.streamData.bufferData.lowerMaxFr > 0.9) && window.performance.now() - t > 60){
                      // o.translateY( modulate(framework.streamData.bufferData.peak, 1,2.5,0,2.5))
                      o.translateY(lerp(o.position.y, distance , ease(t)))
+                     t = window.performance.now()
                   }else if(o.position.y > 2 && MoveUpper ){
                      // o.translateY(-1 * modulate(framework.streamData.bufferData.trough,1,2,0,2))
                       o.translateY( -1 * lerp(o.position.y, distance , ease(t)))

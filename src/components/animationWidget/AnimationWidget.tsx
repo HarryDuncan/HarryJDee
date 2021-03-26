@@ -71,12 +71,15 @@ export class AnimationWidget extends React.Component<IAnimationWidgetProps, IAni
 	************************************
 	*/
 	public componentDidMount = () => {
+		let scenes = this.initializeScenes(this.props.scenes)
 		this.setState({
-			sceneArray : this.initializeScenes(this.props.scenes)
-		})
+			sceneArray : scenes
+		},  ) 
+		
 		setTimeout(() => {
 			this.createScene()
 		}, 100)
+		
 	}
 
 	public createScene = () => {
@@ -124,7 +127,7 @@ export class AnimationWidget extends React.Component<IAnimationWidgetProps, IAni
 	    		currentVisual : currentVisualizer,
 	      		manager : {...this.state.manager,  'scene' : currentVisualizer.scene, 'camera' : currentVisualizer.camera,changeVisuals : false, sceneIndex : index}
 	      	})
-	   if(currentVisualizer.sceneLength !== undefined){
+	   if(currentVisualizer.sceneLength !== undefined && !this.state.manager.breakAnimation){
 	   	setTimeout(() => {
 	   		this.changeScene()
 	   	}, currentVisualizer.sceneLength)
@@ -133,16 +136,27 @@ export class AnimationWidget extends React.Component<IAnimationWidgetProps, IAni
 	}
 
 
+
+  public onWindowResize() {
+	  	this.setState({
+	  		manager : {...this.state.manager, camera : {...this.state.manager.camera, aspect : window.innerWidth / window.innerHeight}}
+	  	})
+       this.state.manager.camera.updateProjectionMatrix();
+       this.state.manager.renderer.setSize(window.innerWidth, window.innerHeight);
+
+
+    }
 	public componentWillUnmount = () => {
-		framework.breakAnimation = true
-	    if(this.state.manager.renderer !== undefined && this.state.manager.renderer !== null){
-	      this.state.manager.renderer.dispose()
-	    }
-	  //  deleteAllScenes() 
+	
+	   
+	   this.state.manager.renderer.dispose()
 	  
-	   // window.removeEventListener('resize', this.handleResize, false)
+	//  deleteAllScenes() 
+	//  console.log('asdasd')
+	//  window.removeEventListener('resize', this.handleResize, false)
 		this.setState({
-			manager : {...this.state.manager, 'breakAnimation' : true}
+			manager : {...this.state.manager, 'breakAnimation' : true},
+			sceneArray : []
 		})
 	}
 	

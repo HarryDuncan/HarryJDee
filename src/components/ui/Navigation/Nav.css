@@ -26,7 +26,7 @@
 
 .homeNav{
   background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0));
-  height:100vh !important;
+  height:50vh !important;
   width: 100vw;
   display:block;
   border: 0px; 
@@ -34,7 +34,11 @@
   position: fixed;
 }
 
-
+h2{
+  margin-bottom: 5px;
+  text-align: right;
+  cursor: pointer;
+}
 .noScroll{
   height:4em;
   display:block;
@@ -87,7 +91,7 @@ button{
 
 ul { 
   margin-right:4.5em !important;
-  margin-top: 1.5em;
+  margin-top: 0.6em;
   list-style: none; 
   float: right;
   text-align: center;
@@ -99,13 +103,13 @@ li {
   align-content:right;
   float:right;
   margin-right: 1em;
+  cursor : pointer;
 }
 a {
   color: #fff;
   text-transform: uppercase;
   text-decoration: none;
   letter-spacing: 0.2em;
-  padding: 5px 5px;
   position: relative;
 }
 
@@ -114,9 +118,11 @@ a {
       justify-content:right;
       text-decoration: none;
       align-content:right;
+      cursor : pointer !important;
       float:right;
-      font-size: 1.1em;
-      font-weight: 800;
+      font-size: 0.8em;
+      font-weight: 1000;
+      letter-spacing: 0.3em;
       color: black !important; 
   }
  
@@ -126,8 +132,10 @@ a {
       text-decoration: none;
       align-content:right;
       float:right;
-      font-size: 1.1em;
-      font-weight: 800;
+      font-size: 0.8em;
+      cursor : pointer;
+      letter-spacing: 0.3em;
+      font-weight: 1000;
       color: white !important; 
   }
 
@@ -137,7 +145,8 @@ a {
   content: "";
   display: block;
   height: 2px;
-  left: 40%;
+  left: 30%;
+  
   position: absolute;
   background: black;
   transition: width 0.3s ease 0s, left 0.3s ease 0s;
@@ -156,6 +165,7 @@ a {
   display: block;
   height: 2px;
   left: 30%;
+ 
   position: absolute;
   background: white;
   transition: width 0.3s ease 0s, left 0.3s ease 0s;
@@ -163,8 +173,9 @@ a {
 }
 
 .active-nav{
-   box-shadow: inset 0 0px 0 white, inset 0 -2px 0 
+   box-shadow: inset 0 0px 0px white, inset 0 -2px 0 
 }
+
 .scrolled-nav-item:hover:after { 
   width: 98%; 
   left: 0; 
@@ -207,7 +218,7 @@ a {
 @Media only screen and (max-width: 1100px){
 
  .mainNav-mobile{
-  background-image: linear-gradient(rgba(255,255,255,0.53), rgba(255,255,255,0.02));
+    background-image: linear-gradient(rgba(255,255,255,0.53), rgba(255,255,255,0.02));
   } 
 
   .item-number{
@@ -242,9 +253,9 @@ a {
 
     .link {
         display:flex;
-        font-size: 1.7em;
+        font-size: 1.3em;
         font-weight: 500;
-        margin:15%;
+        margin:5%;
         margin-right: 0%;
         letter-spacing: 0.25em;
         color: white;

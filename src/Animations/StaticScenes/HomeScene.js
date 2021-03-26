@@ -34,7 +34,6 @@ var camera = new THREE.PerspectiveCamera( 705, window.innerWidth / window.innerH
 
 export function HomeScene(framework){
   
-    window.addEventListener('resize', this.handleResize, false)
     breakAnimation = false;
    
     camera.position.y = 180;
@@ -108,16 +107,17 @@ export function HomeScene(framework){
           framework.camera.lookAt( scene.position );
           if(framework.camera.position.z > -0.5 && framework.camera.position.z < 0.5 && !changeScene){
             changeScene = true
-            if(rotateCount === 2){
-               
+            if(rotateCount === 1){
+               setTimeout(() => {
                 framework.changeVisuals = true
+                 }, 1500)
                 rotateCount = 1
                
             }else{
               rotateCount ++ 
             }
         
-           
+           console.log('hggfhghgh')
             
             let c1 = colourPairs[colourCount]['colour_1']
             let c2 = colourPairs[colourCount]['colour_2']
@@ -144,7 +144,10 @@ export function HomeScene(framework){
             });
         
           }else if((camera.position.z < -0.5 || camera.position.z > 0.5) && changeScene){
-            framework.changeVisuals = false
+            
+               framework.changeVisuals = false
+
+           
             changeScene = false
           }
         }

@@ -7,7 +7,7 @@ import {default as Loop} from './loop';
 import {default as Name} from './name';
 import {default as SeekBar} from './seekBar';
 import {default as Time} from './time';
-import {default as Volume} from './volume';
+
 import {default as CustomArrange} from './customArrange'
 
 export function renderPlay(position) {
@@ -83,19 +83,7 @@ export function renderTime() {
     duration={this.state.duration}/>
 }
 
-export function renderVolume() {
-  return <Volume
-    hideSeeking={this.props.hideSeeking}
-    handleMute={this.handleMute}
-    handleHoverOver={this.handleHoverOver}
-    handleHoverOut={this.handleHoverOut}
-    iconSize={this.state.iconSize}
-    renderMuteIcon={this.renderMuteIcon}
-    sliderClass={this.state.sliderClass}
-    volume={this.state.volume}
-    handleVolume={this.handleVolume}
-    width={this.state.volumeWidth}/>
-}
+
 
 export function renderCustomArrange() {
   return <CustomArrange

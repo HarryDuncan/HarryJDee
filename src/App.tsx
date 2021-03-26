@@ -11,6 +11,7 @@ import Bio from './containers/Bio';
 import Dashboard from './containers/Dashboard';
 import Shop from './containers/Shop';
 import Mixes from './containers/Mixes';
+import Example from './containers/Example';
 import NavBar from './components/ui/Navigation/NavigationBar';
 import {connect} from "react-redux";
 import LoadingSplash from './components/ui/loadingSplash/LoadingSplash';
@@ -74,6 +75,7 @@ export class App extends React.Component<IAppProps, IAppState> {
                       <Route path='/Mixes' component={Mixes} />
                       <Route path='/Activism' component={Activism} />
                       <Route path="/Dashboard" component={Dashboard} />
+                      <Route path='/Examples' component={Example} />
                       <Route path='/TermsAndConditions' component={TermsAndConditions} />
                       <Route path="*" component={Home} />
                   </Switch>
