@@ -48,7 +48,7 @@ export function ArtLavaLamp(framework) {
 		ambientLight = new THREE.AmbientLight(0xffffff, 0.2 );
 		ambientLight.position.set( 0, 0, 100 );
 		scene.add( ambientLight );
-
+		let index = 0;
 		// MATERIALS
 
 		function createShaderMaterial( shader, light, ambientLight ) {
@@ -69,17 +69,68 @@ export function ArtLavaLamp(framework) {
 
 				}
 
-		function generateMaterials() {
+
+		function updateBackground(index){
 
 					// environment map
-
+					let pathURL = ['../images/textures/cube/img-1/','../images/textures/cube/img-2/' ]
+					
 					const path = "../images/textures/cube/";
+					
 					const format = '.jpg';
 					const urls = [
-						path + 'px' + format, path + 'nx' + format,
-						path + 'py' + format, path + 'ny' + format,
-						path + 'pz' + format, path + 'nz' + format
+						// Middle Right
+						pathURL[index] + 'px' + format, 
+						// Middle Left
+						pathURL[index] + 'nx' + format,
+						// Top Middle
+						pathURL[index] + 'py' + format,
+						// Bottom Middle
+						pathURL[index] + 'ny' + format,
+						// Middle Middle
+						pathURL[index] + 'pz' + format, 
+
+						path + 'nz' + format
 					];
+
+					console.log(urls)
+
+					const cubeTextureLoader = new THREE.CubeTextureLoader();
+
+					const reflectionCube = cubeTextureLoader.load( urls );
+					const refractionCube = cubeTextureLoader.load( urls );
+					refractionCube.mapping = THREE.CubeRefractionMapping;
+
+					
+						
+			return new THREE.MeshLambertMaterial( { color: 0xffffff, envMap: reflectionCube } )// new THREE.MeshLambertMaterial( { color: 0xffffff, envMap: refractionCube, refractionRatio: 0.85 } )
+						// 	h: 0, s: 0, l: 1
+						// },
+		}
+
+		function generateMaterials(index) {
+
+					// environment map
+					let pathURL = ['../images/textures/cube/img-1/','../images/textures/cube/img-2/' ]
+					
+					const path = "../images/textures/cube/";
+					
+					const format = '.jpg';
+					const urls = [
+						// Middle Right
+						pathURL[index] + 'px' + format, 
+						// Middle Left
+						pathURL[index] + 'nx' + format,
+						// Top Middle
+						pathURL[index] + 'py' + format,
+						// Bottom Middle
+						pathURL[index] + 'ny' + format,
+						// Middle Middle
+						pathURL[index] + 'pz' + format, 
+
+						path + 'nz' + format
+					];
+
 
 					const cubeTextureLoader = new THREE.CubeTextureLoader();
 
@@ -122,11 +173,12 @@ export function ArtLavaLamp(framework) {
 					return materials;
 
 				}
-		materials = generateMaterials();
+		materials = generateMaterials(index);
 		
 		current_material = "chrome";
 
-		resolution = 55;
+		resolution = 105;
+
 
 		effect = new MarchingCubes( resolution, materials[ current_material ].m, true, true );
 		effect.position.set( 0, 0, 0 );
@@ -140,7 +192,7 @@ export function ArtLavaLamp(framework) {
 		// RENDERER
 
 		renderer = new THREE.WebGLRenderer();
-		renderer.outputEncoding = THREE.sRGBEncoding;
+		
 		renderer.setPixelRatio( window.devicePixelRatio );
 		renderer.setSize( window.innerWidth, window.innerHeight );
 		
@@ -189,15 +241,28 @@ export function ArtLavaLamp(framework) {
 	     responsive : true,
 	     sceneLength: 7000,
 	     onUpdate : function(framework){
+	     		if(framework.reInitScene){
+	     			let background = 
+	     			
+	     			effect.material = updateBackground(index) 
+	     			
+	     			framework.reInitScene = false
+	     			if(index >= 2){
+	     				index = 0
+	     			}else{
+	     				index ++ 
+	     			}
+	     			
+	     		}
 	      		const delta = clock.getDelta();
 				time += delta * effectController.speed * 0.3;
 			
-				if ( effectController.resolution !== resolution ) {
+				// if ( effectController.resolution !== resolution ) {
 
-					resolution = effectController.resolution;
-					effect.init( Math.floor( resolution ) );
+				// 	resolution = effectController.resolution;
+				// 	effect.init( Math.floor( resolution ) );
 
-				}
+				// }
 
 				if ( effectController.isolation !== effect.isolation ) {
 					effect.isolation = effectController.isolation;

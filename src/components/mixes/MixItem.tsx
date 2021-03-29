@@ -50,6 +50,7 @@ const [audioCont, setAudioContext] = useState(null)
     props.hideNav(false)
   }
 
+
   const hideNavCB = (fullScrn: boolean) => {
     props.hideNav(fullScrn)
   } 
@@ -66,15 +67,15 @@ const [audioCont, setAudioContext] = useState(null)
 		    			:
 				      <div className={'mix-section'} >
 				          <div className={'mix-details-div'}>
+
 				          	<div className={'mix-item-header'} >
-					          	<h1 className={'mix-item-title'}>{props.itemProps.Title}</h1>
-                      <img className={'mix-cover'} src={`/hjdmix/${props.itemProps['Url']}.jpg`} />
-					          	<div className={'btn-container'}>
-					          		<img onClick={sectionSelected} onMouseOver={isHovered} onMouseLeave={notHovered} src={hovered? require('./../../visualizer/controler/assets/play-dark.png') : require('./../../visualizer/controler/assets/play-light.png')} />
-					         	 </div>
+					          	 <h1 className={'mix-item-title'}>{props.itemProps.Title}</h1>
+                      <img className={hovered ? 'image-hovered ' : '' + 'mix-cover'}  onClick={sectionSelected} src={`/hjdmix/${props.itemProps['Url']}.jpg`} />
+					          	
 					        </div>
+                   
 				          	<p className={'mix-item-description'} >{props.itemProps.MixDescription}</p>
-                    <p>Recorded: {moment(new Date(props.itemProps.PublishDate)).format('DD/MM/YYYY')}</p>
+                   
 				          </div>
 				          
 				      </div>  
@@ -85,6 +86,10 @@ const [audioCont, setAudioContext] = useState(null)
  
  
  }
+
+ // <div className={'btn-container'}>
+ //                        <img onClick={sectionSelected} onMouseOver={isHovered} onMouseLeave={notHovered} src={hovered? require('./../../visualizer/controler/assets/play-dark.png') : require('./../../visualizer/controler/assets/play-light.png')} />
+ //                     </div>  <p>Recorded: {moment(new Date(props.itemProps.PublishDate)).format('DD/MM/YYYY')}</p>
 
 
 export default MixItem

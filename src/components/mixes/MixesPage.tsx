@@ -68,7 +68,7 @@ class MixesPage extends React.Component<IMixesProps, IMixesState>{
 						{!this.state.isPlaying?
 							<div className={'mixes-header'} >
 								<h1 className='mixes-title'>
-									Press play to listen to a mix with a visualizer.
+									Listen to a mix with a visualizer.
 								</h1>
 								<p className={'warning-message'}>Visualizer may potentially trigger seizures for people with photosensitive epilepsy. Viewer discretion is advised.</p>
 							</div>

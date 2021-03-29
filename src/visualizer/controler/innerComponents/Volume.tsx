@@ -5,7 +5,6 @@ import { DefaultButton,DirectionalHint, Callout, Link, getTheme, FontWeights, me
 import { IStackTokens, Stack, IStackStyles } from 'office-ui-fabric-react/lib/Stack';
 
 const stackStyles: Partial<IStackStyles> = { root: { height: 100 } };
-
 const SliderStyles : Partial<ISliderStyles> = {root : {margin : 0}, container : {margin: 0}, valueLabel : {display : 'none'}};
 const theme = getTheme();
 const styles = mergeStyleSets({
@@ -59,7 +58,7 @@ export const Volume : React.FunctionComponent<IVolumeProps> = (props) => {
 
 
   const handleHoverOver = () => {
-    console.log('shsh')
+    
     toggleIsCalloutVisible(true)
   }
 

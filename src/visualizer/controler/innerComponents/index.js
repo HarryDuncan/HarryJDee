@@ -5,8 +5,7 @@ import {default as Rewind} from './rewind';
 import {default as Forward} from './forward';
 import {default as Loop} from './loop';
 import {default as Name} from './name';
-import {default as SeekBar} from './seekBar';
-import {default as Time} from './time';
+
 
 import {default as CustomArrange} from './customArrange'
 
@@ -68,20 +67,9 @@ export function renderName() {
     width={this.state.nameWidth}/>
 }
 
-export function renderSeekBar() {
-  return <SeekBar
-    sliderClass={this.state.sliderClass}
-    seekerVal={this.state.seekerVal}
-    handleSeekSlider={this.handleSeekSlider}
-    handleSeek={this.handleSeek}
-    width={this.state.seekWidth}/>
-}
 
-export function renderTime() {
-  return <Time
-    currentAudioTime={this.state.currentAudioTime}
-    duration={this.state.duration}/>
-}
+
+
 
 
 

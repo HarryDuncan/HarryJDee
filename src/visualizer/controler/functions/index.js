@@ -10,9 +10,9 @@ import {
 
 import {startPlay, endPlay, handlePlay, handlePause} from './playPause';
 
-import {handleProgress, handleSeek, handleSeekSlider} from './seek';
+import {handleProgress, handleSeek, handleSeekSlider, setTime, secondsToClock, loadDuration} from './seek';
 
-import {setTime, secondsToClock, loadDuration} from './time';
+
 
 import {handleVolume, handleMute} from './volume';
 

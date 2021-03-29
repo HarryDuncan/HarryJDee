@@ -5,7 +5,7 @@ import pauseHoverIcon from "./pause-dark.png";
 import volumeIcon from "./volume.png";
 import muteIcon from "./mute.png";
 import muteEngagedIcon from "./mute-dark.png";
-import volumeEngaged from "./volume-dark.png";
+import volumeEngaged from "./volume.png";
 import forwardIcon from "./forward.png";
 import forwardHoverIcon from "./forward-hover.png"
 import loopIcon from "./loop.png"

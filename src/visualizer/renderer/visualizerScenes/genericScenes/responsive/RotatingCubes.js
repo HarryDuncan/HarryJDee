@@ -92,7 +92,7 @@ export function RotatingCubes (framework) {
           return currentRotation
         }
 
-        if(framework.streamData.frequencies.bassFr > 1.2 && window.performance.now() - t > 50 ){
+        if(framework.streamData.frequencies.bassFr > 1.1 && window.performance.now() - t > 50 ){
           cube.rotation.x = rotate(cube.rotation.x )
           t = window.performance.now()
         }

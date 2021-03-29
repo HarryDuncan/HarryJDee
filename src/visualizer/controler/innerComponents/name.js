@@ -17,10 +17,8 @@ const Name = (props) => {
  
   return (
     <div
-      className={"audio-player-track-name above-visualizer"}
-      style={{
-        width
-      }}
+      className={"track-name above-visualizer"}
+     
       ref={setNameDisplayRef}
       onMouseOver={scrollMarquee
       ? e => scrollMarqueeFunc(e, 'left')

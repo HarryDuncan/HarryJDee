@@ -14,7 +14,9 @@ export interface IFramework  {
         bgDark : boolean,
         sceneIndex : number;
         changeVisuals : boolean;
-       
+
+        reInitScene : boolean;
+        transition : boolean;
     }
 
 export const framework : IFramework = {
@@ -31,7 +33,11 @@ export const framework : IFramework = {
         // If background is dark change logo to light version
         bgDark : false,
         sceneIndex : 0,
-        changeVisuals : false
+        changeVisuals : false,
+
+        //Transition
+        reInitScene : false,
+        transition : false
 }
 
    

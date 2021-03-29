@@ -7,14 +7,13 @@ import {
   renderForward,
   renderLoop,
   renderName,
-  renderSeekBar,
-  renderTime,
+  
  
   renderCustomArrange
 } from "./innerComponents/index";
 
 import {Volume} from './innerComponents/Volume'
-
+import {SeekBar} from './innerComponents/SeekBar'
 
 import IdleTimer from 'react-idle-timer'
 //methods
@@ -69,9 +68,7 @@ class AudioPlayer extends Component {
                   rewindHoverIcon : icons.rewindHoverIcon,
                   loopIcon : icons.loopIcon,
                   loopEngagedIcon : icons.loopEngagedIcon,
-                  seekWidth : "35%",
-                  volumeWidth : "33%",
-                  nameWidth : "12%",
+                  nameWidth : "22%",
                   sliderClass : "slider",
                   fontFamily : "sans-serif",
                   fontWeight : "100",
@@ -94,8 +91,6 @@ class AudioPlayer extends Component {
       forward: renderForward.bind(this),
       loop: renderLoop.bind(this),
       name: renderName.bind(this),
-      seek: renderSeekBar.bind(this),
-      time: renderTime.bind(this),
       
     };
 
@@ -166,29 +161,19 @@ class AudioPlayer extends Component {
   }
   render() {
     let title = this.props.audioFiles[this.state.currentTrackIdx].Title;
-   
-    if (!this.props.rearrange) {
-      //DEFAULT PLAYER VIEW
-
-      return (
-        <div
-          className={"audio-player "}
-          style={this.setStyle()}
-        >
-        <div className={this.state.showClassName === 'idle-audio' ? 'hide-cursor' : 'show-cursor'} />
+    const isMobile = window.innerWidth <= 900;
+    return (
+        <div className={"audio-player "} style={this.setStyle()}>
         <IdleTimer
           ref={ref => { this.idleTimer = ref }}
-          timeout={1000 * 60 * 0.081}
+          timeout={1000 * 6000 * 0.081}
           onActive={this.handleOnActive}
           onIdle={this.handleOnIdle}
           onAction={this.handleOnAction}
           debounce={250}
         />
         {this.setAudio(this.props.audioContext)}
-         
-
-
-          {/* Rewind */}
+         {isMobile ? 
           <div className={this.state.showClassName}>
             <div className={"wrapper " + (this.props.isLight? 'light-screen' : '')}>
               {this.props.hideRewind ? null : this.componentObj.rewind()}
@@ -196,23 +181,37 @@ class AudioPlayer extends Component {
               {/* Forward */}
               {this.props.hideForward ? null : this.componentObj.forward()}
             </div>
-             {/* Current Time / Duration */}
-            {this.componentObj.time()}
-            {/* Seeking Bar*/}
-            {this.props.hideSeeking ? null : this.componentObj.seek()}
-
             
-            <Volume renderMuteIcon={this.renderMuteIcon} handleVolume={this.handleVolume}  volume={this.state.volume}/>
-            {/* Track Name and Artist */}
-            {this.props.hideName ? null : this.componentObj.name()}
+                       
+            <SeekBar seekerVal={this.state.seekerVal} handleSeekSlider={this.handleSeekSlider} handleSeek={this.handleSeek} currentAudioTime={this.state.currentAudioTime} duration={this.state.duration} />
+          
+          
+          
+
+            <div className={'mobile-bottom-wrapper'}>
+              <Volume renderMuteIcon={this.renderMuteIcon} handleVolume={this.handleVolume}  volume={this.state.volume}/>
+              {this.componentObj.name()}
+            </div>
 
           </div>
+          :
+            <div className={this.state.showClassName}>
+            <div className={"wrapper " + (this.props.isLight? 'light-screen' : '')}>
+              {this.props.hideRewind ? null : this.componentObj.rewind()}
+               {this.componentObj.play("first")}
+              {/* Forward */}
+              {this.props.hideForward ? null : this.componentObj.forward()}
+            </div>
+            
+            <SeekBar seekerVal={this.state.seekerVal} handleSeekSlider={this.handleSeekSlider} handleSeek={this.handleSeek} currentAudioTime={this.state.currentAudioTime} duration={this.state.duration} />
+          
+            {this.props.hideName ? null : this.componentObj.name()}
+            <Volume renderMuteIcon={this.renderMuteIcon} handleVolume={this.handleVolume}  volume={this.state.volume}/>
+
+          </div>
+         }
         </div>
       );
-    } else {
-      // Custom Arrangement
-      return this.renderCustomArrange();
-    }
   }
 }
 

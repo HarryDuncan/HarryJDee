@@ -37,7 +37,7 @@
 // 		let camera, scene, renderer;
 // 			let controls;
 			
-// 			const objects = [];
+// 			const objects = [];5
 // 			const targets = { table: [], sphere: [], helix: [], grid: [] };
 
 			

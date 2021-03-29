@@ -2,6 +2,7 @@ import  React from 'react';
 import * as Scenes from '../../animations';
 import {IFramework, framework} from './data/Framework';
 import * as THREE from "three";
+import * as Transitions from '../../animations/transitions'
 
 interface IAnimationWidgetProps{
 	scenes : any[];
@@ -11,6 +12,7 @@ interface IAnimationWidgetProps{
 interface IAnimationWidgetState{
 	manager : IFramework;
 	sceneArray : any[];
+	transitionArray : any[];
 	currentVisual : any;
 }
 
@@ -26,6 +28,7 @@ export class AnimationWidget extends React.Component<IAnimationWidgetProps, IAni
 	    this.state = {
 	    	manager : this.initalizeFramework(),
 	    	sceneArray : [],
+	    	transitionArray : [],
 	    	currentVisual : null
 	    }
 	   
@@ -40,9 +43,8 @@ export class AnimationWidget extends React.Component<IAnimationWidgetProps, IAni
 
 	public initializeScenes = (scenes : any[]) : any[]=> {
 		let returnArray :any[] = []
-		returnArray.push(Scenes.HomeScene(this.state.manager)) 
+		returnArray.push(Scenes.HomeScene(this.state.manager))
 		returnArray.push(Scenes.ArtLavaLamp(this.state.manager))
-
 		return returnArray
 	}
 
@@ -73,7 +75,8 @@ export class AnimationWidget extends React.Component<IAnimationWidgetProps, IAni
 	public componentDidMount = () => {
 		let scenes = this.initializeScenes(this.props.scenes)
 		this.setState({
-			sceneArray : scenes
+			sceneArray : scenes,
+			transitionArray : [Transitions.BlackTransition()]
 		},  ) 
 		
 		setTimeout(() => {
@@ -99,6 +102,7 @@ export class AnimationWidget extends React.Component<IAnimationWidgetProps, IAni
 	     
 	      // switchVisualizers(framework, this.dispatchFunctions)
 	      const tick = () => {
+
 		    this.state.currentVisual.onUpdate(this.state.manager); // perform any requested updates
 		   	 this.state.manager.renderer.render(this.state.currentVisual.scene,  this.state.currentVisual.camera )
 			 if(!this.state.manager.breakAnimation){
@@ -114,24 +118,27 @@ export class AnimationWidget extends React.Component<IAnimationWidgetProps, IAni
 	}
 
 	public changeScene = () => {
-		let index : number = 0;
-		if(Number(this.state.manager.sceneIndex) < this.state.sceneArray.length - 1){
-			index ++
-		}else{
-			index = 0
+		if(!this.state.manager.breakAnimation){
+			let index : number = 0;
+			if(Number(this.state.manager.sceneIndex) < this.state.sceneArray.length - 1){
+				index ++
+			}else{
+				index = 0
+			}
+			let currentVisualizer = this.state.sceneArray[index]
+			
+			this.state.manager.renderer.render(this.state.transitionArray[0].scene,  this.state.transitionArray[0].camera)
+		    this.setState({
+		    		currentVisual : currentVisualizer,
+		      		manager : {...this.state.manager, reInitScene : true,  'scene' : currentVisualizer.scene, 'camera' : currentVisualizer.camera,changeVisuals : false, sceneIndex : index}
+		      	})
+		   if(currentVisualizer.sceneLength !== undefined){
+		   	setTimeout(() => {
+		   		this.changeScene()
+		   	}, currentVisualizer.sceneLength)
+		   }
 		}
-		let currentVisualizer = this.state.sceneArray[index]
 		
-		this.state.manager.renderer.render(currentVisualizer.scene,  currentVisualizer.camera)
-	    this.setState({
-	    		currentVisual : currentVisualizer,
-	      		manager : {...this.state.manager,  'scene' : currentVisualizer.scene, 'camera' : currentVisualizer.camera,changeVisuals : false, sceneIndex : index}
-	      	})
-	   if(currentVisualizer.sceneLength !== undefined && !this.state.manager.breakAnimation){
-	   	setTimeout(() => {
-	   		this.changeScene()
-	   	}, currentVisualizer.sceneLength)
-	   }
 	      
 	}
 
@@ -147,24 +154,24 @@ export class AnimationWidget extends React.Component<IAnimationWidgetProps, IAni
 
     }
 	public componentWillUnmount = () => {
-	
+		this.setState({
+			manager : {...this.state.manager, 'breakAnimation' : true},
+			sceneArray : []
+		})
 	   
 	   this.state.manager.renderer.dispose()
 	  
 	//  deleteAllScenes() 
 	//  console.log('asdasd')
 	//  window.removeEventListener('resize', this.handleResize, false)
-		this.setState({
-			manager : {...this.state.manager, 'breakAnimation' : true},
-			sceneArray : []
-		})
+		
 	}
 	
 
 
 
 	public render(){
-		
+		console.log('asdas')
 		
 		return(
 			

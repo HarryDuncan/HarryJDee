@@ -3,7 +3,7 @@
   width: calc(100% - 9em);
   margin: 0 5em 0 3.5em; 
   
-  padding-top: 1%;
+  
   overflow-x: hidden;
   overflow-y: hidden;
 	animation-timing-function: linear;
@@ -13,7 +13,7 @@
 
 .mixes-title{
     justify-content: center;
-    font-size: 1.2em;
+    font-size: 1em;
     font-weight: 600;
     color: black !important;
     text-decoration: none;
@@ -21,15 +21,15 @@
     padding: 2px 2px;
     position: relative;
     display: flex;
-     text-align: center;
-	align-items: center;
+    text-align: left;
+	   align-items: center;
 }
 .mix-cover{
-  height: 25em;
+  height: 22em;
 }
 .warning-message{
 	color: gray;
-  font-size: 15px;
+  font-size: 0.9em;
   position: relative;
   display: flex;
   justify-content: center;
@@ -102,7 +102,9 @@
      text-align: center;
 	align-items: center;
 }
-
+.mix-cover:hover{
+  filter: brightness(60%);
+}
 .mix-item-description{
 	justify-content: center;
     font-size: 1.2em;

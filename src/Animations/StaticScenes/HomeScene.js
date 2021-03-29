@@ -93,7 +93,7 @@ export function HomeScene(framework){
    // let changeVis = false
     
     let HomeScene = {
-      name: 'MagicBlobs',
+      name: 'HomeScene',
        scene: scene,
        camera: camera,
        tag : 'generic',
@@ -117,7 +117,7 @@ export function HomeScene(framework){
               rotateCount ++ 
             }
         
-           console.log('hggfhghgh')
+      
             
             let c1 = colourPairs[colourCount]['colour_1']
             let c2 = colourPairs[colourCount]['colour_2']
