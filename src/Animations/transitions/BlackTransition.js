@@ -32,17 +32,6 @@ export function BlackTransition() {
 
 		// LIGHTS
 
-		light = new THREE.DirectionalLight( 0xffffff );
-		light.position.set( 0.5, 0.5, 1 );
-		scene.add( light );
-
-		pointLight = new THREE.PointLight( 0xff3300 );
-		pointLight.position.set( 0, 0, 100 );
-		scene.add( pointLight );
-
-		ambientLight = new THREE.AmbientLight(0xffffff, 0.2 );
-		ambientLight.position.set( 0, 0, 100 );
-		scene.add( ambientLight );
 		let index = 0;
 		// MATERIALS
 

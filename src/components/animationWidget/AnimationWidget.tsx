@@ -103,8 +103,19 @@ export class AnimationWidget extends React.Component<IAnimationWidgetProps, IAni
 	      // switchVisualizers(framework, this.dispatchFunctions)
 	      const tick = () => {
 
-		    this.state.currentVisual.onUpdate(this.state.manager); // perform any requested updates
-		   	 this.state.manager.renderer.render(this.state.currentVisual.scene,  this.state.currentVisual.camera )
+	      	if(this.state.manager.transition){
+	      		this.state.currentVisual.onUpdate(this.state.manager); // perform any requested updates
+	      		setTimeout(() => {
+	      			this.setState({
+	      				manager : {...this.state.manager, transition : false}
+	      			})
+	      		}, 10)
+	      		
+	      	}else{
+	      		this.state.currentVisual.onUpdate(this.state.manager); // perform any requested updates
+		   	 	this.state.manager.renderer.render(this.state.currentVisual.scene,  this.state.currentVisual.camera )
+	      	}
+		    	
 			 if(!this.state.manager.breakAnimation){
 			 		if(this.state.manager.changeVisuals === true){
 			 			
@@ -130,7 +141,7 @@ export class AnimationWidget extends React.Component<IAnimationWidgetProps, IAni
 			this.state.manager.renderer.render(this.state.transitionArray[0].scene,  this.state.transitionArray[0].camera)
 		    this.setState({
 		    		currentVisual : currentVisualizer,
-		      		manager : {...this.state.manager, reInitScene : true,  'scene' : currentVisualizer.scene, 'camera' : currentVisualizer.camera,changeVisuals : false, sceneIndex : index}
+		      		manager : {...this.state.manager, reInitScene : true, transition : true, 'scene' : currentVisualizer.scene, 'camera' : currentVisualizer.camera,changeVisuals : false, sceneIndex : index}
 		      	})
 		   if(currentVisualizer.sceneLength !== undefined){
 		   	setTimeout(() => {
@@ -171,10 +182,7 @@ export class AnimationWidget extends React.Component<IAnimationWidgetProps, IAni
 
 
 	public render(){
-		console.log('asdas')
-		
 		return(
-			
 			<div style={{'height': '100vh', 'width': '100vw', 'overflow':'hidden'}} 
 				ref={this.container}>
 
