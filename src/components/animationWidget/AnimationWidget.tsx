@@ -45,6 +45,7 @@ export class AnimationWidget extends React.Component<IAnimationWidgetProps, IAni
 		let returnArray :any[] = []
 		returnArray.push(Scenes.HomeScene(this.state.manager))
 		returnArray.push(Scenes.ArtLavaLamp(this.state.manager))
+		// returnArray.push(Scenes.TransLights(this.state.manager))
 		return returnArray
 	}
 

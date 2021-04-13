@@ -1,3 +1,6 @@
+.activisim-page{
+  background: linear-gradient(rgba(255,255,255,0.53), rgba(255,255,255,0.08)) !important;
+}
 .activism-container{
   display: flex;
   flex-direction: column;
@@ -10,7 +13,8 @@
   -webkit-animation: in 2500ms linear ;
   overflow: hidden;
   animation: in 2500ms linear ;
-  height: 100vh;
+  height: auto;
+  min-height: 90vh;
 }
 .activism-menu{
   display: flex;

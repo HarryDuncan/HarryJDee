@@ -90,10 +90,13 @@ class AddItem extends React.Component<IAddItemProps, IAddItemState>{
 				updatedDataObj = removeVariation(updatedDataObj, index)
 				break;
 			case 'variationName':
-				updatedDataObj['variations']['value']['variationName']['value'] = index
+				console.log(updatedDataObj)
+				console.log(fieldName)
+				console.log(index)
+				updatedDataObj['Variations']['value']['variationName']['value'] = index
 				break;
 			default:
-				updatedDataObj['variations']['value']['variationTypes']['value'][nestingDepth]['value'][fieldName]['value'] = index
+				updatedDataObj['Variations']['value']['variationTypes']['value'][nestingDepth]['value'][fieldName]['value'] = index
 				break;
 		}
 		this.setState({

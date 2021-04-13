@@ -22,7 +22,7 @@ const stackTokens: IStackTokens = { childrenGap: 10 };
 export const ExternalLinkWidget: React.FunctionComponent<IExternalLinkWidgetProps> = props => {
 	 return (
 	    <Stack styles={props.styles !== undefined? props.styles : stackStyles} horizontal tokens={stackTokens}>
-	      {props.links.map(item => (<LinkImage links={item} colour={props.colour} />))}
+	      {props.links.map((item : any, index : number) => (<LinkImage key={`Link-widget ${Number(index)}`} links={item} colour={props.colour} />))}
 	    </Stack>
 	  );
 };

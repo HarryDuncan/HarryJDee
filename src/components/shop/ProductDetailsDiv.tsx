@@ -34,14 +34,15 @@ const ProductDetailsDiv: React.SFC<IDropDownDivProps> = props => {
   const [itemQuantity, updateQuantity] = useState(1)
       // @ts-ignore
     const _createOptions = ():IDropdownOption[]  => {
-      if(props.productData.hasVariations){
+      if(props.productData.HasVariations){
+        
         let items = JSON.parse(props.productData['Variations'])
         let options : IDropdownOption[] = [{key: 0, text : `Please Select`}]
         for(let i in items['value']){
           let newObj : any = {}
           newObj['key'] = Number(i) + 1
           newObj['text'] = items['value'][i]['itemTitle']
-          newObj['data'] = {'price' : items['value'][i]['Price'], 'Stock' : items['value'][i]['Stock']}
+          newObj['data'] = {'Price' : items['value'][i]['price'], 'Stock' : items['value'][i]['stock']}
           if(Number(items['value'][i]['stock']) === 0){
             newObj['disabled'] = true
           }
@@ -93,9 +94,10 @@ const ProductDetailsDiv: React.SFC<IDropDownDivProps> = props => {
         </div>
       );
     }else{
+      console.log(option['data']['Stock'])
       return(
         <div style={{width : '400px', display : 'flex', flexDirection : 'row'}}>
-         <span>{option.text}</span><span className={Number(option['data']['stock']) === 0 ? 'sold-out' : 'price-txt'}>AUD ${option.data['price']}</span>{option.data.stock < 11 &&  option.data.stock > 0 ? <span className={'stock-txt'}>{option.data.stock} left</span> : <div>{Number(option['data']['stock']) === 0 ? <span className={'stock-txt'}>Sold Out</span> : <div/> }</div>}
+         <span>{option.text} </span><span className={Number(option['data']['Stock']) === 0 ? 'sold-out' : 'price-txt'}> AUD ${option.data['Price']}</span>{Number(option['data']['Stock']) < 11 && Number(option['data']['Stock']) > 0 ? <span className={'stock-txt'}>{option.data.Stock} left</span> : <div>{Number(option['data']['Stock']) === 0 ? <span className={'stock-txt'}>Sold Out</span> : <div/> }</div>}
         </div>
       );
     }
@@ -103,7 +105,7 @@ const ProductDetailsDiv: React.SFC<IDropDownDivProps> = props => {
   };
 
   const _setDisabled = ():boolean => {
-    if(props.productData.hasVariations){
+    if(props.productData.HasVariations){
        return true
     }else{
        return false
@@ -123,7 +125,7 @@ const ProductDetailsDiv: React.SFC<IDropDownDivProps> = props => {
       setValue({})
       setTimeout(() => {
         toggleAdded(false)
-        if(!props.productData.hasVariations){
+        if(!props.productData.HasVariations){
          toggleDisabled(false)
        }
       },2500)
@@ -131,6 +133,24 @@ const ProductDetailsDiv: React.SFC<IDropDownDivProps> = props => {
   }
 
 
+
+  const hasStock = () => {
+    if(props.productData.HasVariations){
+      let variationData = JSON.parse(props.productData['Variations'])
+      for(let i in variationData['value']){
+        if(Number(variationData['value'][i]['stock']) !== 0){
+          return false
+        }
+      }
+      return true
+    }else{
+      if(props.productData['Stock'] !== undefined && props.productData['Stock'] <= 0){
+        return true
+      }else{
+        return false
+      }
+    }
+  }
 
   const [checkoutDisabled, toggleDisabled] = useState(_setDisabled)
   const [isCalloutVisible, toggleCallout] = useState(false)
@@ -174,7 +194,7 @@ const ProductDetailsDiv: React.SFC<IDropDownDivProps> = props => {
         }
         <div className='panel-footer'>
           {
-            Number(props.productData['Stock']) <= 0 ?
+            hasStock() ?
 
             <div/>
               :

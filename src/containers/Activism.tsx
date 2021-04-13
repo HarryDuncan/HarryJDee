@@ -1,6 +1,6 @@
 import React from 'react';
 import ActivisimContainer from './../components/activisim/ActivisimContainer';
-import Footer from './../components/ui/footer/Footer';
+import FooterHome from './../components/ui/footer/FooterHome';
 import './../App.css'
 import MetaTags from 'react-meta-tags';
 
@@ -15,7 +15,7 @@ export const Activism = () => {
            
           </MetaTags>
     	<ActivisimContainer />
-    	<Footer />
+    	<FooterHome />
     </div>
   );
 }

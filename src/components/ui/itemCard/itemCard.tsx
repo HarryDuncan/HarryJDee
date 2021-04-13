@@ -46,18 +46,43 @@ export class ItemTile extends React.Component<IItemTileProps, IItemTileState>{
 	}
 
 	public _getItemPrice = (item : any) => {
-		if(item['Price'] !== undefined && item['Price'] !== 0){
-			return item['Price']
+		if(this.props.itemProps['HasVariations']){
+			// Get Variation Stock Data
+			let variationData = JSON.parse(this.props.itemProps['Variations'])
+			
+			let minPrice = Number(variationData['value'][0]['price'])
+			let maxPrice = Number(variationData['value'][0]['price'])
+			for(let i in variationData['value']){
+				minPrice = Number(variationData['value'][i]['price']) < minPrice? variationData['value'][i]['price'] : minPrice
+				maxPrice = Number(variationData['value'][i]['price']) > maxPrice ? variationData['value'][i]['price'] : maxPrice
+			}
+			return `AUD $${minPrice} - $${maxPrice}`
 		}else{
-			return 0
+			if(item['Price'] !== undefined && item['Price'] !== 0){
+				return `AUD $${item['Price']}`
+			}else{
+				return `AUD $0`
+			}
 		}
 	}
 	public _isSoldOut = () => {
-		if(this.props.itemProps['Stock'] !== undefined && this.props.itemProps['Stock'] <= 0){
+		if(this.props.itemProps['HasVariations']){
+			// Get Variation Stock Data
+			let variationData = JSON.parse(this.props.itemProps['Variations'])
+			for(let i in variationData['value']){
+				if(Number(variationData['value'][i]['stock']) !== 0){
+					return false
+				}
+			}
 			return true
 		}else{
-			return false
+			if(this.props.itemProps['Stock'] !== undefined && this.props.itemProps['Stock'] <= 0){
+				return true
+			}else{
+				return false
+			}
 		}
+		
 	}
 	
 	public render(){
@@ -92,7 +117,7 @@ export class ItemTile extends React.Component<IItemTileProps, IItemTileState>{
 	        		 />
 	        		<div style={{'display' : 'inline-block', 'background' : 'black', 'width' : '100%'}}>
 			          <CardTitle className={'item-title-card'}>{String(this.props.itemProps['Title'])}</CardTitle>
-			          <CardSubtitle className={'item-price-card'} >AUD ${this._getItemPrice(this.props.itemProps)}</CardSubtitle>
+			          <CardSubtitle className={'item-price-card'} >{this._getItemPrice(this.props.itemProps)}</CardSubtitle>
 			        </div>
 			      </Card>
 			     </div>

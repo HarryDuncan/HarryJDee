@@ -6,11 +6,10 @@ interface ICustomSVGProps {
 }
 
 export const Insta:  React.SFC<ICustomSVGProps> = props => {
-  console.log(props.fill)
   let dynamicFill : string  = props.fill !== undefined? props.fill :"#0A0A08"
   return(
       <svg className={props.className} version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"  x="0px" y="0px"
-               width="50px" height="50px" viewBox="103 103 50 50" enable-background="new 103 103 50 50" >
+               width="50px" height="50px" viewBox="103 103 50 50" >
                 <g>
                         <path fill={dynamicFill} d="M128,107.504c6.676,0,7.466,0.026,10.103,0.146c2.437,0.111,3.761,0.519,4.642,0.861
                                 c1.167,0.453,2,0.995,2.875,1.87c0.875,0.875,1.416,1.708,1.87,2.875c0.342,0.881,0.749,2.205,0.86,4.642

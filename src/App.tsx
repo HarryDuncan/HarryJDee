@@ -13,6 +13,7 @@ import Shop from './containers/Shop';
 import Mixes from './containers/Mixes';
 import Example from './containers/Example';
 import NavBar from './components/ui/Navigation/NavigationBar';
+import DigitalSculpture from './containers/DigitalSculpture';
 import {connect} from "react-redux";
 import LoadingSplash from './components/ui/loadingSplash/LoadingSplash';
 import Activism from './containers/Activism';

@@ -241,12 +241,11 @@ export function ArtLavaLamp(framework) {
 	     responsive : true,
 	     sceneLength: 7000,
 	     onUpdate : function(framework){
-	     		if(framework.reInitScene){
-	     				
+	     		if(framework.reInitScene){	
 	     			effect.material = updateBackground(index) 
 	     			
 	     			framework.reInitScene = false
-	     			if(index === 1){
+	     			if(index === 2){
 	     				index = 0
 	     			}else{
 	     				index ++ 

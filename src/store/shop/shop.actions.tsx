@@ -55,7 +55,7 @@ export const updateInventory = (isOutOfStock?: boolean) => {
 	const returnDataCallback = (success : boolean, items : any[]) => {
 
 			if(success){
-				console.log(items)
+				
 				dispatch(
 					{type: shopActionTypes.UPDATE_INVENTORY_SUCCESS, payload: items, outOfStock : isOutOfStock}
 				)

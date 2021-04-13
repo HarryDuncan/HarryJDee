@@ -102,7 +102,6 @@ class NavBar extends React.Component<INavProps, INavState>{
     }
     const isMobile = document.documentElement.clientWidth <= 1100 ;
     if(isMobile){
-      console.log(this.props.isLight)
         return (
           <div key={`Main Nav Mobile ${this.state.isOpen} `} className={ 'mainNav '}>
           <div className={(this.state.navTop? 'noScroll ' : 'scrolledMainNav ') + (this.state.activeNav === '/' || this.state.activeNav === ''  ? 'homeNav'  : ' ')} />
@@ -152,7 +151,7 @@ class NavBar extends React.Component<INavProps, INavState>{
     }else{
       return (
           <div className={ 'mainNav '}>
-          <div className={(this.state.navTop? 'noScroll ' : 'scrolledMainNav ') + (this.state.activeNav === '/'  || this.state.activeNav === '' ? 'homeNav' || this.state.activeNav === '' || 'TestMode' : ' ' || this.state.activeNav === '/Activism')} />
+          <div className={(this.state.navTop? 'noScroll ' : 'scrolledMainNav ') + (this.state.activeNav === '/'  || this.state.activeNav === '' ? 'homeNav' || this.state.activeNav === '' || 'TestMode' : ' ')} />
           <Link to="/"><img key={`${this.props.isLight} Logo`} onClick={this.navClicked.bind(this, '/')} className={'navLogo start'} src={!this.state.navTop || this.props.isLight ? '/images/icons/harryDLogoWhite.png' : '/images/icons/harryDLogo.png' }/></Link>
                 {this.props.showNav && !this.props.testing? 
                    <ul>

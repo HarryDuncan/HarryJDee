@@ -113,7 +113,7 @@ class ActivisimContainer extends React.Component<IActivisimProps, IActivisimStat
 		let selectionOptions = this._getOptions()
 		if(this.state.viewingCampaign['Name'] === 'No Active Campaign' || this.state.viewingCampaign['Name'] === ''){
 			return(
-				<div className="page">
+				<div className="page activisim-page">
 					<NoActiveCampaign />
 					<div className='activism-container inactive-campaign no-border'>
 						<div className={'inactive-background'}/>

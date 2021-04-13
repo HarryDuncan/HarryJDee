@@ -136,7 +136,7 @@ class AudioPlayer extends Component {
 
   handleOnActive(){
     this.props.activeCB(true)
-    document.exitPointerLock();
+    // document.exitPointerLock();
     this.setState({
       showClassName : 'active-audio'
     })
@@ -144,7 +144,7 @@ class AudioPlayer extends Component {
 
   handleOnAction(){
     this.props.activeCB(true)
-    document.exitPointerLock();
+    // document.exitPointerLock();
     this.setState({
       showClassName : 'active-audio'
     })
@@ -152,9 +152,8 @@ class AudioPlayer extends Component {
 
   handleOnIdle(){
     this.props.activeCB(false)
-    let el = document.getElementById('vizualizer-full')
-    el.webkitRequestFullScreen()
-    console.log('asdsd')
+    // let el = document.getElementById('vizualizer-full')
+    // el.webkitRequestFullScreen()
     this.setState({
       showClassName : 'idle-audio'
     })
@@ -166,7 +165,7 @@ class AudioPlayer extends Component {
         <div className={"audio-player "} style={this.setStyle()}>
         <IdleTimer
           ref={ref => { this.idleTimer = ref }}
-          timeout={1000 * 6000 * 0.081}
+          timeout={1000 * 60 * 0.081}
           onActive={this.handleOnActive}
           onIdle={this.handleOnIdle}
           onAction={this.handleOnAction}
