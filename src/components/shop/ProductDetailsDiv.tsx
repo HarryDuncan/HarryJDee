@@ -94,10 +94,9 @@ const ProductDetailsDiv: React.SFC<IDropDownDivProps> = props => {
         </div>
       );
     }else{
-      console.log(option['data']['Stock'])
       return(
         <div style={{width : '400px', display : 'flex', flexDirection : 'row'}}>
-         <span>{option.text} </span><span className={Number(option['data']['Stock']) === 0 ? 'sold-out' : 'price-txt'}> AUD ${option.data['Price']}</span>{Number(option['data']['Stock']) < 11 && Number(option['data']['Stock']) > 0 ? <span className={'stock-txt'}>{option.data.Stock} left</span> : <div>{Number(option['data']['Stock']) === 0 ? <span className={'stock-txt'}>Sold Out</span> : <div/> }</div>}
+         <span>{option.text}</span><span className={Number(option['data']['Stock']) === 0 ? 'sold-out' : 'price-txt'}> AUD ${option.data['Price']}</span>{Number(option['data']['Stock']) < 11 && Number(option['data']['Stock']) > 0 ? <span className={'stock-txt'}>{option.data.Stock} left</span> : <div>{Number(option['data']['Stock']) === 0 ? <span className={'stock-txt'}>Sold Out</span> : <div/> }</div>}
         </div>
       );
     }

@@ -1,9 +1,9 @@
 import * as React from 'react'
 import {useState} from 'react'
 import { Dropdown , IDropdownStyles, IDropdownOption} from 'office-ui-fabric-react/lib/Dropdown';
-import CalloutWrapper from './../ui/calloutWrapper/CalloutWrapper';
+import CalloutWrapper from './../../ui/calloutWrapper/CalloutWrapper';
 import { PrimaryButton} from 'office-ui-fabric-react';
-import DonationModal from './../stripe/DonationModal';
+import DonationModal from './../../stripe/DonationModal';
 import { loadStripe } from "@stripe/stripe-js";
 import { CardElement, useStripe, useElements, Elements  } from "@stripe/react-stripe-js";
 

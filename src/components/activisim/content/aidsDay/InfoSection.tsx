@@ -4,8 +4,8 @@ import {KYS} from './infoFiles/KYS'
 import {Educated} from './infoFiles/Educated'
 import {Stigma} from './infoFiles/Stigma'
 // import CalloutWrapper from './../ui/calloutWrapper/CalloutWrapper';
+import './aidsDay.scss'
 
-import './activism.css'
 import {
   getTheme,
   mergeStyleSets,

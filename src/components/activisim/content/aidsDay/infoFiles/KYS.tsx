@@ -19,7 +19,7 @@ import {
   Label,
  
 } from 'office-ui-fabric-react';
-import './../activism.css'
+import './../aidsDay.scss'
 import {InfoCallout} from './InfoCallout';
 
 const cancelIcon: IIconProps = { iconName: 'Cancel' };

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {useState} from 'react'
-import './../activism.css'
+import './../aidsDay.scss'
 import {
   getTheme,
   mergeStyleSets,

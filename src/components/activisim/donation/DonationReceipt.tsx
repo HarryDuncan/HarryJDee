@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {useState} from 'react'
-import CalloutWrapper from './../ui/calloutWrapper/CalloutWrapper';
+import CalloutWrapper from './../../ui/calloutWrapper/CalloutWrapper';
 import { PrimaryButton} from 'office-ui-fabric-react';
 import {
   Modal,
@@ -12,8 +12,8 @@ import {
   mergeStyleSets
 } from 'office-ui-fabric-react';
 import { Stack, IStackTokens, IStackStyles  ,  ITextFieldStyles} from 'office-ui-fabric-react';
-import ResendReceipt from './../ui/resendReceipt/ResendReceipt'
-import {ReactComponent as Thanks} from './../ui/notification/notificationPages/thankyou.svg'
+import ResendReceipt from './../../ui/resendReceipt/ResendReceipt'
+import {ReactComponent as Thanks} from './../../ui/notification/notificationPages/thankyou.svg'
 
 interface IDonationReceiptProps{
 	isOpen : boolean;

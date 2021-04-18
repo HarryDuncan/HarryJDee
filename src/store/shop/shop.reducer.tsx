@@ -37,8 +37,18 @@ const removeMissingItems = (cart : any[], conflict : any) => {
 const updateInventory = (products : any[] , updatedInventory : any) => {
 	let inventoryArr = Object.keys(updatedInventory)
 	for(let i in products){
-		products[i]['Stock'] = updatedInventory[products[i]['ID']]['Stock']
+		if(products[i]['HasVariations']){
+			let items : any = JSON.parse(products[i]['Variations'])
+			for(let item in items['value']){
+				items['value'][item]['stock'] = updatedInventory[products[i]['ID']][items['value'][item]['itemTitle']]
+			}
+			products[i]['Variations'] = JSON.stringify(items)
+		}else{
+			products[i]['Stock'] = updatedInventory[products[i]['ID']]['Stock']
+		}
+	
 	}
+
 	return products
 }
 

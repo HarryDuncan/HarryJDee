@@ -53,7 +53,7 @@ export const updateInventory = (isOutOfStock?: boolean) => {
 	
 
 	const returnDataCallback = (success : boolean, items : any[]) => {
-
+			console.log(items)
 			if(success){
 				
 				dispatch(
@@ -65,7 +65,7 @@ export const updateInventory = (isOutOfStock?: boolean) => {
 				)
 			}
 		} 
-		console.log(isOutOfStock)
+
 		getData('_product_table', '', returnDataCallback)
 	}
 }

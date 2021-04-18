@@ -1,15 +1,14 @@
 import React from 'react';
 import {connect} from "react-redux";
 import {getCampaignData} from './../../store/campaign/campaign.actions';
-import DonationSection from './DonationSection';
+import DonationSection from './donation/DonationSection';
+import {DonationReceipt} from './donation/DonationReceipt'
 import { Stack, IStackTokens, IStackStyles  ,  ITextFieldStyles,Link} from 'office-ui-fabric-react';
-import {DisplayText} from './../ui/customTextField/DisplayText';
-import {DonationReceipt} from './DonationReceipt'
 import { closeDonationModal} from './../../store/campaign/campaign.actions'
-import {AidsRibbon} from './../../animations/staticScenes/activisimItems/AidsRibbon';
-import {InfoSection} from './InfoSection';
 import { Dropdown , IDropdownStyles, IDropdownOption} from 'office-ui-fabric-react/lib/Dropdown';
 import {NoActiveCampaign} from './../../animations/staticScenes/NoActiveCampaign';
+// import {AidsDay} from './content';
+
 import './activism.css';
 
 
@@ -35,22 +34,6 @@ const dropdownStyles: Partial<IDropdownStyles> = {
  
 };
 
-const customStyles : Partial<ITextFieldStyles> = {
-	root : {
-		'margin' : 0,
-		'padding' : 0,
-		
-	},
-  field : {
-    'fontWeight' : 500,
-    'fontSize' : document.documentElement.clientWidth <= 900 ? '1.4em': '1.2em',
-    'marginTop' : 0,
-	'paddingTop' : 0,
-	'lineHeight': '120%',
-	'letterSpacing': '0.15em',
-	'height' :'fit-content',
-  }
-}
 
 
 const stackTokens: IStackTokens = { childrenGap: document.documentElement.clientWidth <= 900 ? '2em' : 0 };
@@ -142,44 +125,16 @@ class ActivisimContainer extends React.Component<IActivisimProps, IActivisimStat
 				</div>
 				);
 		}else{
+			let componentStr = `./content/${this.state.viewingCampaign['Component'].toLowerCase()}/${this.state.viewingCampaign['Component']}`
+			const CampaignComponent = React.lazy(() => import('./content/amazon'));
 			return(
-				<div className="page">
-					<DonationReceipt isOpen={this.props.showModal} campaignData={this.state.viewingCampaign} closeCallback={this._closeModal} donationReceipt={this.props.donationReceipt} />
-					<div className='activism-container'>
-						<div className={'activism-menu'}>
-						 
-                         <div className={'thanks-to'}>
-                         	<p className={'thanks-text'}>This campaign is closed.<br/>Special thanks to
-                         	<a className={'thanks-link'} href={'https://www.barbapresents.com/'} target={'_blank'}>Barba Presents</a> and 
-                         	<a className={'thanks-link'} href={'https://thorneharbour.org'} target={'_blank'}>Thorne Harbour Health</a>
-                         	</p>
-                         </div>
-                         <div className={'dd-container'}>
-	                         <Dropdown
-						 			placeHolder="View Previous Campaigns"
-		                            options={selectionOptions}
-		                            onChange={this._campaignSelected}
-		                            onRenderOption={onRenderOption}
-	                             	/>
-                         </div>
-						</div>
-						<div className='activism-section'>
-							<Stack styles={stackStyles} tokens={stackTokens}>
-								<Stack.Item align="stretch">
-									<h1 className={'campaign-title'}>{this.state.viewingCampaign['Name']} </h1>
-								</Stack.Item>
-								 <Stack.Item align="stretch" >
-									<DisplayText customStyleObj={customStyles} text={this.state.viewingCampaign['Supporting']}/>
-									<InfoSection />
-								</Stack.Item>
-							</Stack>
-							<div className={'action-section'}>
-								<DonationSection amount={this.state.viewingCampaign['Total']} campaign={this.state.viewingCampaign} contributionCount={this.state.viewingCampaign['ContributionCount']}  />
-							</div>
-						</div>
-						<AidsRibbon/>
+				<React.Suspense fallback={<div/>}>
+					<div className="page">
+						<DonationReceipt isOpen={this.props.showModal} campaignData={this.state.viewingCampaign} closeCallback={this._closeModal} donationReceipt={this.props.donationReceipt} />
+						<DonationSection amount={this.state.viewingCampaign['Total']} campaign={this.state.viewingCampaign} contributionCount={this.state.viewingCampaign['ContributionCount']} />
+						<CampaignComponent campaignData={this.state.viewingCampaign}/>
 					</div>
-				</div>
+				</React.Suspense>
 				);
 		}
 		

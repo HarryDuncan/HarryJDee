@@ -239,7 +239,6 @@ class ViewItem extends React.Component<IViewItemProps, IViewItemState>{
 				classNameSide : 'slide-left',
 			})
 		}else{
-			console.log(arrType.length)
 			let newObj = Object.assign({}, arrType[arrType.length - 1])
 			this.setState({
 				currentItem : newObj,

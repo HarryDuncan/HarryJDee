@@ -162,9 +162,9 @@ export const _reformatVariation = (data : any) => {
 	for(let i in data['value']){
 		let vObj = cloneDeep(variationItem)
 		vObj['value']['index']['value'] = Number(i)
-		vObj['value']['itemTitle']['value'] = String(data['value'][i]['ItemTitle'])
-		vObj['value']['stock']['value'] = Number(data['value'][i]['Stock'])
-		vObj['value']['price']['value'] = Number(data['value'][i]['Price'])
+		vObj['value']['itemTitle']['value'] = String(data['value'][i]['itemTitle'])
+		vObj['value']['stock']['value'] = Number(data['value'][i]['stock'])
+		vObj['value']['price']['value'] = Number(data['value'][i]['price'])
 		variationValueArr.push(vObj)
 	}
 	returnVariationObj['variationTypes'] = {type: "arrayItems", display: "true", value: variationValueArr, nestedDepth: 1}
