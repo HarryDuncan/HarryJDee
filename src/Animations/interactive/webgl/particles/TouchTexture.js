@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import { easeOutQuad, easeInOutQuad, easeOutSine, easeInOutSine } from '../../utils/easing';
 
+
 export default class TouchTexture {
 	constructor(parent) {
 		this.parent = parent;
@@ -22,7 +23,7 @@ export default class TouchTexture {
 		this.texture = new THREE.Texture(this.canvas);
 
 		this.canvas.id = 'touchTexture';
-		this.canvas.style.width = this.canvas.style.height = `${this.canvas.width}px`;
+		this.canvas.style.width = this.canvas.style.height = `${400}px`;
 	}
 
 	update(delta) {
@@ -86,4 +87,4 @@ export default class TouchTexture {
 		this.ctx.arc(pos.x, pos.y, radius, 0, Math.PI * 2);
 		this.ctx.fill();
 	}
-}
+} 

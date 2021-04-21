@@ -1,4 +1,4 @@
-export const fragmentShading = `precision highp float;
+export const fragShade = `precision highp float;
 
 uniform sampler2D uTexture;
 
@@ -28,5 +28,4 @@ void main() {
 	color.a = t;
 
 	gl_FragColor = color;
-}
-`
+}`

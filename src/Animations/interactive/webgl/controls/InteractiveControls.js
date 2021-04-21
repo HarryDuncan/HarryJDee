@@ -29,7 +29,6 @@ export default class InteractiveControls extends EventEmitter {
 		this.isDown = false;
 
 		this.browser = browser();
-
 		this.enable();
 	}
 
@@ -95,7 +94,7 @@ export default class InteractiveControls extends EventEmitter {
 		const touch = { x: t.clientX, y: t.clientY };
 
 		this.mouse.x = ((touch.x + this.rect.x) / this.rect.width) * 2 - 1;
-		this.mouse.y = -((touch.y + this.rect.y) / this.rect.height) * 2 + 1;
+		this.mouse.y = -((touch.y + this.rect.y) / this.rect.height) + 1;
 
 		this.raycaster.setFromCamera(this.mouse, this.camera);
 

@@ -8,7 +8,7 @@ export default class InteractiveParticle extends Component {
 
 	componentDidMount(){
 		this.initWebGL();
-		this.initGUI();
+		
 		this.addListeners();
 		this.animate();
 		this.resize();
@@ -19,9 +19,7 @@ export default class InteractiveParticle extends Component {
 		this.container.appendChild(this.webgl.renderer.domElement);
 	}
 
-	initGUI() {
-		this.gui = new GUIView(this);
-	}
+	
 
 	addListeners() {
 		this.handlerAnimate = this.animate.bind(this);
@@ -30,7 +28,7 @@ export default class InteractiveParticle extends Component {
 		window.addEventListener('keyup', this.keyup.bind(this));
 		
 		const el = this.webgl.renderer.domElement;
-		el.addEventListener('click', this.click.bind(this));
+		
 	}
 
 	animate() {
@@ -45,14 +43,13 @@ export default class InteractiveParticle extends Component {
 	// ---------------------------------------------------------------------------------------------
 
 	update() {
-		if (this.gui.stats) this.gui.stats.begin();
+		
 		if (this.webgl) this.webgl.update();
 		if (this.gui) this.gui.update();
 	}
 
 	draw() {
 		if (this.webgl) this.webgl.draw();
-		if (this.gui.stats) this.gui.stats.end();
 	}
 
 	// ---------------------------------------------------------------------------------------------
@@ -76,8 +73,9 @@ export default class InteractiveParticle extends Component {
 	 render() {
 	
 	    return (
-	        <div className={'container'}
+	        <div className={'container'} 
 	          ref={thisNode => this.container=thisNode}>
+	        
 	      </div>  
 	    )
   	}

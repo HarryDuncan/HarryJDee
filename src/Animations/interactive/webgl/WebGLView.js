@@ -11,7 +11,7 @@ export default class WebGLView {
 		this.app = app;
 
 		this.samples = [
-			'../sample-01.png'
+			'../mujertriqui.jpg'
 		];
 
 		this.initThree();
@@ -27,7 +27,7 @@ export default class WebGLView {
 		this.scene = new THREE.Scene();
 
 		// camera
-		this.camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 10000);
+		this.camera = new THREE.PerspectiveCamera(100, window.innerWidth / window.innerHeight, 1, 10000);
 		this.camera.position.z = 300;
 
 		// renderer
@@ -44,6 +44,7 @@ export default class WebGLView {
 	initParticles() {
 		this.particles = new Particles(this);
 		this.scene.add(this.particles.container);
+
 	}
 
 	// ---------------------------------------------------------------------------------------------
@@ -52,8 +53,10 @@ export default class WebGLView {
 
 	update() {
 		const delta = this.clock.getDelta();
-
-		if (this.particles) this.particles.update(delta);
+		
+		if (this.particles){
+			this.particles.update(delta);
+		}
 	}
 
 	draw() {

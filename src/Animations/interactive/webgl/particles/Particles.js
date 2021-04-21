@@ -2,10 +2,9 @@ import * as THREE from 'three';
 import { TweenLite } from 'gsap/all';
 import TouchTexture from './TouchTexture';
 import {easeInQuad} from './../../utils/easing';
+import {vertShader} from '../../shaders/vert';
 
-import {vertexShading, fragmentShading} from './../../shaders'
-
-// const glslify = require('glslify');
+const glslify = require('glslify');
 
 export default class Particles {
 	
@@ -18,16 +17,15 @@ export default class Particles {
 	init(src) {
 		const loader = new THREE.TextureLoader();
 
-		loader.load(src, (texture) => {
-			this.texture = texture;
-			this.texture.minFilter = THREE.LinearFilter;
-			this.texture.magFilter = THREE.LinearFilter;
-			this.texture.format = THREE.RGBFormat;
-
-			this.width = texture.image.width;
-			this.height = texture.image.height;
-
-			console.log(this.texture)
+		loader.load(src, (loadedTexture) => {
+			this.loadedTexture = loadedTexture;
+			this.loadedTexture.minFilter = THREE.LinearFilter;
+			this.loadedTexture.magFilter = THREE.LinearFilter;
+			this.loadedTexture.format = THREE.RGBFormat;
+		
+			this.width = loadedTexture.image.width;
+			this.height = loadedTexture.image.height;
+			
 			this.initPoints(true);
 			this.initHitArea();
 			this.initTouch();
@@ -48,7 +46,7 @@ export default class Particles {
 			numVisible = 0;
 			threshold = 34;
 
-			const img = this.texture.image;
+			const img = this.loadedTexture.image;
 			const canvas = document.createElement('canvas');
 			const ctx = canvas.getContext('2d');
 
@@ -58,6 +56,7 @@ export default class Particles {
 			ctx.drawImage(img, 0, 0, this.width, this.height * -1);
 
 			const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+			console.log()
 			originalColors = Float32Array.from(imgData.data);
 
 			for (let i = 0; i < this.numPoints; i++) {
@@ -67,20 +66,58 @@ export default class Particles {
 			// console.log('numVisible', numVisible, this.numPoints);
 		}
 
+		// create only once
+		if (!this.touch) this.touch = new TouchTexture(this);
+		console.log(this.touch)
 		const uniforms = {
 			uTime: { value: 0 },
 			uRandom: { value: 1.0 },
 			uDepth: { value: 2.0 },
 			uSize: { value: 0.0 },
 			uTextureSize: { value: new THREE.Vector2(this.width, this.height) },
-			uTexture: { value: this.texture },
-			uTouch: { value: null },
-		};
+			uTexture: { value: this.loadedTexture },
+			uTouch: { value: this.touch.texture },
 
+		};
+		const frag = `
+			precision highp float;
+
+			uniform sampler2D uTexture;
+
+			varying vec2 vPUv;
+			varying vec2 vUv;
+
+			void main() {
+				vec4 color = vec4(0.0);
+				vec2 uv = vUv;
+				vec2 puv = vPUv;
+
+				// pixel color
+				vec4 colA = texture2D(uTexture, puv);
+
+				// greyscale
+				float grey = colA.r * 0.21 + colA.g * 0.71 + colA.b * 0.07;
+				vec4 colB = vec4(grey, grey, grey, 1.0);
+
+				// circle
+				float border = 0.3;
+				float radius = 0.5;
+				float dist = radius - distance(uv, vec2(0.5));
+				float t = smoothstep(0.0, border, dist);
+
+				// final color
+				color = colB;
+				color.a = t;
+
+				gl_FragColor = color;
+			}`
+
+	
+		
 		const material = new THREE.RawShaderMaterial({
 			uniforms,
-			vertexShader: vertexShading,
-			fragmentShader: fragmentShading,
+			vertexShader: vertShader,
+			fragmentShader: frag,
 			depthTest: false,
 			transparent: true,
 			// blending: THREE.AdditiveBlending
@@ -94,7 +131,7 @@ export default class Particles {
 		positions.setXYZ(1,  0.5,  0.5,  0.0);
 		positions.setXYZ(2, -0.5, -0.5,  0.0);
 		positions.setXYZ(3,  0.5, -0.5,  0.0);
-		geometry.addAttribute('position', positions);
+		geometry.setAttribute('position', positions);
 
 		// uvs
 		const uvs = new THREE.BufferAttribute(new Float32Array(4 * 2), 2);
@@ -102,7 +139,7 @@ export default class Particles {
 		uvs.setXYZ(1,  1.0,  0.0);
 		uvs.setXYZ(2,  0.0,  1.0);
 		uvs.setXYZ(3,  1.0,  1.0);
-		geometry.addAttribute('uv', uvs);
+		geometry.setAttribute('uv', uvs);
 
 		// index
 		geometry.setIndex(new THREE.BufferAttribute(new Uint16Array([ 0, 2, 1, 2, 3, 1 ]), 1));
@@ -111,34 +148,36 @@ export default class Particles {
 		const offsets = new Float32Array(numVisible * 3);
 		const angles = new Float32Array(numVisible);
 
+
 		for (let i = 0, j = 0; i < this.numPoints; i++) {
-			if (discard && originalColors[i * 4 + 0] <= threshold) continue;
+			if (discard && originalColors[i * 4 + 0] <= threshold){
 
-			offsets[j * 3 + 0] = i % this.width;
-			offsets[j * 3 + 1] = Math.floor(i / this.width);
+				continue;
+			}else{
+				offsets[j * 3 + 0] = i % this.width;
+				offsets[j * 3 + 1] = Math.floor(i / this.width);
 
-			indices[j] = i;
+				indices[j] = i;
 
-			angles[j] = Math.random() * Math.PI;
+				angles[j] = Math.random() * Math.PI;
+				j++;
+			}
+			
 
-			j++;
+			
 		}
 
-		geometry.addAttribute('pindex', new THREE.InstancedBufferAttribute(indices, 1, false));
-		geometry.addAttribute('offset', new THREE.InstancedBufferAttribute(offsets, 3, false));
-		geometry.addAttribute('angle', new THREE.InstancedBufferAttribute(angles, 1, false));
+		geometry.setAttribute('pindex', new THREE.InstancedBufferAttribute(indices, 1, false));
+		geometry.setAttribute('offset', new THREE.InstancedBufferAttribute(offsets, 3, false));
+		geometry.setAttribute('angle', new THREE.InstancedBufferAttribute(angles, 1, false));
 
 		this.object3D = new THREE.Mesh(geometry, material);
 		this.container.add(this.object3D);
 
-
-		console.log(this)
 	}
 
 	initTouch() {
-		// create only once
-		if (!this.touch) this.touch = new TouchTexture(this);
-		this.object3D.material.uniforms.uTouch.value = this.touch.texture;
+		console.log(this.object3D)
 	}
 
 	initHitArea() {
@@ -170,8 +209,12 @@ export default class Particles {
 	// ---------------------------------------------------------------------------------------------
 
 	update(delta) {
-		if (!this.object3D) return;
-		if (this.touch) this.touch.update();
+		if (!this.object3D){
+			return;
+		}
+		if(this.touch){
+			this.touch.update();
+		}
 
 		this.object3D.material.uniforms.uTime.value += delta;
 	}
