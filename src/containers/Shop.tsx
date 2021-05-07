@@ -1,7 +1,7 @@
 import React from 'react';
 import ShopPage from './../components/shop/ShopPage';
-import Footer from './../components/ui/footer/Footer';
-import './../App.css'
+import Footer from './../components/navigation/footer/Footer';
+import './../App.scss'
 import MetaTags from 'react-meta-tags';
 
 

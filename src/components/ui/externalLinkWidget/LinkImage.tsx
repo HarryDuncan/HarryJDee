@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Insta} from './Icons/Insta'
 import {ReactComponent as SoundCloud} from './Icons/SoundCloud.svg'
 import {ReactComponent as Youtube} from './Icons/Youtube.svg'
-import './externalWidget.css';
+import './externalWidget.scss';
 
 export interface ILinkImageProps {
   // These are set based on the toggles shown above the examples (not needed in real code)

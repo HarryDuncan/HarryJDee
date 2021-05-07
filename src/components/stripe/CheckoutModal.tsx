@@ -20,7 +20,7 @@ import { CardElement, useStripe, useElements  } from "@stripe/react-stripe-js";
 import { ITextFieldStyleProps, ITextFieldStyles, TextField } from 'office-ui-fabric-react/lib/TextField';
 import { ILabelStyles, ILabelStyleProps } from 'office-ui-fabric-react/lib/Label';
 import axios from "axios";
-import './CheckoutStyles.css'
+import './CheckoutStyles.scss'
 
 
 
@@ -32,6 +32,8 @@ interface ICheckoutModalProps{
   onSuccessCallback : (paymentData : object, customerData : object , billingData : object) => void;
   outOfStockCallback : () => void;
   closeModalCallback : () => void;
+
+  shipping: any[];
 }
 
 

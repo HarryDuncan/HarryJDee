@@ -26,7 +26,7 @@ export class HomePage extends React.Component<IHomePageProps, IHomePageState>{
 		return(
 			<div>
 				<div style={{'height': '100vh', 'width': '100vw', 'overflow':'hidden'}}>
-					<AnimationWidget scenes={['ArtLavaLamp', 'HomeScene']} />
+					<AnimationWidget scenes={['SpinningHaring','ArtLavaLamp', 'HomeScene']} />
 				</div>
 			</div>
 		);

@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {NavLinks} from './../../ui/customNavLinks/NavLinks'
+import {NavLinks} from 'components/navigation/customNavLinks/NavLinks'
 import SettingsPageInner from './SettingsPageInner'
 import {formatRawData, siteSettings} from './../../../data'
 

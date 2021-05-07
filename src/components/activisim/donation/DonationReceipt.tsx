@@ -12,8 +12,8 @@ import {
   mergeStyleSets
 } from 'office-ui-fabric-react';
 import { Stack, IStackTokens, IStackStyles  ,  ITextFieldStyles} from 'office-ui-fabric-react';
-import ResendReceipt from './../../ui/resendReceipt/ResendReceipt'
-import {ReactComponent as Thanks} from './../../ui/notification/notificationPages/thankyou.svg'
+import ResendReceipt from 'components/shop/resendReceipt/ResendReceipt'
+import {ReactComponent as Thanks} from 'components/notification/notificationPages/thankyou.svg'
 
 interface IDonationReceiptProps{
 	isOpen : boolean;

@@ -1,10 +1,10 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {initializeGallery} from './../../store/art/art.actions'
-import {ItemTile} from './../ui/itemCard/itemCard';
-import { ItemPanel} from './../ui/itemPanel/itemPanel';
+import {initializeGallery} from './../../../store/art/art.actions'
+import {ItemTile} from './../../ui/itemCard/itemCard';
+import { ItemPanel} from './../../ui/itemPanel/itemPanel';
 // import {Gallery3D} from './Gallery3D' 	 <Gallery3D items={this.props.galleryArray} key={`3d ${this.props.galleryArray.length}`}/>
-import './galleryStyles.scss';
+import './../galleryStyles.scss';
 
 
 interface IGalleryState {
@@ -56,7 +56,7 @@ class GalleryPage extends React.Component<IGalleryProps, IGalleryState>{
 				height = String(this.props.galleryArray.length * 70) +'vh'
 			}
 			return(
-			<div className='page'>
+			<div >
 				<div className="gallerySection" style={{'height' : height}}>
 					{this.props.galleryArray.map(item => (<ItemTile onClickCallback={this.isViewing} itemProps={item} key={`Gallery Item ${item['ID']}`}/> ))}
 				</div>

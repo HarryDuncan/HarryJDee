@@ -9,30 +9,28 @@ export default class WebGLView {
 
 	constructor(app) {
 		this.app = app;
-
-		this.samples = [
-			'../mujertriqui.jpg'
-		];
+		
+		this.samples = app.props.imgUrls
 
 		this.initThree();
 		this.initParticles();
 		this.initControls();
 
 		const rnd = ~~(Math.random() * this.samples.length);
-		this.goto(rnd);
+		this.goto(app.props.currentIndex);
 	}
 
 	initThree() {
 		// scene
 		this.scene = new THREE.Scene();
-
+		
 		// camera
 		this.camera = new THREE.PerspectiveCamera(100, window.innerWidth / window.innerHeight, 1, 10000);
 		this.camera.position.z = 300;
 
 		// renderer
         this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-
+        this.renderer.setClearColor(0x000000, 0)
         // clock
 		this.clock = new THREE.Clock(true);
 	}

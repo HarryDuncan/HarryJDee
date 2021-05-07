@@ -9,7 +9,7 @@ interface ILoadingSplashProps {
 }
 
 
-const LoadingSplash:FunctionComponent<ILoadingSplashProps> = (props : any ) => {
+export const LoadingSplash: React.FunctionComponent<ILoadingSplashProps> = (props : any ) => {
 	if(props.show){
 		return (
   		<div className={'splash-container'}>
@@ -28,8 +28,3 @@ const LoadingSplash:FunctionComponent<ILoadingSplashProps> = (props : any ) => {
   
 }
 
-
-export default LoadingSplash;
-
- //   <FooterHome inverse={true}/>
-          

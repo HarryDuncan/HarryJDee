@@ -1,10 +1,16 @@
 import React from 'react';
-import './App.css';
+import './App.scss';
+import './styles/globalClasses.scss';
+import './styles/keyFrames.scss';
 import {
   BrowserRouter,
   Switch,
  // withRouter,
   Route} from 'react-router-dom'
+import {connect} from "react-redux";
+
+
+// Containers --------------------> 
 import {Home} from './containers/Home';
 import Gallery from './containers/Gallery';
 import Bio from './containers/Bio';
@@ -12,14 +18,17 @@ import Dashboard from './containers/Dashboard';
 import Shop from './containers/Shop';
 import Mixes from './containers/Mixes';
 import Example from './containers/Example';
-import NavBar from './components/ui/Navigation/NavigationBar';
-import DigitalSculpture from './containers/DigitalSculpture';
-import {connect} from "react-redux";
-import LoadingSplash from './components/ui/loadingSplash/LoadingSplash';
-import Activism from './containers/Activism';
-import {initializeSite} from './store/app/app.actions'
 import TermsAndConditions from './containers/TermsAndConditions';
-import Test from './containers/Test';
+import DigitalSculpture from './containers/DigitalSculpture';
+import Activism from './containers/Activism';
+
+import NavBar from 'components/navigation/navBar/NavBar';
+
+import {LoadingSplash} from './components/ui';
+
+import {initializeSite} from './store/app/app.actions'
+
+
 
 
 interface IAppProps {
@@ -84,7 +93,6 @@ export class App extends React.Component<IAppProps, IAppState> {
                      <Switch>
                       <Route exact path="/"  component={Home} />
                        <Route path="/Dashboard" component={Dashboard} />
-                       <Route path="/TestMode" component={Test} />
                        <Route path="*" component={Home} />
                     </Switch>
                 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import {ExamplePage} from './../components/exampleDisplay/ExamplePage';
 
-import './../App.css'
+import './../App.scss'
 
 
 export const Examples = () => {

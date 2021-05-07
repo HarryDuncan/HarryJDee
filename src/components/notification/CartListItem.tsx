@@ -5,7 +5,7 @@ import { List } from 'office-ui-fabric-react/lib/List';
 import { ITheme, mergeStyleSets, getTheme, getFocusStyle } from 'office-ui-fabric-react/lib/Styling';
 import {Icon,  Stack, IStackTokens} from 'office-ui-fabric-react';
 import './notificationStyles.scss';
-import {removeItemFromCart} from './../../../store/shop/shop.actions'
+import {removeItemFromCart} from 'store/shop/shop.actions'
 
 
 

@@ -96,7 +96,7 @@ export class ItemTile extends React.Component<IItemTileProps, IItemTileState>{
 		}
 		if(this.props.itemProps['DataType'] === 'products'){
 			return(
-				<div className="cardItem" onClick={this.cardClicked.bind(this)} onMouseLeave={this.onLeave.bind(this)} onMouseOver={this.onHover.bind(this)}>
+				<div className={`${!this.state.loaded? "out-of-view " : "item-loaded" } cardItem` } onClick={this.cardClicked.bind(this)} onMouseLeave={this.onLeave.bind(this)} onMouseOver={this.onHover.bind(this)}>
 			      <Card>
 			      	{this._isSoldOut() ? 
 			      		<div className={'sold-out-div'}><p>Sold Out</p></div>
@@ -124,7 +124,7 @@ export class ItemTile extends React.Component<IItemTileProps, IItemTileState>{
 			);
 		}else{
 			return(
-				<div className="cardItem" onClick={this.cardClicked.bind(this)} onMouseLeave={this.onLeave.bind(this)} onMouseOver={this.onHover.bind(this)}>
+				<div className={`${!this.state.loaded? "out-of-view " : "item-loaded "} cardItem`} onClick={this.cardClicked.bind(this)} onMouseLeave={this.onLeave.bind(this)} onMouseOver={this.onHover.bind(this)}>
 			      <Card>
 			      	<h1 className={"artTitle " + (this.state.hovered ? "hovered" : "")} >{String(this.props.itemProps['Title'])}</h1>
 			      	{!this.state.loaded ?

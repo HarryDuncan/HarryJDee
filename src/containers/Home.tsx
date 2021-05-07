@@ -1,10 +1,10 @@
 import React from 'react';
 import {HomePage} from '../components/home/HomePage';
 import MetaTags from 'react-meta-tags';
-import FooterHome from './../components/ui/footer/FooterHome';
+import FooterHome from './../components/navigation/footer/FooterHome';
 
 
-import './../App.css'
+import './../App.scss'
 export const Home = (props : any) => {
   return (
          <div className="divWrapper">

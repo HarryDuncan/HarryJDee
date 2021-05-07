@@ -29,7 +29,9 @@ export const initializeSite = () => {
 				 let content  : any = items['data'][3]
 				 let mixes  : any = items['data'][4]
 				 let campaigns : any = items['data'][5]
-				//  console.log(items)
+				
+				 let shipping : any = items['data'][6]
+				
 				dispatch(
 					{type: appActionTypes.INITIALIZE_SITE_SUCCESS, payload: siteData},
 					)
@@ -38,6 +40,9 @@ export const initializeSite = () => {
 					)
 				dispatch(
 					{type: shopActionTypes.LOAD_SHOP_DATA_SUCCESS, payload: products}
+					)
+				dispatch(
+					{type: shopActionTypes.LOAD_SHIPPING_DATA_SUCCESS, payload: shipping}
 					)
 				dispatch(
 					{type: campaignActionTypes.LOAD_CAMPAIGN_DATA_SUCCESS, payload : {data : campaigns}} 

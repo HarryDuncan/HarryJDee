@@ -15,6 +15,7 @@ export default class InteractiveParticle extends Component {
 	}
 
 	initWebGL() {
+		console.log(this.props)
 		this.webgl = new WebGLView(this);
 		this.container.appendChild(this.webgl.renderer.domElement);
 	}
@@ -70,6 +71,9 @@ export default class InteractiveParticle extends Component {
 	}
 
 
+	componentWillUnmount(){
+		this.webgl.renderer.dispose()
+	}
 	 render() {
 	
 	    return (

@@ -11,7 +11,9 @@ const initialShopState : IShopState = {
 	hideCart : false,
 	showReceipt: false,
 	receiptType : '',
-	receiptObject : {contribution : 40,  paidWith : 4242, items : getFromStorage("HJD_Cart", [], true), total : getFromStorage("Cart_Total", 0, true), email : 'h.duncan@live.com'}
+	receiptObject : {contribution : 0,  paidWith : 0, items : getFromStorage("HJD_Cart", [], true), total : getFromStorage("Cart_Total", 0, true), email : ''},
+
+	shippingData : []
 }
 
 
@@ -112,6 +114,10 @@ function shop(state: IShopState = initialShopState, action: any){
 					receiptType : {$set : 'Out Of Stock'},
 				})
 			}
+		case shopActionTypes.LOAD_SHIPPING_DATA_SUCCESS:
+			return update(state, {
+				shippingData : {$set : action.payload}
+			})
 		case shopActionTypes.OUT_OF_STOCK:
 			let missingItems : any[] = []
 			let updatedCart  = removeMissingItems(newCart, action.payload.conflict)

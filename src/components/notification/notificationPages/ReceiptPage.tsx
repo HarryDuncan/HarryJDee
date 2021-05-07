@@ -1,13 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux'
-// import {ExternalLinkWidget} from './../ui/externalLinkWidget/ExternalLinkWidget'
 import { Stack, IStackTokens, IStackStyles  ,  ITextFieldStyles} from 'office-ui-fabric-react';
-import CartListItem from './../CartListItem';
 import { List } from 'office-ui-fabric-react/lib/List';
 import './../notificationStyles.scss';
 import {ReactComponent as Thanks} from './thankyou.svg'
-import {Insta} from './../../externalLinkWidget/Icons/Insta'
-import ResendReceipt from './../../resendReceipt/ResendReceipt';
+import CartListItem from './../CartListItem';
+import {Insta} from 'components/ui/externalLinkWidget/Icons/Insta'
+import ResendReceipt from 'components/shop/resendReceipt/ResendReceipt';
 
  interface IReceiptProps{
  	receiptObject : any;

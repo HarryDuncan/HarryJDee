@@ -1,7 +1,7 @@
 import React from 'react';
-import ActivisimContainer from './../components/activisim/ActivisimContainer';
-import FooterHome from './../components/ui/footer/FooterHome';
-import './../App.css'
+import ActivisimContainer from 'components/activisim/ActivisimContainer';
+import FooterHome from 'components/navigation/footer/FooterHome';
+import './../App.scss'
 import MetaTags from 'react-meta-tags';
 
 export const Activism = () => {

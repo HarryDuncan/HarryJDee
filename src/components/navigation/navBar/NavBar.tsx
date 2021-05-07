@@ -1,15 +1,19 @@
 import * as React from 'react';
 import {connect} from 'react-redux';
 import {Link, BrowserRouter, } from "react-router-dom";
-import CartNotification from './../notification/Notification'
-import {NotificationModal} from './../notification/NotificationModal'
-import { stack as Menu } from 'react-burger-menu'
-import {closeNotification} from './../../../store/shop/shop.actions'
-import {openSite} from './../../../store/app/app.actions'
-import './Nav.css'
 import { createBrowserHistory } from "history";
-import Hero from './../hero/Hero'
-import {Countdown} from './../../launch/Countdown';
+import { stack as Menu } from 'react-burger-menu'
+
+import {closeNotification} from 'store/shop/shop.actions'
+import {openSite} from 'store/app/app.actions'
+
+
+import Hero from 'components/ui/hero/Hero'
+import {Countdown} from 'components/launch/Countdown';
+import CartNotification from 'components/notification/Notification'
+import {NotificationModal} from 'components/notification/NotificationModal'
+
+import './../Nav.scss'
 
 
 const history = createBrowserHistory()

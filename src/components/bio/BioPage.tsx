@@ -72,6 +72,21 @@ class BioPage extends React.Component<IBioProps>{
 						</div>
 						
 					</div>
+					<div className="bio-page">
+						 <div className={'bio-content-wrapper'}>
+						 	<Stack styles={stackStyles} tokens={stackTokens}>
+						 		<Stack.Item align="stretch">
+									<DisplayText customStyleObj={customStyles} text={this.props.content['Bio']['Content']}/>
+								</Stack.Item>
+								
+					 		</Stack>
+						</div>
+						<div className={'image-wrapper'}>
+							<img src={'/images/content/DJ.jpg'} 
+							className={'bio-pic'}
+							 />
+						</div>
+					</div>
 				</div>
 				);
 		}

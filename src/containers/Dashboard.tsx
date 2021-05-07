@@ -2,7 +2,7 @@ import React from 'react';
 import LoginPage from './../components/dashboard/LoginPage'
 import {DashboardPage} from './../components/dashboard/Dashboard'
 import {connect} from 'react-redux'
-import './../App.css'
+import './../App.scss'
 interface IDashboardProps{
 	loggedIn : boolean;
 }

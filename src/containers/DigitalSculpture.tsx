@@ -1,6 +1,6 @@
 import React from 'react';
 import TestMode from './../components/testMode/TestMode';
-import './../App.css'
+import './../App.scss'
 
 
 export const DigitalSculpture = () => {

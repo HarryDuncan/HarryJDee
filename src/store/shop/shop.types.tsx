@@ -8,6 +8,7 @@ export interface IShopState{
 	showReceipt: boolean;
 	receiptType : string;
 	receiptObject : IReceiptObject;
+	shippingData : any[];
 }
 export interface IReceiptObject {
 
@@ -21,6 +22,8 @@ export enum shopActionTypes {
 	LOAD_SHOP_DATA = 'shop/LOAD_SHOP_DATA',
 	LOAD_SHOP_DATA_SUCCESS = 'shop/LOAD_SHOP_DATA_SUCCESS',
 	LOAD_SHOP_DATA_ERROR = 'shop/LOAD_SHOP_DATA_ERROR',
+
+	LOAD_SHIPPING_DATA_SUCCESS = 'shop/LOAD_SHIPPING_DATA_SUCCESS',
 
 
 	ADD_TO_CART = 'shop/ADD_TO_CART',

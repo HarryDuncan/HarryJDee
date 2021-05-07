@@ -1,3 +1,5 @@
 export * from './ArtLavaLamp'
 export * from './HomeScene'
 export * from './TransLights'
+export * from './SpinningHaring'
+export * from './RoomAndMirror'

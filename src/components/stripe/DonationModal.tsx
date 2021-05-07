@@ -20,9 +20,9 @@ import {
 import { CardElement, useStripe, useElements  } from "@stripe/react-stripe-js";
 import { ITextFieldStyleProps, ITextFieldStyles, TextField } from 'office-ui-fabric-react/lib/TextField';
 import { ILabelStyles, ILabelStyleProps } from 'office-ui-fabric-react/lib/Label';
-import {donationReceived} from './../../store/campaign/campaign.actions';
+import {donationReceived} from 'store/campaign/campaign.actions';
 import axios from "axios";
-import './CheckoutStyles.css'
+import './CheckoutStyles.scss'
 
 
 const cancelIcon: IIconProps = { iconName: 'Cancel' };

@@ -43,9 +43,13 @@ export class AnimationWidget extends React.Component<IAnimationWidgetProps, IAni
 
 	public initializeScenes = (scenes : any[]) : any[]=> {
 		let returnArray :any[] = []
+		// returnArray.push(Scenes.SpinningHaring(this.state.manager))
+		// returnArray.push(Scenes.RoomAndMirror(this.state.manager))
+		// returnArray.push(Scenes.TransLights(this.state.manager))
+		
 		returnArray.push(Scenes.HomeScene(this.state.manager))
 		returnArray.push(Scenes.ArtLavaLamp(this.state.manager))
-		// returnArray.push(Scenes.TransLights(this.state.manager))
+		
 		return returnArray
 	}
 

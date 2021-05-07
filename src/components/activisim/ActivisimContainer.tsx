@@ -1,4 +1,5 @@
 import React from 'react';
+import {useState, useEffect} from 'react';
 import {connect} from "react-redux";
 import {getCampaignData} from './../../store/campaign/campaign.actions';
 import DonationSection from './donation/DonationSection';
@@ -7,6 +8,7 @@ import { Stack, IStackTokens, IStackStyles  ,  ITextFieldStyles,Link} from 'offi
 import { closeDonationModal} from './../../store/campaign/campaign.actions'
 import { Dropdown , IDropdownStyles, IDropdownOption} from 'office-ui-fabric-react/lib/Dropdown';
 import {NoActiveCampaign} from './../../animations/staticScenes/NoActiveCampaign';
+import {ContentContainer} from './campaignContent/ContentContainer';
 // import {AidsDay} from './content';
 
 import './activism.css';
@@ -49,9 +51,6 @@ interface IActivisimProps {
 }
 
 
-interface IActivisimState{
-	viewingCampaign: any;
-}
 
  const onRenderOption = (option: IDropdownOption|undefined): JSX.Element => {
     if(option === undefined){
@@ -74,83 +73,88 @@ interface IActivisimState{
 
 
 
-class ActivisimContainer extends React.Component<IActivisimProps, IActivisimState>{
-	constructor(props : IActivisimProps){
-	super(props);
-	   this.state ={
-	    viewingCampaign : this.props.activeCampaign
-	   }
-  	}
-	public componentDidMount = () => {
-		this.props.getCampaignData()
-	}
+const ActivisimContainer: React.FunctionComponent<IActivisimProps> = props => {
 
-	public _getOptions = () => {
-		let optionArr : any[] = this.props.campaignData.map((item : any) =>  ( {'key' : item['ID'], 'text' : item['Name'], 'data' : {'EndDate' : item['EndDate']} }))
+	const [viewingCampaign, changeCampaign] = useState(props.activeCampaign)
+	
+
+	const _getOptions = () => {
+		let optionArr : any[] = props.campaignData.map((item : any) =>  ( {'key' : item['ID'], 'text' : item['Name'], 'data' : {'EndDate' : item['EndDate']} }))
 		return optionArr
 	}
 
+	const _campaignSelected = (event: any, option: any) => {
+		let selectedCampaign = props.campaignData.filter((item : any)=> item['ID'] === option['key'])
+		changeCampaign(selectedCampaign[0])
+		
+		
+	}
+
+	const _closeModal = () => {
+		props.closeDonationModal()
+	}
+
+	useEffect(() => {
+			props.getCampaignData()
+		   
+		}, []);
+	
+
+
+
+
+	let selectionOptions = _getOptions()
+
+	// Returns the home page - if there are no campaings active
+	if(viewingCampaign['Name'] === 'No Active Campaign' || viewingCampaign['Name'] === ''){
+		return(
+			<div className="page activisim-page">
+				<NoActiveCampaign />
+				<div className='activism-container inactive-campaign no-border'>
+					<div className={'inactive-background'}/>
+					<div className={'inactive-content'}>
+						<h1>Harry J Dee Activisim</h1>
+						<p>
+							Harry J Dee creates work and runs campaigns to generate awareness and support for various causes.
+							By Selling prints, pieces, collecting donations and creating content to inform and empower.
+						</p>
+
+						<p>There are currently no active campaigns at the moment</p>
+						
+
+						 <Dropdown
+				 			
+                            options={selectionOptions}
+                            onChange={_campaignSelected}
+                            onRenderOption={onRenderOption}
+                            styles={dropdownStyles}
+                            placeHolder="View Previous Campaigns"
+                             />
+                    </div>
+
+				</div>
+				
+			</div>
+			);
+	}else{
+		return(
+			<div className="page">
+				{viewingCampaign['ExternalDonation'] === 1?
+					<div>
+						<DonationReceipt isOpen={props.showModal} campaignData={viewingCampaign} closeCallback={_closeModal} donationReceipt={props.donationReceipt} />
+						<DonationSection amount={viewingCampaign['Total']} campaign={viewingCampaign} contributionCount={viewingCampaign['ContributionCount']} />
+					</div>
+					:
+					null
+				}
+				<ContentContainer campaignTitle={viewingCampaign['Component']} campaignData={viewingCampaign} />
+			</div>
+			
+			);
+		}
+	
 
 	
-	public render(){
-		let selectionOptions = this._getOptions()
-		if(this.state.viewingCampaign['Name'] === 'No Active Campaign' || this.state.viewingCampaign['Name'] === ''){
-			return(
-				<div className="page activisim-page">
-					<NoActiveCampaign />
-					<div className='activism-container inactive-campaign no-border'>
-						<div className={'inactive-background'}/>
-						<div className={'inactive-content'}>
-							<h1>Harry J Dee Activisim</h1>
-							<p>
-								Harry J Dee creates work and runs campaigns to generate awareness and support for various causes.
-								By Selling prints, pieces, collecting donations and creating content to inform and empower.
-							</p>
-
-							<p>There are currently no active campaigns at the moment</p>
-							
-
-							 <Dropdown
-					 			
-	                            options={selectionOptions}
-	                            onChange={this._campaignSelected}
-	                            onRenderOption={onRenderOption}
-	                            styles={dropdownStyles}
-	                            placeHolder="View Previous Campaigns"
-	                             />
-	                    </div>
-
-					</div>
-					
-				</div>
-				);
-		}else{
-			let componentStr = `./content/${this.state.viewingCampaign['Component'].toLowerCase()}/${this.state.viewingCampaign['Component']}`
-			const CampaignComponent = React.lazy(() => import('./content/amazon'));
-			return(
-				<React.Suspense fallback={<div/>}>
-					<div className="page">
-						<DonationReceipt isOpen={this.props.showModal} campaignData={this.state.viewingCampaign} closeCallback={this._closeModal} donationReceipt={this.props.donationReceipt} />
-						<DonationSection amount={this.state.viewingCampaign['Total']} campaign={this.state.viewingCampaign} contributionCount={this.state.viewingCampaign['ContributionCount']} />
-						<CampaignComponent campaignData={this.state.viewingCampaign}/>
-					</div>
-				</React.Suspense>
-				);
-		}
-		
-	}
-
-	private _campaignSelected = (event: any, option: any) => {
-		let selectedCampaign = this.props.campaignData.filter((item : any)=> item['ID'] === option['key'])
-		this.setState({
-			viewingCampaign : selectedCampaign[0]
-		})
-		
-	}
-
-	private _closeModal = () => {
-		this.props.closeDonationModal()
-	}
 } 
 
 const mapStateToProps = (state : any) => ({

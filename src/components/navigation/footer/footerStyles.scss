@@ -134,7 +134,7 @@
   margin: 0 auto;
   text-align: center;
 }
-@Media only screen and (max-width: 900px){
+@Media (max-width: 900px){
 	.footer-container{
 		width: 100vw;
 		display: flex;

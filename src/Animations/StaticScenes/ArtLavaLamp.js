@@ -208,7 +208,7 @@ export function ArtLavaLamp(framework) {
 				material: "shiny",
 
 				speed: 1.0,
-				numBlobs: 10,
+				numBlobs: document.documentElement.clientWidth <= 1100? 6 : 10,
 				resolution: 58,
 				isolation: 80,
 
@@ -245,7 +245,7 @@ export function ArtLavaLamp(framework) {
 	     			effect.material = updateBackground(index) 
 	     			
 	     			framework.reInitScene = false
-	     			if(index === 2){
+	     			if(index === 1){
 	     				index = 0
 	     			}else{
 	     				index ++ 

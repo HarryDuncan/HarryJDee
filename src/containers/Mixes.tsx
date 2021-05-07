@@ -1,8 +1,8 @@
 import React from 'react';
 import MixesPage from './../components/mixes/MixesPage';
-import Footer from './../components/ui/footer/Footer';
+import Footer from './../components/navigation/footer/Footer';
 import MetaTags from 'react-meta-tags';
-import './../App.css'
+import './../App.scss'
 export const Mixes = () => {
 window.scrollTo(0,0);
   return (

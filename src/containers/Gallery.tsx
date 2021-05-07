@@ -1,8 +1,8 @@
 import React from 'react';
-import GalleryPage from './../components/gallery/GalleryPage';
-import Footer from './../components/ui/footer/Footer';
+import {GalleryContainer} from './../components/gallery/GalleryContainer';
+import Footer from './../components/navigation/footer/Footer';
 import MetaTags from 'react-meta-tags';
-import './../App.css'
+import './../App.scss'
 export const Gallery = () => {
 	 window.scrollTo(0,0);
   return (
@@ -11,7 +11,9 @@ export const Gallery = () => {
             <title>Gallery</title>
             <meta id="meta-description" name="description" content="Art of Harry J Dee." />
           </MetaTags>
-    	<GalleryPage />
+        <div className={'page'}>
+    	   <GalleryContainer />
+        </div>
     	<Footer />
     </div>
   );

@@ -1,13 +1,16 @@
 import * as React from 'react';
 import {Icon, DefaultButton, Callout, Link, getTheme, FontWeights, mergeStyleSets, getId } from 'office-ui-fabric-react';
 import {connect} from 'react-redux'
-import {CartList} from './CartList'
-import {removeItemFromCart, checkout, updateInventory} from './../../../store/shop/shop.actions'
-import {CheckoutModal} from './../../stripe/CheckoutModal'
-import { Redirect} from "react-router-dom";
 import {PrimaryButton} from 'office-ui-fabric-react';
 import { loadStripe } from "@stripe/stripe-js";
 import { CardElement, useStripe, useElements, Elements  } from "@stripe/react-stripe-js";
+import { Redirect} from "react-router-dom";
+
+import {CartList} from './CartList'
+import {removeItemFromCart, checkout, updateInventory} from 'store/shop/shop.actions'
+import {CheckoutModal} from 'components/stripe/CheckoutModal'
+
+
 
 
 // Themed styles for the example.
@@ -85,6 +88,7 @@ interface ICartNotificationProps {
   total : number;
   hideCart : boolean;
   redirectCallback : () => void;
+  shippingData : any;
   isMobile? : boolean;
 }
 interface ICartNotificationState {
@@ -156,6 +160,7 @@ class CartNotification extends React.Component<ICartNotificationProps, ICartNoti
               onSuccessCallback={this._handleToken}
               outOfStockCallback={this._outOfStock}
               closeModalCallback={this._closeCheckout}
+              shipping={this.props.shippingData}
              />
         </Elements>
       </div>
@@ -208,6 +213,7 @@ const mapStateToProps = (state : any) => ({
   cart : state.shop.cart,
   total : state.shop.total,
   hideCart : state.shop.hideCart,
+  shippingData : state.shop.shippingData
 })
 
 const mapDispatchToProps = {

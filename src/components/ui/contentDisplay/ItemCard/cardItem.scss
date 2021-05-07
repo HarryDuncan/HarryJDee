@@ -1,0 +1,147 @@
+
+.card{
+    box-sizing: inherit;
+    display: inline-block;
+    position: relative;
+    margin-bottom: 30px;
+    vertical-align: middle;
+    width: 100%;
+    flex: 1 0 22%;
+    background-color: transparent !important;
+    padding-bottom: -4%;
+    -webkit-box-shadow: 15px 15px 16px #ccc;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+    -moz-box-shadow:    15px 15px 16px  #ccc;  /* Firefox 3.5 - 3.6 */
+    box-shadow:         15px 15px 16px #ccc;
+    cursor : pointer;
+    
+}
+.product-img{
+   width:100%;
+   vertical-align: middle;
+}
+
+.GalleryArtWorkImg{
+  width:100%;
+  min-height: 100px;
+  vertical-align: middle;
+}
+.GalleryArtWorkImg:hover{
+  filter: brightness(30%);
+}
+.artTitle{
+  color: #edebe9;
+  position: absolute;
+  opacity: 0;
+  z-index: 1;
+  font-family: 'HarryDuncan';
+
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  font-size: 1.5em;
+  margin-left : 5px;
+  font-weight : 400;
+}
+
+.item-title-card{
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  font-size: 1em;
+  color: #edebe9;
+  padding: 0 2% 1% 2%;
+}
+.item-price-card{
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  font-size: 1em;
+  color: #edebe9;
+  padding:0 2% 1% 2%;
+}
+
+.sold-out-div{
+    position: absolute;
+    right: 2%;
+    top: 2%;
+    background-color: black;
+   
+    color: white;
+
+    letter-spacing: 0.1em;
+    font-weight: 600;
+    font-size: 1em;
+    height: auto;
+    min-height: 4em;
+    min-width: 6.5em;
+    justify-content: center;
+    text-align: center;
+}
+.sold-out-div p{
+    margin: 0 auto;
+    position: absolute;
+    top: 40%;
+    justify-self: center;
+    left: 15%;
+}
+
+
+///Animations for showing the title  ------------------------------------->
+.hovered{
+  animation-timing-function: ease-in-out;
+  animation: showTitle 500ms 1 forwards;
+  -webkit-animation: showTitle 500ms 1 forwards;
+    
+    }
+
+  @keyframes showTitle{
+  0% {
+  transform : translateY(100%);
+  opacity: 0;
+  }
+  100%{
+  transform : translateY(0);
+  opacity : 1;
+  }
+
+}
+
+@media only screen 
+  and (min-device-width: 1024px) 
+  and (max-device-width: 1366px) 
+  and (orientation: portrait) {
+
+    .MainDiv{
+      display:none;
+
+    }
+
+  }
+
+@Media only screen and (max-width: 900px){
+.MainDiv{
+  max-height: auto;
+  display:block;
+  margin-left: 4%;
+  padding: 1%;
+  }
+.GalleryPiece{
+  flex:auto;
+  height: auto;
+  width: 70vw;
+  
+  padding-bottom: 5%;
+
+
+}
+.GalleryArtWork{
+ max-width: 600px;
+  -webkit-box-shadow:  0 0 0 0 #ccc;  /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow:    0 0 0 0 #ccc;  /* Firefox 3.5 - 3.6 */
+  box-shadow:         0 0 0 0 #ccc;
+   
+}
+
+.artTitle{
+  display: none;
+ 
+}
+
+}

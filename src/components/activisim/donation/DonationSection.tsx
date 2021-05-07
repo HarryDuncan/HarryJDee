@@ -23,7 +23,6 @@ const DonationSection: React.SFC<IDonationSectionProps> = props => {
 		toggleKey(!donationModalKey)
 	}
 
-
     return(
       <div className={'donation-section'}>
 	      <h1 className={'campaign-subtitle'}>Thanks to {props.contributionCount} generous donors we have raised... </h1>
