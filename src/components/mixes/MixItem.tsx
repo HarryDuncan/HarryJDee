@@ -1,7 +1,8 @@
 import * as React from 'react'
 import {useState} from 'react'
-import {Visualizer} from './../../visualizer';
+import {Visualizer} from 'visualizer';
 import './mixes.css'
+import {CSSAnimationHook} from 'components/ui';
 import moment from 'moment';
  
 interface IMixItemProps {
@@ -65,20 +66,22 @@ const [audioCont, setAudioContext] = useState(null)
 		    	{isSelected? 
 		    		  <Visualizer audioContext={audioCont} trackProps={props.allTracks} selectedTrack={props.itemProps.Title} hideNav={hideNavCB} exitCallback={unselect} />
 		    			:
-				      <div className={'mix-section'} >
-				          <div className={'mix-details-div'}>
+              <CSSAnimationHook togglerVar={false} animationType={'slideLeft'} isOnScroll={true} >
+  				      <div className={'mix-section'} >
+  				          <div className={'mix-details-div'}>
 
-				          	<div className={'mix-item-header'} >
-					          	 <h1 className={'mix-item-title'}>{props.itemProps.Title}</h1>
-                      <img className={hovered ? 'image-hovered ' : '' + 'mix-cover'}  onClick={sectionSelected} src={`/hjdmix/${props.itemProps['Url']}.jpg`} />
-					          	
-					        </div>
-                   
-				          	<p className={'mix-item-description'} >{props.itemProps.MixDescription}</p>
-                   
-				          </div>
-				          
-				      </div>  
+  				          	<div className={'mix-item-header'} >
+  					          	 <h1 className={'mix-item-title'}>{props.itemProps.Title}</h1>
+                        <img className={hovered ? 'image-hovered ' : '' + 'mix-cover'}  onClick={sectionSelected} src={`/hjdmix/${props.itemProps['Url']}.jpg`} />
+  					          	
+  					        </div>
+                     
+  				          	<p className={'mix-item-description'} >{props.itemProps.MixDescription}</p>
+                     
+  				          </div>
+  				          
+  				      </div>
+              </CSSAnimationHook>
 				} 
 				</div>  
 		    )

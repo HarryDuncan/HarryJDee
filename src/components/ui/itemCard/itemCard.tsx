@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card , CardTitle , CardBody, CardSubtitle, CardImg} from 'reactstrap';
 import { Spinner, SpinnerSize } from 'office-ui-fabric-react/lib/Spinner';
+import {CSSAnimationHook} from '../cssAnimationHook'
 import './cardItem.scss';
 
 
@@ -85,6 +86,9 @@ export class ItemTile extends React.Component<IItemTileProps, IItemTileState>{
 		
 	}
 	
+	//  className={`${!this.state.loaded? "out-of-view " : "item-loaded "} cardItem`}
+
+
 	public render(){
 		let cardImage : any;
 		if(this.props.itemProps['DataType'] === undefined || this.props.itemProps['Url'] === undefined){
@@ -124,24 +128,25 @@ export class ItemTile extends React.Component<IItemTileProps, IItemTileState>{
 			);
 		}else{
 			return(
-				<div className={`${!this.state.loaded? "out-of-view " : "item-loaded "} cardItem`} onClick={this.cardClicked.bind(this)} onMouseLeave={this.onLeave.bind(this)} onMouseOver={this.onHover.bind(this)}>
-			      <Card>
-			      	<h1 className={"artTitle " + (this.state.hovered ? "hovered" : "")} >{String(this.props.itemProps['Title'])}</h1>
-			      	{!this.state.loaded ?
-			      		<Spinner size={SpinnerSize.medium} />
-			      		:
-			      		null
-			      	}
-			      	<img 
-			      		className="GalleryArtWorkImg" 
-			      		src={cardImage} 
-			      		alt={this.props.itemProps['Title']}
-			      		ref={this.imgEl}
-	        			onLoad={() => this.setState({height: this.imgEl.current.naturalHeight, width: this.imgEl.current.naturalWidth, loaded : true})} 
-	        		 />
-			      </Card>
-			     </div>
-		      
+				<CSSAnimationHook togglerVar={this.state.loaded} animationType={'slideLeft'} >
+					<div className={`cardItem`} onClick={this.cardClicked.bind(this)} onMouseLeave={this.onLeave.bind(this)} onMouseOver={this.onHover.bind(this)}>
+				      <Card>
+				      	<h1 className={"artTitle " + (this.state.hovered ? "hovered" : "")} >{String(this.props.itemProps['Title'])}</h1>
+				      	{!this.state.loaded ?
+				      		<Spinner size={SpinnerSize.medium} />
+				      		:
+				      		null
+				      	}
+				      	<img 
+				      		className="GalleryArtWorkImg" 
+				      		src={cardImage} 
+				      		alt={this.props.itemProps['Title']}
+				      		ref={this.imgEl}
+		        			onLoad={() => this.setState({height: this.imgEl.current.naturalHeight, width: this.imgEl.current.naturalWidth, loaded : true})} 
+		        		 />
+				      </Card>
+				     </div>
+		      </CSSAnimationHook>
 		
 			);
 		}

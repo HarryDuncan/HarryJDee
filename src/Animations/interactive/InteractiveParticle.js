@@ -12,6 +12,7 @@ export default class InteractiveParticle extends Component {
 		this.addListeners();
 		this.animate();
 		this.resize();
+		this.breakAnimation = false;
 	}
 
 	initWebGL() {
@@ -35,8 +36,10 @@ export default class InteractiveParticle extends Component {
 	animate() {
 		this.update();
 		this.draw();
-
-		this.raf = requestAnimationFrame(this.handlerAnimate);
+		if(!this.breakAnimation){
+			this.raf = requestAnimationFrame(this.handlerAnimate);
+		}
+		
 	}
 
 	// ---------------------------------------------------------------------------------------------
@@ -73,6 +76,7 @@ export default class InteractiveParticle extends Component {
 
 	componentWillUnmount(){
 		this.webgl.renderer.dispose()
+		this.breakAnimation = true
 	}
 	 render() {
 	

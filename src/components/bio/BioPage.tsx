@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import {getContent} from './../../store/app/app.actions'
 import { Stack, IStackTokens, IStackStyles  ,  ITextFieldStyles} from 'office-ui-fabric-react';
 import {DisplayText} from './../ui/customTextField/DisplayText';
+import {CSSAnimationHook} from 'components/ui';
 import './BioStyles.scss';
 
 
@@ -57,35 +58,46 @@ class BioPage extends React.Component<IBioProps>{
 			return(
 				<div className='page'>
 					<div className="bio-page">
-						<div className={'image-wrapper'}>
-							<img src={cardImage} 
-							className={'bio-pic'}
-							 />
-						</div>
+						<CSSAnimationHook togglerVar={false} animationType={'slideLeft'} isOnScroll={true} >
+							<div className={'image-wrapper'}>
+								<img src={cardImage} 
+								className={'bio-pic'}
+								 />
+							</div>
+						</CSSAnimationHook>
+
+						
 						 <div className={'bio-content-wrapper'}>
-						 	<Stack styles={stackStyles} tokens={stackTokens}>
-						 		<Stack.Item align="stretch">
-									<DisplayText customStyleObj={customStyles} text={this.props.content['Bio']['Content']}/>
-								</Stack.Item>
-								
-					 		</Stack>
+						 	<CSSAnimationHook togglerVar={false} animationType={'slideRight'} isOnScroll={true} >
+						 		<Stack styles={stackStyles} tokens={stackTokens}>
+						 			<Stack.Item align="stretch">
+										<DisplayText customStyleObj={customStyles} text={this.props.content['Bio']['Content']}/>
+									</Stack.Item>
+						
+					 				</Stack>
+					 		</CSSAnimationHook>
 						</div>
 						
 					</div>
+					
 					<div className="bio-page">
 						 <div className={'bio-content-wrapper'}>
-						 	<Stack styles={stackStyles} tokens={stackTokens}>
-						 		<Stack.Item align="stretch">
-									<DisplayText customStyleObj={customStyles} text={this.props.content['Bio']['Content']}/>
-								</Stack.Item>
-								
-					 		</Stack>
+						 	<CSSAnimationHook togglerVar={false} animationType={'slideLeft'} isOnScroll={true} >
+							 	<Stack styles={stackStyles} tokens={stackTokens}>
+							 		<Stack.Item align="stretch">
+										<DisplayText customStyleObj={customStyles} text={this.props.content['Bio']['Content']}/>
+									</Stack.Item>
+									
+						 		</Stack>
+						 	</CSSAnimationHook>
 						</div>
-						<div className={'image-wrapper'}>
-							<img src={'/images/content/DJ.jpg'} 
-							className={'bio-pic'}
-							 />
-						</div>
+						<CSSAnimationHook togglerVar={false} animationType={'slideRight'} isOnScroll={true} >
+							<div className={'image-wrapper'}>
+								<img src={'/images/content/DJ.jpg'} 
+								className={'bio-pic'}
+								 />
+							</div>
+						</CSSAnimationHook>
 					</div>
 				</div>
 				);

@@ -7,3 +7,4 @@ export * from './externalLinkWidget';
 export * from './formComponent';
 export * from './hero';
 export * from './loadingSplash';
+export *from './cssAnimationHook';

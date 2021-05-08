@@ -1,0 +1,115 @@
+// CSS Animations
+
+
+// ################################
+// Sliding in right
+// ################################
+
+.slide-right{
+  animation-timing-function: ease-in-out;
+  animation: slide-in-right 500ms 1 forwards;
+  -webkit-animation: slide-in-right 500ms 1 forwards;
+  }
+
+  @keyframes slide-in-right{
+    0% {
+    opacity: 0;
+    transform : translateX(100%);
+    }
+    100%{
+    transform : translateX(0%);
+    opacity : 1;
+    }
+  }
+
+
+// ########################################
+// Sliding in left
+// #####################################
+
+.slide-left{
+  animation-timing-function: ease-in-out;
+  animation: slide-in-left 500ms 1 forwards;
+  -webkit-animation: slide-in-left 500ms 1 forwards;
+  }
+
+  @keyframes slide-in-left{
+    0% {
+    opacity: 0;
+    transform : translateX(-100%);
+    }
+    100%{
+    transform : translateX(0%);
+    opacity : 1;
+    }
+  }
+
+
+
+// ########################################
+// Sliding in bottom to top
+// #####################################
+
+.slide-up{
+  animation-timing-function: ease-in-out;
+  animation: slide-in-up 500ms 1 forwards;
+  -webkit-animation: slide-in-up 500ms 1 forwards;
+  }
+
+  @keyframes slide-in-up{
+    0% {
+    opacity: 0;
+    transform : translateY(100%);
+    }
+    100%{
+    transform : translateY(0%);
+    opacity : 1;
+    }
+  }
+
+
+
+// ########################################
+// Sliding in top to bottom
+// #####################################
+
+.slide-down{
+  animation-timing-function: ease-in-out;
+  animation: slide-in-down 500ms 1 forwards;
+  -webkit-animation: slide-in-down 500ms 1 forwards;
+  }
+
+  @keyframes slide-in-down{
+    0% {
+    opacity: 0;
+    transform : translateY(-100%);
+    }
+    100%{
+    transform : translateY(0%);
+    opacity : 1;
+    }
+  }
+
+
+
+  // <------------------------------------------ FADING FUNCTIONS --------------------------------------------->
+
+  // ####################################
+  // Fading In - Default function
+  // ##################################
+
+  .fade-in{
+    animation-timing-function: ease-in-out;
+    animation: fade-in-default 500ms 1 forwards;
+    -webkit-animation: fade-in-default 500ms 1 forwards;
+  }
+
+  @keyframes fade-in-default{
+    0% {
+    opacity: 0;
+    }
+    100%{
+    opacity : 1;
+    }
+  }
+
