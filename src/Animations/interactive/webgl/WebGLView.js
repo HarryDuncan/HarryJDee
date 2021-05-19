@@ -1,3 +1,4 @@
+import React from 'react';
 import * as THREE from "three";
 import { TweenLite } from 'gsap/all';
 import InteractiveControls from './controls/InteractiveControls';
@@ -5,7 +6,7 @@ import Particles from './particles/Particles';
 
 const glslify = require('glslify');
 
-export default class WebGLView {
+export default class WebGLView  {
 
 	constructor(app) {
 		this.app = app;
@@ -16,6 +17,7 @@ export default class WebGLView {
 		this.initParticles();
 		this.initControls();
 
+		this.breakAnimation = false
 		const rnd = ~~(Math.random() * this.samples.length);
 		this.goto(app.props.currentIndex);
 	}
@@ -25,12 +27,14 @@ export default class WebGLView {
 		this.scene = new THREE.Scene();
 		
 		// camera
-		this.camera = new THREE.PerspectiveCamera(100, window.innerWidth / window.innerHeight, 1, 10000);
+		this.camera = new THREE.PerspectiveCamera(100, 800 / 800, 1, 1080);
 		this.camera.position.z = 300;
 
 		// renderer
         this.renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        this.renderer.setSize(800, 800);
         this.renderer.setClearColor(0x000000, 0)
+
         // clock
 		this.clock = new THREE.Clock(true);
 	}
@@ -49,10 +53,18 @@ export default class WebGLView {
 	// PUBLIC
 	// ---------------------------------------------------------------------------------------------
 
+	cleanUp(){
+		this.renderer.dispose()
+		this.breakAnimation = true
+		// this.interactive = null
+		// this.particles = null
+		// this.scene = null
+
+	}
 	update() {
 		const delta = this.clock.getDelta();
 		
-		if (this.particles){
+		if (this.particles && !this.breakAnimation){
 			this.particles.update(delta);
 		}
 	}
@@ -86,12 +98,12 @@ export default class WebGLView {
 
 	resize() {
 		if (!this.renderer) return;
-		this.camera.aspect = window.innerWidth / window.innerHeight;
+		// this.camera.aspect = window.innerWidth / window.innerHeight;
 		this.camera.updateProjectionMatrix();
 
 		this.fovHeight = 2 * Math.tan((this.camera.fov * Math.PI) / 180 / 2) * this.camera.position.z;
 
-		this.renderer.setSize(window.innerWidth, window.innerHeight);
+		// this.renderer.setSize(window.innerWidth, window.innerHeight);
 
 		if (this.interactive) this.interactive.resize();
 		if (this.particles) this.particles.resize();

@@ -56,7 +56,7 @@ export default class Particles {
 			ctx.drawImage(img, 0, 0, this.width, this.height * -1);
 
 			const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-			console.log()
+	
 			originalColors = Float32Array.from(imgData.data);
 
 			for (let i = 0; i < this.numPoints; i++) {

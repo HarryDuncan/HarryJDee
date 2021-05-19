@@ -1,6 +1,6 @@
 
 .bio-pic{
-	height : 80vh;
+	height : 50vh;
 	float: left;
   display: flex;
 }
@@ -49,9 +49,9 @@
      margin: 0 auto; 
   }
   .bio-pic{
-   width: 100%;
+   
    max-width: 90vw;
-  height: auto;
+  max-height: 50vh;
    
    margin: 0 auto;
   }
@@ -84,8 +84,8 @@
    width: auto;
    margin: 0 auto;
    max-width: 90vw;
-    height: auto;
-    max-height: 500px;
+  max-height: 500vh;
+    
   }
 }
 

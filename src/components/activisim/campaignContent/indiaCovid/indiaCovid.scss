@@ -1,0 +1,28 @@
+.india-covid-container{
+	height:100%;
+}
+.shape {
+  height: 80px;
+  width: 550px;
+  background-color: black;
+  margin: 0 auto;
+  margin-top: 40px;
+}
+.particle-container{
+	position: relative;
+	height: 100%;
+}
+.particle-cradle{
+	z-index: 1000;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+.shape-container{
+	display : flex;
+	flex-direction: column;
+	justify-content : center;
+}

@@ -11,7 +11,7 @@ import {NoActiveCampaign} from './../../animations/staticScenes/NoActiveCampaign
 import {ContentContainer} from './campaignContent/ContentContainer';
 // import {AidsDay} from './content';
 
-import './activism.css';
+import './activism.scss';
 
 
 

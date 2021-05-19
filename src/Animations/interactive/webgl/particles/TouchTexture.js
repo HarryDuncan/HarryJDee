@@ -5,7 +5,7 @@ import { easeOutQuad, easeInOutQuad, easeOutSine, easeInOutSine } from '../../ut
 export default class TouchTexture {
 	constructor(parent) {
 		this.parent = parent;
-		this.size = 64;
+		this.size = 800;
 		this.maxAge = 120;
 		this.radius = 0.15;
 		this.trail = [];
@@ -13,7 +13,7 @@ export default class TouchTexture {
 		this.initTexture();
 	}
 
-	initTexture() {
+		initTexture() {
 		this.canvas = document.createElement('canvas');
 		this.canvas.width = this.canvas.height = this.size;
 		this.ctx = this.canvas.getContext('2d');
@@ -23,7 +23,7 @@ export default class TouchTexture {
 		this.texture = new THREE.Texture(this.canvas);
 
 		this.canvas.id = 'touchTexture';
-		this.canvas.style.width = this.canvas.style.height = `${400}px`;
+		this.canvas.style.width = this.canvas.style.height = `${this.canvas.width}px`;
 	}
 
 	update(delta) {
@@ -59,15 +59,17 @@ export default class TouchTexture {
 			const dd = dx * dx + dy * dy;
 			force = Math.min(dd * 10000, 1);
 		}
+		
 		this.trail.push({ x: point.x, y: point.y, age: 0, force });
 	}
 
 	drawTouch(point) {
 		const pos = {
-			x: point.x * this.size,
+			x: (point.x * this.size),
 			y: (1 - point.y) * this.size
 		};
 
+	
 		let intensity = 1;
 		if (point.age < this.maxAge * 0.3) {
 			intensity = easeOutSine(point.age / (this.maxAge * 0.3), 0, 1, 1);
