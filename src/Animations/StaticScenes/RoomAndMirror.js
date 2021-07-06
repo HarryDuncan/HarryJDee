@@ -118,13 +118,13 @@ export function RoomAndMirror(framework) {
 		scene.add( planeBottom );
 
 
-		const planeFront = new THREE.Mesh( planeGeo, new THREE.MeshBasicMaterial({map : new THREE.TextureLoader().load('../images/art/Haza_Paintings_03.jpg')}) );
+		const planeFront = new THREE.Mesh( planeGeo, new THREE.MeshBasicMaterial({map : new THREE.TextureLoader().load('../images/art/keith.jpg')}) );
 		planeFront.position.z = 50;
 		planeFront.position.y = 50;
 		planeFront.rotateY( Math.PI );
 		scene.add( planeFront );
 
-		const planeRight = new THREE.Mesh( planeGeo, new THREE.MeshPhongMaterial( { color: 0xfed943 } ) );
+		const planeRight = new THREE.Mesh( planeGeo, new THREE.MeshPhongMaterial( { color:  0xe92b13} ) );
 		planeRight.position.x = 50;
 		planeRight.position.y = 50;
 		planeRight.rotateY( - Math.PI / 2 );

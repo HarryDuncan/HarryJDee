@@ -25,6 +25,7 @@
 	   align-items: center;
 }
 .mix-cover{
+  cursor: pointer !important;
   height: 22em;
 }
 .warning-message{
@@ -81,7 +82,7 @@
 	width: 60%;
 	margin-left: 20%;
   clear: both;
-  cursor: pointer;
+ 
   background-color: white;
 	
   border-bottom: 2px solid black;
@@ -139,7 +140,7 @@
     z-index: 150;
     font-size: 2em;
     position: absolute;
-    top: 11vh;
+    top: 20vh;
 }
 .icon-vis{
   clear: both;

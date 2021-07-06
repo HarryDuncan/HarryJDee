@@ -9,7 +9,7 @@ const noise3D = makeNoise3D(424342)
 // Ball and plane scene
 export function BallAndPlane (framework) {
 
-  
+
   // Initializes 3 JS Stuff
     let scene = new THREE.Scene();
     let group = new THREE.Group();
@@ -24,23 +24,23 @@ export function BallAndPlane (framework) {
         side: THREE.DoubleSide,
         wireframe: true
     });
-    
+
     let plane = new THREE.Mesh(planeGeometry, planeMaterial);
     plane.rotation.x = -0.5 * Math.PI;
     plane.position.set(0, 90, 0);
     group.add(plane);
-    
+
 
     let icosahedronMaterial = new THREE.ShaderMaterial({
       uniforms: {
-          time: { 
-            type: "f", 
+          time: {
+            type: "f",
             value: Date.now()
           },
           noiseStrength: {
             type: "f",
             value: 2.0
-          }, 
+          },
           numOctaves: {
             type: "f",
             value: 3
@@ -60,12 +60,12 @@ export function BallAndPlane (framework) {
     group.add(plane2);
 
     let icosahedronGeometry = new THREE.IcosahedronGeometry(10, 4);
-  
+
 
     let ball = new THREE.Mesh(icosahedronGeometry, icosahedronMaterial);
     ball.position.set(0, 0, 0);
     group.add(ball);
- 
+
     let ambientLight = new THREE.AmbientLight(0xaaaaaa);
     scene.add(ambientLight);
 
@@ -77,7 +77,7 @@ export function BallAndPlane (framework) {
     scene.add(spotLight);
     scene.add(group);
     scene.name = 'BallAndPlane'
-  // The scene Object  
+  // The scene Object
   let BallAndPlaneScene = {
       name: 'BallAndPlane',
       scene: scene,
@@ -110,7 +110,7 @@ export function BallAndPlane (framework) {
             framework.camera.updateProjectionMatrix();
             framework.renderer.setSize(window.innerWidth, window.innerHeight);
           }
-      
+
         function makeRoughBall(mesh, bassFr, treFr) {
           mesh.geometry.vertices.forEach(function (vertex, i) {
               var offset = mesh.geometry.parameters.radius;
@@ -119,7 +119,7 @@ export function BallAndPlane (framework) {
               vertex.normalize();
               var rf = 0.0003;
               var distance = (offset + bassFr ) + noise3D(vertex.x + time *rf*8, vertex.y +  time*rf*7, vertex.z + time*rf*9) * amp * treFr;
-              
+
               vertex.multiplyScalar(distance);
           });
           mesh.geometry.verticesNeedUpdate = true;
@@ -129,6 +129,7 @@ export function BallAndPlane (framework) {
       }
 
         function makeRoughGround(mesh, distortionFr) {
+          console.log(mesh)
           mesh.geometry.vertices.forEach(function (vertex, i) {
               var amp = 3;
               var time = Date.now();
@@ -142,8 +143,8 @@ export function BallAndPlane (framework) {
         }
       }
 
-      
-      
+
+
 
     }
 

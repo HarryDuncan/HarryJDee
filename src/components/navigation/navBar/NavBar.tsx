@@ -95,7 +95,10 @@ class NavBar extends React.Component<INavProps, INavState>{
 
 
   public render (){
-    if(this.props.siteStatus === 'Maintenance' || this.props.siteStatus === 'Down'){
+    if(history.location.pathname === '/DigitalSculpture'  ){
+      return null
+    }
+   if(this.props.siteStatus === 'Maintenance' || this.props.siteStatus === 'Down'){
       return (
           <div className={ 'mainNav '}>
             <div className={this.state.activeNav === '/' ? 'homeNav'  : ' '} />
@@ -154,9 +157,9 @@ class NavBar extends React.Component<INavProps, INavState>{
         );
     }else{
       return (
-          <div className={ 'mainNav '}>
-          <div className={(this.state.navTop? 'noScroll ' : 'scrolledMainNav ') + (this.state.activeNav === '/'  || this.state.activeNav === '' ? 'homeNav' || this.state.activeNav === '' || 'TestMode' : ' ')} />
-          <Link to="/"><img key={`${this.props.isLight} Logo`} onClick={this.navClicked.bind(this, '/')} className={'navLogo start'} src={!this.state.navTop || this.props.isLight ? '/images/icons/harryDLogoWhite.png' : '/images/icons/harryDLogo.png' }/></Link>
+          <div className={'mainNav '}>
+          <div className={(this.state.navTop || !this.props.showNav? 'noScroll ' : 'scrolledMainNav ') + (this.state.activeNav === '/'  || this.state.activeNav === '' ? 'homeNav' || this.state.activeNav === '' || 'TestMode' : ' ')} />
+          <Link to="/"><img key={`${this.props.isLight} Logo`} onClick={this.navClicked.bind(this, '/')} className={'navLogo start'} src={(!this.state.navTop && this.props.showNav) || this.props.isLight  ? '/images/icons/harryDLogoWhite.png' : '/images/icons/harryDLogo.png' }/></Link>
                 {this.props.showNav && !this.props.testing? 
                    <ul>
                     <li>

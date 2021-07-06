@@ -19,7 +19,7 @@ import Shop from './containers/Shop';
 import Mixes from './containers/Mixes';
 import Example from './containers/Example';
 import TermsAndConditions from './containers/TermsAndConditions';
-import DigitalSculpture from './containers/DigitalSculpture';
+import DigitalSculptureContainer from './containers/DigitalSculpture';
 import Activism from './containers/Activism';
 
 import NavBar from 'components/navigation/navBar/NavBar';
@@ -86,6 +86,7 @@ export class App extends React.Component<IAppProps, IAppState> {
                       <Route path='/Activism' component={Activism} />
                       <Route path="/Dashboard" component={Dashboard} />
                       <Route path='/Examples' component={Example} />
+                      <Route path='/DigitalSculpture' component={DigitalSculptureContainer} />
                       <Route path='/TermsAndConditions' component={TermsAndConditions} />
                       <Route path="*" component={Home} />
                   </Switch>
@@ -93,6 +94,7 @@ export class App extends React.Component<IAppProps, IAppState> {
                      <Switch>
                       <Route exact path="/"  component={Home} />
                        <Route path="/Dashboard" component={Dashboard} />
+                        <Route path='/DigitalSculpture' component={DigitalSculptureContainer} />
                        <Route path="*" component={Home} />
                     </Switch>
                 }

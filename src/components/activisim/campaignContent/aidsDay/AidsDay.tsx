@@ -60,7 +60,7 @@ export const AidsDay: React.FunctionComponent<IAidsDayProps> = (props) => {
                 </Stack.Item>
               </Stack>
             </div>
-            <AidsRibbon/>
+           
           </div>
         </div>
   );

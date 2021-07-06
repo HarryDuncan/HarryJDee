@@ -9,6 +9,26 @@ const isError = (data : any) => {
 	}
 }
 
+// Promise for retrieving data
+export const getDataPromise = (table : string, query : string) => {
+	return new Promise((resolve, reject) => {
+		let getDataCall = `${process.env.REACT_APP_API_URL}/${table}`;
+		try{
+			axios.get(getDataCall)
+			.then(response => {
+				if(response.status === 200  ){
+					resolve(true, response.data)
+				}else{
+					resolve(false, [response.status])
+				}
+			}).catch(err => {
+				reject(false, ['Error'])
+			})
+		}catch{
+			reject(false, ['Error'])
+		}
+	})
+}
 
 export const getData = (table : string, query : string, returnFunction : (success : boolean, data : any[]) => void) => {
 	let getDataCall = `${process.env.REACT_APP_API_URL}/${table}`;
@@ -29,8 +49,39 @@ export const getData = (table : string, query : string, returnFunction : (succes
 		}catch{
 			returnFunction(false, ['Error'])
 		}
-	
+
 }
+
+
+export const postDataPromise = (method : string, data : object, returnFunction : (success : boolean, data? : any[]) => void) => {
+		return new Promise((resolve, reject) => {
+			const body =  JSON.stringify(data);
+			let axiosConfig = {
+			  headers: {
+			      'Content-Type': 'application/json',
+			      "Access-Control-Allow-Origin": "*",
+			  }
+			};
+
+
+			const postMethod = `${process.env.REACT_APP_API_URL}/${method}`;
+			try{
+				axios.post(postMethod, body, axiosConfig)
+				.then(response =>{
+					if(!isError(response.data)){
+						resolve(true, response.data)
+					}else{
+						resolve(false, response.data)
+					}
+				})
+			}catch{
+				reject(false, ['unknownIssue'])
+			}
+		})
+
+
+}
+
 
 export const postData = (method : string, data : object, returnFunction : (success : boolean, data? : any[]) => void) => {
 		let body =  JSON.stringify(data);
@@ -58,6 +109,8 @@ export const postData = (method : string, data : object, returnFunction : (succe
 		}
 }
 
+
+
 export const removeFile = (method : string, data : any, type : string, returnFunction : (success : boolean, returnData? : any[]) => void) => {
 		let item = {'dataType' : data['image_data']['dataType'], 'url' : data['image_data']['url']}
 		let body =  JSON.stringify(item);
@@ -73,7 +126,7 @@ export const removeFile = (method : string, data : any, type : string, returnFun
 		try{
 			axios.post(postMethod, body, axiosConfig)
 			.then(response =>{
-				
+
 				if(response.status === 200){
 					returnFunction(true, response.data)
 				}else{
@@ -145,7 +198,7 @@ export const formatSubmissionData = (data: any, update? : boolean) => {
 			}catch{
 				delete returnDataObj['url']
 			}
-			
+
 		}
 	}
 	return returnDataObj
@@ -182,7 +235,7 @@ export const updateCurrentData = (newData : any , itemID : number ,  currentData
 	}catch{
 		return currentData
 	}
-	
+
 }
 
 
@@ -198,7 +251,7 @@ export const formatContributionData = (productData : any ) => {
 		}else{
 			totalAmount += productData[i]['Price'] * (0.01 * productData[i]['PercentageDonated'])
 		}
-		
+
 	}
 	return totalAmount
 }

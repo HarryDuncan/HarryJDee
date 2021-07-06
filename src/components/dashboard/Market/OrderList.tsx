@@ -7,7 +7,7 @@ import ViewOrder from './ViewOrder';
 import {Stack, IStackTokens , DefaultButton } from 'office-ui-fabric-react';
 import { Dropdown, DropdownMenuItemType, IDropdownOption, IDropdownStyles } from 'office-ui-fabric-react/lib/Dropdown';
 import moment from 'moment'
- import './Market.css';
+import './Market.css';
 
 
 const dropdownStyles: Partial<IDropdownStyles> = { dropdown: { width: 300 } };
@@ -44,7 +44,7 @@ class OrderList extends React.Component<IOrderListProps , IOrderListState> {
       selectedFilter : 'All',
       selectedItem : {},
     }
-      
+
   }
 
 
@@ -61,11 +61,11 @@ public _onChange = (event: React.FormEvent<HTMLDivElement>, item: any): void => 
 
 public _filterItems = (itemArray : any[]) => {
   if(this.state.selectedFilter === 'All'){
-    return itemArray 
+    return itemArray
   }else{
     return itemArray.filter(item => item.OrderStat === this.state.selectedFilter)
   }
-  
+
 }
 
 public render(): JSX.Element {
@@ -89,7 +89,7 @@ public render(): JSX.Element {
                 minWidth: 210,
                 maxWidth: 350,
                 data: 'string',
-              
+
           },
           {
             key: 'CustomerEmail',
@@ -150,7 +150,7 @@ public render(): JSX.Element {
     this.setState({
       isOpen : false
     })
-   } 
+   }
 
   private _openOrder = (item : any ) => {
     if(item.length > 0){
@@ -169,10 +169,9 @@ public render(): JSX.Element {
 const mapStateToProps = (state: any) => ({
   orders : state.dashboard.ordersArray,
 })
- 
+
 const mapDispatchToProps = {
  getOrders,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrderList);
-
