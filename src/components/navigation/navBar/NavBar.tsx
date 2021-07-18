@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {Link, BrowserRouter, } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import { stack as Menu } from 'react-burger-menu'
-
+import {NavItem} from './NavItem'
 import {closeNotification} from 'store/shop/shop.actions'
 import {openSite} from 'store/app/app.actions'
 
@@ -18,7 +18,7 @@ import './../Nav.scss'
 
 const history = createBrowserHistory()
 interface INavProps  {
- 
+
   showReceipt : boolean;
   receiptType : string;
   showNav : boolean;
@@ -46,10 +46,10 @@ class NavBar extends React.Component<INavProps, INavState>{
       isOpen : false,
       showCountdown : false,
       navTop : true,
-     
+
     }
   }
-  
+
 
 
 
@@ -78,7 +78,7 @@ class NavBar extends React.Component<INavProps, INavState>{
     //       })
     //     }
     // }, 2500)
-   
+
   }
 
   public handleScroll = (ev : any) => {
@@ -114,25 +114,25 @@ class NavBar extends React.Component<INavProps, INavState>{
           <div className={(this.state.navTop? 'noScroll ' : 'scrolledMainNav ') + (this.state.activeNav === '/' || this.state.activeNav === ''  ? 'homeNav'  : ' ')} />
           <img key={`${this.props.isLight} Logo`} className={'navLogo start'} alt={"Harry J Dee"} src={!this.state.navTop || this.props.isLight ? '/images/icons/harryDLogoWhite.png' : '/images/icons/harryDLogo.png' }/>
               <CartNotification redirectCallback={this.setActiveHome} isMobile={true} customClassName={(this.state.navTop? 'top-nav ' : 'scrolled-top ')}/>
-          
-            {this.props.showNav && !this.props.testing? 
+
+            {this.props.showNav && !this.props.testing?
              <nav key={`Main Nav Mobile ${this.state.isOpen} 22`} className={'navbar-toggler'}>
                <div className="nav-container" onClick={this.openMenu} >
                 <div className={"bar1 " + (this.state.navTop? '' : 'bar-item ')} ></div>
                 <div className={"bar2 " + (this.state.navTop? '' : 'bar-item ')} ></div>
                 <div className={"bar3 " + (this.state.navTop? '' : 'bar-item ')}></div>
               </div>
-              
+
                   <Menu right key={String(this.state.isOpen) + 'nav'} className="MobileMenu" width={200}  >
                     <Link className='link' onClick={this.navClicked.bind(this, '/')} to="/" ><h2>Home</h2></Link>
                     <Link className='link' onClick={this.navClicked.bind(this, '/Bio')} to='/Bio'><h2>Bio</h2></Link>
-                    <Link className='link' onClick={this.navClicked.bind(this, '/Mixes')}  to='/Mixes'><h2>Mixes</h2></Link>        
+                    <Link className='link' onClick={this.navClicked.bind(this, '/Mixes')}  to='/Mixes'><h2>Mixes</h2></Link>
                     <Link className='link' onClick={this.navClicked.bind(this, '/Gallery')}  to='/Gallery'><h2>Gallery</h2></Link>
-                    <Link className='link' onClick={this.navClicked.bind(this, '/Activism')} to='/Activism'><h2>Activism</h2></Link> 
+                    <Link className='link' onClick={this.navClicked.bind(this, '/Activism')} to='/Activism'><h2>Activism</h2></Link>
                     <Link className='link' onClick={this.navClicked.bind(this, '/Shop')} to='/Shop'><h2>Shop</h2></Link>
                   </Menu>
-               
-                
+
+
             </nav>
 
               :
@@ -148,7 +148,7 @@ class NavBar extends React.Component<INavProps, INavState>{
               :
               null
             }
-            {this.props.testing? 
+            {this.props.testing?
             <Countdown key={'count-down' + String(this.state.showCountdown)} launchCallback={this._openSite} isOpen={this.state.showCountdown}/>
             :
             null
@@ -160,7 +160,7 @@ class NavBar extends React.Component<INavProps, INavState>{
           <div className={'mainNav '}>
           <div className={(this.state.navTop || !this.props.showNav? 'noScroll ' : 'scrolledMainNav ') + (this.state.activeNav === '/'  || this.state.activeNav === '' ? 'homeNav' || this.state.activeNav === '' || 'TestMode' : ' ')} />
           <Link to="/"><img key={`${this.props.isLight} Logo`} onClick={this.navClicked.bind(this, '/')} className={'navLogo start'} src={(!this.state.navTop && this.props.showNav) || this.props.isLight  ? '/images/icons/harryDLogoWhite.png' : '/images/icons/harryDLogo.png' }/></Link>
-                {this.props.showNav && !this.props.testing? 
+                {this.props.showNav && !this.props.testing?
                    <ul>
                     <li>
                       <CartNotification redirectCallback={this.setActiveHome} customClassName={(this.state.navTop? 'top-nav ' : 'scrolled-top ')}/>
@@ -184,7 +184,7 @@ class NavBar extends React.Component<INavProps, INavState>{
                       <Link className={'nav-item-link ' + (this.state.navTop? 'no-scroll-item-link ' : 'scrolled-nav-item ') + (this.state.activeNav === '/' && this.props.showReceipt ? 'active-nav ' : '')} onClick={this.navClicked.bind(this, '/')} to="/"><h2>Home</h2></Link>
                     </li>
                   </ul>
-                  : 
+                  :
                   null
                 }
             {this.props.showReceipt?
@@ -192,7 +192,7 @@ class NavBar extends React.Component<INavProps, INavState>{
                :
                <div/>
             }
-            {this.props.testing? 
+            {this.props.testing?
             <Countdown key={'count-down' + String(this.state.showCountdown)} launchCallback={this._openSite} isOpen={this.state.showCountdown}/>
             :
             null
@@ -211,7 +211,7 @@ class NavBar extends React.Component<INavProps, INavState>{
   private _openSite = () => {
     this.props.openSite()
   }
- 
+
  private setActiveHome = () => {
   this.setState({
     activeNav : '/'
@@ -227,7 +227,7 @@ private navClicked = (target : string) => {
         isOpen : true
       })
   },200)
- 
+
   this.props.closeNotification()
 }
 };
@@ -251,4 +251,3 @@ const mapDispatchToProps = {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavBar)
-

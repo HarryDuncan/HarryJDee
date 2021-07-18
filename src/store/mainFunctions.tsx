@@ -17,15 +17,15 @@ export const getDataPromise = (table : string, query : string) => {
 			axios.get(getDataCall)
 			.then(response => {
 				if(response.status === 200  ){
-					resolve(true, response.data)
+					resolve(response.data)
 				}else{
-					resolve(false, [response.status])
+					reject(response.status)
 				}
 			}).catch(err => {
-				reject(false, ['Error'])
+				reject('Error')
 			})
 		}catch{
-			reject(false, ['Error'])
+			reject('Error')
 		}
 	})
 }
@@ -69,13 +69,13 @@ export const postDataPromise = (method : string, data : object, returnFunction :
 				axios.post(postMethod, body, axiosConfig)
 				.then(response =>{
 					if(!isError(response.data)){
-						resolve(true, response.data)
+						resolve(response.data)
 					}else{
-						resolve(false, response.data)
+						reject(response.data)
 					}
 				})
 			}catch{
-				reject(false, ['unknownIssue'])
+				reject('unknownIssue')
 			}
 		})
 

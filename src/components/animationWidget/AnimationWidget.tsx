@@ -47,8 +47,10 @@ export class AnimationWidget extends React.Component<IAnimationWidgetProps, IAni
 		// returnArray.push(Scenes.RoomAndMirror(this.state.manager))
 		// returnArray.push(Scenes.TransLights(this.state.manager))
 
-		returnArray.push(Scenes.HomeScene(this.state.manager))
-		returnArray.push(Scenes.ArtLavaLamp(this.state.manager))
+	 returnArray.push(Scenes.HomeScene(this.state.manager))
+	 returnArray.push(Scenes.ArtLavaLamp(this.state.manager))
+
+	//	returnArray.push(Scenes.LightScene(this.state.manager, {}))
 
 		return returnArray
 	}
